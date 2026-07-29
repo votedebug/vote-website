@@ -54,7 +54,7 @@ export default function ArticleDetail() {
           ))}
         </div>
 
-        <div className="mt-10 rounded-xl border border-dashed border-border bg-cream/60 px-5 py-4 text-sm text-muted-foreground">
+        <div className="mt-10 rounded-xl border border-dashed border-border bg-secondary/60 px-5 py-4 text-sm text-muted-foreground">
           This is placeholder editorial content. Replace with the real article body when ready.
         </div>
 

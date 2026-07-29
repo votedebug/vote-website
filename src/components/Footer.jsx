@@ -7,7 +7,7 @@ import { NAV, SITE } from '@/data/site'
 
 export function Footer() {
   return (
-    <footer className="relative mt-24 overflow-hidden bg-navy text-white">
+    <footer className="relative overflow-hidden bg-navy text-white">
       <div className="flex h-1 w-full">
         <div className="flex-1 bg-flag-red" />
         <div className="flex-1 bg-white" />

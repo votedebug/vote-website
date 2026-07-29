@@ -37,7 +37,7 @@ export function LegislationMap() {
     <div className="grid gap-8 lg:grid-cols-[1.65fr_1fr] lg:items-start">
       {/* Map + legend */}
       <div>
-        <div className="rounded-2xl border border-border bg-white p-3 shadow-sm sm:p-5">
+        <div>
           <svg
             viewBox={`0 0 ${WIDTH} ${HEIGHT}`}
             className="h-auto w-full"
@@ -72,7 +72,7 @@ export function LegislationMap() {
           </svg>
 
           {/* Legend */}
-          <div className="mt-3 flex flex-wrap gap-x-5 gap-y-2 border-t border-border px-1 pt-3">
+          <div className="mt-4 flex flex-wrap gap-x-5 gap-y-2 border-t border-border pt-4">
             {Object.values(CATEGORIES).map((c) => (
               <div key={c.key} className="flex items-center gap-2 text-xs font-medium text-ink/75">
                 <span className="h-3 w-3 rounded-sm ring-1 ring-black/5" style={{ background: c.color }} />
@@ -113,7 +113,7 @@ function StatePanel({ selected }) {
   const cat = selected.cat
   return (
     <aside className="lg:sticky lg:top-24">
-      <div className="overflow-hidden rounded-2xl border border-border bg-white shadow-sm">
+      <div className="overflow-hidden rounded-2xl bg-white shadow-[0_18px_40px_-24px_rgba(11,42,107,0.45)]">
         <div className="relative px-6 pt-6 pb-5" style={{ background: cat.color }}>
           <div className="absolute inset-0 opacity-15 stripe-accent" aria-hidden />
           <div className="relative">

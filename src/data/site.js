@@ -9,6 +9,15 @@ export const SITE = {
   founded: 2024,
 }
 
+// Home hero carousel. PLACEHOLDERS — these reuse existing drive photography.
+// Swap `src` and `caption` for the real rotating shots when you have them.
+export const HERO_SLIDES = [
+  { src: '/img/drive-2.jpg', caption: 'Registering voters at Bronx Science', alt: 'Vote of Teens students running a voter registration drive' },
+  { src: '/img/drive-1.jpg', caption: 'A drive table between class periods', alt: 'Students at a Vote of Teens registration table' },
+  { src: '/img/drive-3.jpg', caption: 'Student organizers on the ground', alt: 'A Vote of Teens organizer talking with a student' },
+  { src: '/img/drive-4.jpg', caption: 'Chapter directors after a drive', alt: 'Vote of Teens chapter directors together after a drive' },
+]
+
 export const STATS = [
   { value: '2,000+', label: 'Voters registered' },
   { value: '30+', label: 'Student leaders' },
@@ -26,6 +35,7 @@ export const NAV = [
       { label: 'Directors', to: '/team#directors' },
       { label: 'Editorial Team', to: '/team#editorial' },
       { label: 'Media Team', to: '/team#media' },
+      { label: 'Founders', to: '/team#founders' },
     ],
   },
   { label: 'Our Chapters', to: '/chapters' },

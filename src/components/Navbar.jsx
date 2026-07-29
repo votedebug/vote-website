@@ -115,7 +115,7 @@ export function Navbar() {
             <Button
               asChild
               size="lg"
-              className="btn-glow hidden bg-flag-red px-6 text-[0.95rem] font-bold text-white hover:bg-flag-red-dark sm:inline-flex"
+              className="hidden bg-flag-red px-6 text-[0.95rem] font-bold text-white hover:bg-flag-red-dark sm:inline-flex"
             >
               <Link to="/get-involved">Get Involved</Link>
             </Button>
@@ -165,7 +165,7 @@ export function Navbar() {
                   </div>
                   <div className="border-t p-4">
                     <SheetClose asChild>
-                      <Button asChild size="lg" className="btn-glow w-full bg-flag-red font-bold text-white hover:bg-flag-red-dark">
+                      <Button asChild size="lg" className="w-full bg-flag-red font-bold text-white hover:bg-flag-red-dark">
                         <Link to="/get-involved">Get Involved</Link>
                       </Button>
                     </SheetClose>

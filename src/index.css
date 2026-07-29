@@ -140,22 +140,20 @@
     text-transform: uppercase;
     font-size: 0.75rem;
   }
-  /* Pulsing red glow for the primary CTA */
-  .btn-glow {
-    box-shadow: 0 6px 22px -4px rgba(200, 16, 46, 0.55);
-    animation: btnGlow 2.6s ease-in-out infinite;
+  /* Faint grid used to give the deep-navy bands some texture. */
+  .navy-grid {
+    background-image:
+      linear-gradient(to right, rgba(255, 255, 255, 0.055) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.055) 1px, transparent 1px);
+    background-size: 56px 56px;
   }
-  .btn-glow:hover {
-    box-shadow: 0 8px 34px 0 rgba(200, 16, 46, 0.9);
+  /* Hairline rule that fades out at both ends — used instead of card borders. */
+  .rule-fade {
+    background: linear-gradient(to right, transparent, var(--color-border), transparent);
   }
-  @keyframes btnGlow {
-    0%, 100% { box-shadow: 0 6px 20px -6px rgba(200, 16, 46, 0.5); }
-    50% { box-shadow: 0 8px 30px -2px rgba(200, 16, 46, 0.85); }
+  .rule-fade-light {
+    background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.22), transparent);
   }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .btn-glow { animation: none; }
 }
 
 @media (prefers-reduced-motion: reduce) {

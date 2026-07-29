@@ -1,10 +1,11 @@
 import { useState } from 'react'
-import { Flag, Mail, Megaphone, Users } from 'lucide-react'
+import { Flag, Landmark, Mail, Megaphone, Users } from 'lucide-react'
 import { InstagramIcon, LinkedinIcon } from '@/components/SocialIcons'
 import { Container, Reveal } from '@/components/Container'
-import { PageHero, SectionHeading, Eyebrow } from '@/components/Bits'
+import { SectionHeading } from '@/components/Bits'
 import { Button } from '@/components/ui/button'
 import { SITE } from '@/data/site'
+import { cn } from '@/lib/utils'
 
 const WAYS = [
   {
@@ -20,6 +21,12 @@ const WAYS = [
     tag: 'Volunteers',
   },
   {
+    icon: Landmark,
+    title: 'Lead a state chapter',
+    body: 'Take VOTE beyond New York. State chapter leads recruit schools, support new chapter directors, and coordinate drives across their state.',
+    tag: 'Leads',
+  },
+  {
     icon: Megaphone,
     title: 'Advocate for legislation',
     body: 'Help expand pre-registration and youth-voting access in your state. We’ll connect you to the right people.',
@@ -30,26 +37,35 @@ const WAYS = [
 export default function GetInvolved() {
   return (
     <>
-      <PageHero
-        eyebrow="Get Involved"
-        title="It starts with one email."
-        intro="However you want to help — starting a chapter, volunteering at a drive, or moving legislation — we’ll meet you where you are."
-      />
-
       {/* Ways to help */}
-      <section className="py-16 sm:py-20">
+      <section className="pt-14 pb-16 sm:pt-20 sm:pb-20">
         <Container>
-          <div className="grid gap-6 md:grid-cols-3">
+          <span className="eyebrow text-flag-red">Get Involved</span>
+          <h1 className="mt-3 font-serif text-4xl font-semibold leading-[1.05] tracking-tight text-navy text-balance sm:text-5xl">
+            Ways to help.
+          </h1>
+          <p className="mt-4 max-w-2xl text-lg leading-relaxed text-ink/70 text-pretty">
+            However you want to help — starting a chapter, volunteering at a drive, leading a state,
+            or moving legislation — we’ll meet you where you are.
+          </p>
+
+          <div className="mt-14 grid gap-y-12 sm:grid-cols-2 sm:gap-x-0 lg:grid-cols-4">
             {WAYS.map((w, i) => (
-              <Reveal key={w.title} delay={i * 80}>
-                <div className="flex h-full flex-col rounded-2xl border border-border bg-white p-7 shadow-sm">
-                  <div className="flex items-center justify-between">
-                    <w.icon className="h-7 w-7 text-royal" strokeWidth={1.75} />
-                    <span className="eyebrow text-flag-red">{w.tag}</span>
-                  </div>
-                  <h3 className="mt-5 font-serif text-xl font-semibold text-navy">{w.title}</h3>
-                  <p className="mt-2 flex-1 leading-relaxed text-ink/70">{w.body}</p>
+              <Reveal
+                key={w.title}
+                delay={i * 80}
+                className={cn(
+                  'sm:px-7',
+                  i % 2 === 1 && 'sm:border-l sm:border-border',
+                  i > 0 && 'lg:border-l lg:border-border',
+                )}
+              >
+                <div className="flex items-center justify-between">
+                  <w.icon className="h-7 w-7 text-royal" strokeWidth={1.75} />
+                  <span className="eyebrow text-flag-red">{w.tag}</span>
                 </div>
+                <h3 className="mt-5 font-serif text-xl font-semibold text-navy">{w.title}</h3>
+                <p className="mt-2 leading-relaxed text-ink/70">{w.body}</p>
               </Reveal>
             ))}
           </div>
@@ -57,29 +73,31 @@ export default function GetInvolved() {
       </section>
 
       {/* Contact form + info */}
-      <section className="pb-24">
-        <Container>
-          <div className="grid gap-12 overflow-hidden rounded-3xl border border-border bg-cream p-8 sm:p-12 lg:grid-cols-2">
+      <section className="relative overflow-hidden bg-navy py-20 text-white sm:py-24">
+        <div className="absolute inset-0 navy-grid" aria-hidden />
+        <div className="pointer-events-none absolute -left-20 top-10 h-72 w-72 rounded-full bg-royal/25 blur-3xl" aria-hidden />
+        <Container className="relative">
+          <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
             <div>
-              <SectionHeading eyebrow="Say hello" title="Send us a message." intro="Tell us a little about you and what you’d like to do. We read every note." />
+              <SectionHeading light eyebrow="Say hello" title="Send us a message." intro="Tell us a little about you and what you’d like to do. We read every note." />
               <div className="mt-8 space-y-4">
-                <a href={`mailto:${SITE.email}`} className="flex items-center gap-3 text-navy transition-colors hover:text-flag-red">
-                  <span className="flex h-11 w-11 items-center justify-center rounded-full bg-white shadow-sm">
-                    <Mail className="h-5 w-5 text-royal" />
+                <a href={`mailto:${SITE.email}`} className="flex items-center gap-3 text-white transition-colors hover:text-flag-red">
+                  <span className="flex h-11 w-11 items-center justify-center rounded-full bg-white/10">
+                    <Mail className="h-5 w-5" />
                   </span>
                   <span className="font-semibold">{SITE.email}</span>
                 </a>
                 <div className="flex gap-3 pt-2">
                   <a href={SITE.instagram} target="_blank" rel="noreferrer" aria-label="Instagram"
-                    className="flex h-11 w-11 items-center justify-center rounded-full bg-white shadow-sm transition-colors hover:bg-navy hover:text-white">
+                    className="flex h-11 w-11 items-center justify-center rounded-full bg-white/10 transition-colors hover:bg-white hover:text-navy">
                     <InstagramIcon className="h-5 w-5" />
                   </a>
                   <a href={SITE.linkedin} target="_blank" rel="noreferrer" aria-label="LinkedIn"
-                    className="flex h-11 w-11 items-center justify-center rounded-full bg-white shadow-sm transition-colors hover:bg-navy hover:text-white">
+                    className="flex h-11 w-11 items-center justify-center rounded-full bg-white/10 transition-colors hover:bg-white hover:text-navy">
                     <LinkedinIcon className="h-5 w-5" />
                   </a>
                 </div>
-                <p className="pt-2 text-sm text-muted-foreground">{SITE.address}</p>
+                <p className="pt-2 text-sm text-white/50">{SITE.address}</p>
               </div>
             </div>
 
@@ -108,7 +126,7 @@ function ContactForm() {
   const label = 'block text-sm font-semibold text-navy'
 
   return (
-    <form onSubmit={onSubmit} className="rounded-2xl border border-border bg-white p-6 shadow-sm sm:p-8">
+    <form onSubmit={onSubmit} className="rounded-2xl bg-white p-6 shadow-2xl sm:p-8">
       <div className="grid gap-4 sm:grid-cols-2">
         <div>
           <label htmlFor="name" className={label}>Name</label>
@@ -128,6 +146,7 @@ function ContactForm() {
         <select id="interest" value={form.interest} onChange={set('interest')} className={`mt-1.5 ${field}`}>
           <option>Start a chapter</option>
           <option>Volunteer at a drive</option>
+          <option>Lead a state chapter</option>
           <option>Advocate for legislation</option>
           <option>Something else</option>
         </select>

@@ -1,28 +1,24 @@
 import { ImagePlus } from 'lucide-react'
 import { Container, Reveal } from '@/components/Container'
-import { PageHeader } from '@/components/Bits'
 import { BOARD, FOUNDERS, EDITORIAL, MEDIA } from '@/data/team'
+import { cn } from '@/lib/utils'
 
-function SubHeading({ children }) {
+function SubHeading({ children, light }) {
   return (
-    <h2 className="font-serif text-3xl font-semibold tracking-tight text-navy sm:text-4xl">{children}</h2>
+    <h2 className={cn('font-serif text-3xl font-semibold tracking-tight sm:text-4xl', light ? 'text-white' : 'text-navy')}>
+      {children}
+    </h2>
   )
 }
 
 export default function Team() {
   return (
     <>
-      <PageHeader
-        eyebrow="Our Team"
-        title="The students running the show."
-        intro="VOTE is built and led entirely by high schoolers and the alumni who started it — the board steering the mission and the editorial and media teams telling its story."
-      />
-
-      {/* Directors */}
-      <section id="directors" className="scroll-mt-24 py-16 sm:py-20">
+      {/* Directors — the page opens straight onto the board */}
+      <section id="directors" className="scroll-mt-24 pt-14 pb-16 sm:pt-20 sm:pb-20">
         <Container>
           <span className="eyebrow text-flag-red">Our Board</span>
-          <div className="mt-3 flex items-baseline justify-between gap-4">
+          <div className="mt-3">
             <SubHeading>Executive Directors</SubHeading>
           </div>
           <p className="mt-3 max-w-2xl text-ink/70">
@@ -36,35 +32,25 @@ export default function Team() {
               </Reveal>
             ))}
           </div>
-
-          {/* Founders — heading matches "Executive Directors", cards centered */}
-          <div className="mt-20 text-center">
-            <SubHeading>Founders</SubHeading>
-          </div>
-          <div className="mx-auto mt-12 grid max-w-3xl gap-x-8 gap-y-12 sm:grid-cols-2">
-            {FOUNDERS.map((p, i) => (
-              <Reveal key={p.name} delay={i * 80}>
-                <PersonCard person={p} center />
-              </Reveal>
-            ))}
-          </div>
         </Container>
       </section>
 
-      {/* Editorial */}
-      <section id="editorial" className="scroll-mt-24 border-t border-border bg-cream py-16 sm:py-20">
-        <Container>
+      {/* Editorial — deep navy band, cards reveal their bio on hover */}
+      <section id="editorial" className="relative scroll-mt-24 overflow-hidden bg-navy py-16 text-white sm:py-20">
+        <div className="absolute inset-0 navy-grid" aria-hidden />
+        <div className="pointer-events-none absolute -right-24 top-0 h-72 w-72 rounded-full bg-royal/25 blur-3xl" aria-hidden />
+        <Container className="relative">
           <span className="eyebrow text-flag-red">Our Editorial Team</span>
           <div className="mt-3">
-            <SubHeading>The voices</SubHeading>
+            <SubHeading light>The voices</SubHeading>
           </div>
-          <p className="mt-3 max-w-2xl text-ink/70">
+          <p className="mt-3 max-w-2xl text-white/65">
             Our editorial desk reports on youth civic power and writes the stories in The Reader.
           </p>
-          <div className="mt-12 grid gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-12 grid gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
             {EDITORIAL.map((p, i) => (
               <Reveal key={i} delay={i * 70}>
-                <PersonCard person={p} />
+                <RevealCard person={p} />
               </Reveal>
             ))}
           </div>
@@ -94,32 +80,89 @@ export default function Team() {
           </p>
         </Container>
       </section>
+
+      {/* Founders — closing the page, where the story started */}
+      <section id="founders" className="scroll-mt-24 border-t border-border py-16 sm:py-20">
+        <Container>
+          <div className="text-center">
+            <span className="eyebrow text-flag-red">Where it started</span>
+            <div className="mt-3">
+              <SubHeading>Founders</SubHeading>
+            </div>
+          </div>
+          <div className="mx-auto mt-12 grid max-w-3xl gap-x-8 gap-y-12 sm:grid-cols-2">
+            {FOUNDERS.map((p, i) => (
+              <Reveal key={p.name} delay={i * 80}>
+                <PersonCard person={p} center />
+              </Reveal>
+            ))}
+          </div>
+        </Container>
+      </section>
     </>
+  )
+}
+
+function Portrait({ person, className }) {
+  if (person.photo) {
+    return (
+      <img
+        src={person.photo}
+        alt={person.name}
+        style={person.imgStyle}
+        className={cn('h-full w-full object-cover object-top', className)}
+      />
+    )
+  }
+  return (
+    <div className="flex h-full w-full flex-col items-center justify-center gap-2 border-2 border-dashed border-current/25 text-current/40">
+      <ImagePlus className="h-8 w-8" strokeWidth={1.5} />
+      <span className="text-xs font-semibold uppercase tracking-wider">Add photo</span>
+    </div>
   )
 }
 
 function PersonCard({ person, center }) {
   return (
     <div className={center ? 'text-center' : ''}>
-      <div className="relative aspect-[4/5] overflow-hidden rounded-xl bg-secondary">
-        {person.photo ? (
-          <img
-            src={person.photo}
-            alt={person.name}
-            style={person.imgStyle}
-            className="h-full w-full object-cover object-top"
-          />
-        ) : (
-          <div className="flex h-full w-full flex-col items-center justify-center gap-2 border-2 border-dashed border-border text-ink/40">
-            <ImagePlus className="h-8 w-8" strokeWidth={1.5} />
-            <span className="text-xs font-semibold uppercase tracking-wider">Add photo</span>
-          </div>
-        )}
+      <div className="relative aspect-[4/5] overflow-hidden rounded-xl bg-secondary text-ink">
+        <Portrait person={person} />
       </div>
       <h3 className="mt-4 font-serif text-xl font-semibold text-navy">{person.name}</h3>
       <p className="mt-0.5 text-sm font-semibold text-royal">{person.role}</p>
       {person.chapter && <p className="text-xs font-medium text-ink/50">{person.chapter}</p>}
-      <p className={`mt-2.5 text-sm leading-relaxed text-ink/70 ${center ? 'mx-auto max-w-xs' : ''}`}>{person.bio}</p>
+      <p className={cn('mt-2.5 text-sm leading-relaxed text-ink/70', center && 'mx-auto max-w-xs')}>{person.bio}</p>
+    </div>
+  )
+}
+
+/**
+ * Navy-band variant: the portrait fills the tile and the bio slides up over it
+ * on hover or keyboard focus. Bio stays readable on touch, where there is no
+ * hover — it is revealed by tapping (focus) and always announced to screen
+ * readers via the visually-present text.
+ */
+function RevealCard({ person }) {
+  return (
+    <div
+      tabIndex={0}
+      className="group relative aspect-[4/5] overflow-hidden rounded-xl bg-navy-soft text-white outline-none ring-flag-red/60 transition-transform duration-300 hover:-translate-y-1 focus-visible:ring-2"
+    >
+      <Portrait person={person} className="transition-transform duration-500 group-hover:scale-105" />
+
+      {/* Resting state: name + role over a gradient */}
+      <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-navy-dark via-navy-dark/80 to-transparent px-4 pb-4 pt-14 transition-opacity duration-300 group-hover:opacity-0 group-focus-visible:opacity-0">
+        <h3 className="font-serif text-lg font-semibold leading-tight">{person.name}</h3>
+        <p className="mt-0.5 text-xs font-semibold uppercase tracking-wider text-royal-light">{person.role}</p>
+      </div>
+
+      {/* Hover / focus state: full bio */}
+      <div className="absolute inset-0 flex translate-y-3 flex-col justify-end bg-navy-dark/92 px-4 pb-4 pt-6 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100 group-focus-visible:translate-y-0 group-focus-visible:opacity-100">
+        <span className="h-0.5 w-8 bg-flag-red" aria-hidden />
+        <h3 className="mt-3 font-serif text-lg font-semibold leading-tight">{person.name}</h3>
+        <p className="mt-0.5 text-xs font-semibold uppercase tracking-wider text-royal-light">{person.role}</p>
+        <p className="mt-2.5 text-[0.8rem] leading-relaxed text-white/75">{person.bio}</p>
+      </div>
     </div>
   )
 }

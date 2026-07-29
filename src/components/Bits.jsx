@@ -75,23 +75,6 @@ export function PageHero({ eyebrow, title, intro, children }) {
   )
 }
 
-// Compact light header for interior pages that don't need the full navy banner.
-export function PageHeader({ eyebrow, title, intro, className }) {
-  return (
-    <section className={cn('border-b border-border bg-cream', className)}>
-      <Container className="py-12 sm:py-14">
-        <div className="max-w-3xl">
-          {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
-          <h1 className="mt-3 font-serif text-4xl font-semibold leading-[1.05] tracking-tight text-navy text-balance sm:text-5xl">
-            {title}
-          </h1>
-          {intro && <p className="mt-4 max-w-2xl text-lg leading-relaxed text-ink/70 text-pretty">{intro}</p>}
-        </div>
-      </Container>
-    </section>
-  )
-}
-
 // Internal link styled as a primary button.
 export function LinkButton({ to, href, children, variant = 'default', size = 'default', className }) {
   if (href) {
