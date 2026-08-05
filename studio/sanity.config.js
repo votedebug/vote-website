@@ -24,6 +24,9 @@ export default defineConfig({
       previewUrl: {
         initial: previewOrigin,
       },
+      // Comlink (the postMessage channel the Presentation tool uses to talk
+      // to the previewed site) only connects to explicitly allowed origins.
+      allowOrigins: [previewOrigin, 'http://localhost:5173'],
     }),
   ],
 
