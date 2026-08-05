@@ -2,6 +2,7 @@ import { ImagePlus } from 'lucide-react'
 import { Container, Reveal } from '@/components/Container'
 import { useSanityQuery } from '@/lib/useSanity'
 import { teamQuery } from '@/lib/queries'
+import { urlFor } from '@/lib/sanity'
 import { cn } from '@/lib/utils'
 
 function SubHeading({ children, light }) {
@@ -112,14 +113,17 @@ export default function Team() {
   )
 }
 
+// Cards are aspect-[4/5] — crop every photo to match via Sanity's hotspot,
+// so everyone renders at the same size regardless of their source photo's
+// original framing. Adjust the crop per-person in the Studio (Media tab on
+// the image field) rather than in code.
 function Portrait({ person, className }) {
   if (person.photo) {
     return (
       <img
-        src={person.photo}
+        src={urlFor(person.photo).width(640).height(800).fit('crop').auto('format').url()}
         alt={person.name}
-        style={person.imgStyle}
-        className={cn('h-full w-full object-cover object-top', className)}
+        className={cn('h-full w-full object-cover', className)}
       />
     )
   }

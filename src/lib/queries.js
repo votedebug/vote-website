@@ -9,13 +9,13 @@ export const siteSettingsQuery = `*[_id == "siteSettings"][0]{
 }`
 
 export const teamQuery = `*[_type == "teamMember"] | order(order asc) {
-  _id, name, role, chapter, bio, category, "photo": photo.asset->url
+  _id, name, role, chapter, bio, category, photo
 }`
 
 export const chaptersQuery = `*[_type == "chapter"] | order(order asc, name asc) {
   _id, name, short, "logo": logo.asset->url, monogram, borough, address,
   "coords": [coords.lng, coords.lat],
-  directors[]{ name, role, "photo": photo.asset->url }
+  directors[]{ name, role, photo }
 }`
 
 export const articlesListQuery = `*[_type == "article"] | order(date desc) {

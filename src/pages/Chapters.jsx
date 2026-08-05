@@ -5,6 +5,7 @@ import { PageHero, SectionHeading, LinkButton, Eyebrow } from '@/components/Bits
 import { Dialog, DialogContent, DialogTitle } from '@/components/ui/dialog'
 import { NycChapterMap } from '@/components/NycChapterMap'
 import { ChapterCalendar } from '@/components/ChapterCalendar'
+import { urlFor } from '@/lib/sanity'
 import { cn } from '@/lib/utils'
 
 export default function Chapters() {
@@ -126,7 +127,11 @@ function ChapterDialog({ chapter, onClose }) {
                   <div key={i} className="text-center">
                     <div className="relative mx-auto aspect-square w-full overflow-hidden rounded-xl bg-secondary">
                       {d.photo ? (
-                        <img src={d.photo} alt={d.name} className="h-full w-full object-cover object-top" />
+                        <img
+                          src={urlFor(d.photo).width(320).height(320).fit('crop').auto('format').url()}
+                          alt={d.name}
+                          className="h-full w-full object-cover"
+                        />
                       ) : (
                         <div className="flex h-full w-full flex-col items-center justify-center gap-1 border-2 border-dashed border-border text-ink/40">
                           <ImagePlus className="h-6 w-6" strokeWidth={1.5} />
