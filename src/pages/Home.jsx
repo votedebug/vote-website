@@ -6,7 +6,7 @@ import { Eyebrow, SectionHeading, StarRow, LinkButton } from '@/components/Bits'
 import { Button } from '@/components/ui/button'
 import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel'
 import { MiniUsMap } from '@/components/MiniUsMap'
-import { useCarouselAutoplay } from '@/lib/useCarouselAutoplay'
+import { useCarouselIndex } from '@/lib/useCarouselAutoplay'
 import { useSanityQuery } from '@/lib/useSanity'
 import { siteSettingsQuery, chaptersQuery, articlesListQuery } from '@/lib/queries'
 import { cn } from '@/lib/utils'
@@ -78,16 +78,11 @@ function Hero({ site }) {
 
 function HeroCarousel({ slides }) {
   const [api, setApi] = useState()
-  const [paused, setPaused] = useState(false)
-  const { index, count, scrollTo } = useCarouselAutoplay(api, { delay: 5000, paused })
+  const { index, count, scrollTo } = useCarouselIndex(api)
 
   return (
-    <div
-      className="relative"
-      onMouseEnter={() => setPaused(true)}
-      onMouseLeave={() => setPaused(false)}
-    >
-      <Carousel setApi={setApi} opts={{ loop: true }} className="overflow-hidden rounded-[1.75rem]">
+    <div className="relative">
+      <Carousel setApi={setApi} opts={{ loop: true, dragFree: false }} className="overflow-hidden rounded-[1.75rem] cursor-grab active:cursor-grabbing">
         <CarouselContent className="ml-0">
           {slides.map((slide) => (
             <CarouselItem key={slide.src} className="pl-0">
@@ -95,7 +90,8 @@ function HeroCarousel({ slides }) {
                 <img
                   src={slide.src}
                   alt={slide.alt}
-                  className="aspect-[4/5] w-full object-cover"
+                  draggable={false}
+                  className="aspect-[4/5] w-full select-none object-cover"
                 />
                 <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-navy/85 via-navy/35 to-transparent pt-16 pb-6 pl-6 pr-6">
                   <figcaption className="font-serif text-lg leading-snug text-white text-balance">
