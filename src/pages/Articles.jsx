@@ -4,22 +4,31 @@ import { ArrowLeft, ArrowRight } from 'lucide-react'
 import { Container } from '@/components/Container'
 import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel'
 import { useCarouselAutoplay } from '@/lib/useCarouselAutoplay'
-import { ARTICLES, featuredArticle } from '@/data/articles'
+import { useSanityQuery } from '@/lib/useSanity'
+import { articlesListQuery } from '@/lib/queries'
 import { cn } from '@/lib/utils'
 
 const fmtDate = (d) =>
   new Date(d + 'T00:00:00').toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
 
 export default function Articles() {
-  const lead = featuredArticle()
-  const categories = useMemo(() => ['All', ...Array.from(new Set(ARTICLES.map((a) => a.category)))], [])
+  const { data: ARTICLES } = useSanityQuery(articlesListQuery)
   const [active, setActive] = useState('All')
 
-  // The carousel leads with the featured story, then the rest in order.
-  const featured = useMemo(
-    () => [lead, ...ARTICLES.filter((a) => a.slug !== lead.slug)].slice(0, 5),
-    [lead],
+  const categories = useMemo(
+    () => ['All', ...Array.from(new Set((ARTICLES || []).map((a) => a.category)))],
+    [ARTICLES],
   )
+
+  // The carousel leads with the featured story, then the rest in order.
+  const featured = useMemo(() => {
+    if (!ARTICLES) return []
+    const lead = ARTICLES.find((a) => a.feature) || ARTICLES[0]
+    if (!lead) return []
+    return [lead, ...ARTICLES.filter((a) => a.slug !== lead.slug)].slice(0, 5)
+  }, [ARTICLES])
+
+  if (!ARTICLES) return null
 
   const filtered = active === 'All' ? ARTICLES : ARTICLES.filter((a) => a.category === active)
 

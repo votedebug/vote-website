@@ -4,7 +4,8 @@ import { InstagramIcon, LinkedinIcon } from '@/components/SocialIcons'
 import { Container, Reveal } from '@/components/Container'
 import { SectionHeading } from '@/components/Bits'
 import { Button } from '@/components/ui/button'
-import { SITE } from '@/data/site'
+import { useSanityQuery } from '@/lib/useSanity'
+import { siteSettingsQuery } from '@/lib/queries'
 import { cn } from '@/lib/utils'
 
 const WAYS = [
@@ -35,6 +36,9 @@ const WAYS = [
 ]
 
 export default function GetInvolved() {
+  const { data: SITE } = useSanityQuery(siteSettingsQuery)
+  if (!SITE) return null
+
   return (
     <>
       {/* Ways to help */}
@@ -101,7 +105,7 @@ export default function GetInvolved() {
               </div>
             </div>
 
-            <ContactForm />
+            <ContactForm email={SITE.email} />
           </div>
         </Container>
       </section>
@@ -109,7 +113,7 @@ export default function GetInvolved() {
   )
 }
 
-function ContactForm() {
+function ContactForm({ email }) {
   const [form, setForm] = useState({ name: '', email: '', school: '', interest: 'Start a chapter', message: '' })
   const set = (k) => (e) => setForm((f) => ({ ...f, [k]: e.target.value }))
 
@@ -119,7 +123,7 @@ function ContactForm() {
     const body = encodeURIComponent(
       `Name: ${form.name}\nEmail: ${form.email}\nSchool: ${form.school}\nInterest: ${form.interest}\n\n${form.message}`,
     )
-    window.location.href = `mailto:${SITE.email}?subject=${subject}&body=${body}`
+    window.location.href = `mailto:${email}?subject=${subject}&body=${body}`
   }
 
   const field = 'w-full rounded-lg border border-input bg-white px-4 py-2.5 text-sm text-navy shadow-sm placeholder:text-ink/40 focus-visible:border-royal focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-royal/25'

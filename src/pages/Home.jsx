@@ -6,38 +6,43 @@ import { Eyebrow, SectionHeading, StarRow, LinkButton } from '@/components/Bits'
 import { Button } from '@/components/ui/button'
 import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel'
 import { MiniUsMap } from '@/components/MiniUsMap'
-import { useCarouselAutoplay } from '@/lib/useCarouselAutoplay'
-import { STATS, SITE, HERO_SLIDES } from '@/data/site'
-import { CHAPTERS } from '@/data/chapters'
-import { featuredArticle, ARTICLES } from '@/data/articles'
+import { useCarouselIndex } from '@/lib/useCarouselAutoplay'
+import { useSanityQuery } from '@/lib/useSanity'
+import { siteSettingsQuery, chaptersQuery, articlesListQuery } from '@/lib/queries'
 import { cn } from '@/lib/utils'
 
 export default function Home() {
-  const featured = featuredArticle()
-  const secondary = ARTICLES.filter((a) => a.slug !== featured.slug).slice(0, 2)
+  const { data: site } = useSanityQuery(siteSettingsQuery)
+  const { data: chapters } = useSanityQuery(chaptersQuery)
+  const { data: articles } = useSanityQuery(articlesListQuery)
+
+  if (!site || !chapters || !articles) return null
+
+  const featured = articles.find((a) => a.feature) || articles[0]
+  const secondary = articles.filter((a) => a.slug !== featured?.slug).slice(0, 2)
 
   return (
     <>
-      <Hero />
-      <StatsBand />
+      <Hero site={site} />
+      <StatsBand stats={site.stats} />
       <MissionTeaser />
       <HowItWorks />
-      <FeaturedArticles featured={featured} secondary={secondary} />
+      {featured && <FeaturedArticles featured={featured} secondary={secondary} />}
       <LegislationTeaser />
-      <ClosingCta />
-      <ChaptersStrip />
+      <ClosingCta site={site} />
+      <ChaptersStrip chapters={chapters} />
     </>
   )
 }
 
-function Hero() {
+function Hero({ site }) {
   return (
     <section className="relative overflow-hidden">
       <div className="pointer-events-none absolute -left-32 top-16 h-80 w-80 rounded-full bg-royal/8 blur-3xl" aria-hidden />
       <div className="pointer-events-none absolute -right-24 bottom-0 h-72 w-72 rounded-full bg-flag-red/6 blur-3xl" aria-hidden />
       <Container className="relative grid items-center gap-12 py-16 lg:grid-cols-[1.05fr_0.95fr] lg:py-24">
         <div>
-          <Eyebrow>{SITE.tagline}</Eyebrow>
+          <Eyebrow>{site.tagline}</Eyebrow>
           <h1 className="mt-5 font-serif text-[2.6rem] font-semibold leading-[1.03] tracking-tight text-navy text-balance sm:text-6xl">
             Registering the next
             <span className="relative whitespace-nowrap text-flag-red"> generation </span>
@@ -65,32 +70,28 @@ function Hero() {
           </div>
         </div>
 
-        <HeroCarousel />
+        <HeroCarousel slides={site.heroSlides} />
       </Container>
     </section>
   )
 }
 
-function HeroCarousel() {
+function HeroCarousel({ slides }) {
   const [api, setApi] = useState()
-  const [paused, setPaused] = useState(false)
-  const { index, count, scrollTo } = useCarouselAutoplay(api, { delay: 5000, paused })
+  const { index, count, scrollTo } = useCarouselIndex(api)
 
   return (
-    <div
-      className="relative"
-      onMouseEnter={() => setPaused(true)}
-      onMouseLeave={() => setPaused(false)}
-    >
-      <Carousel setApi={setApi} opts={{ loop: true }} className="overflow-hidden rounded-[1.75rem]">
+    <div className="relative">
+      <Carousel setApi={setApi} opts={{ loop: true, dragFree: false }} className="overflow-hidden rounded-[1.75rem] cursor-grab active:cursor-grabbing">
         <CarouselContent className="ml-0">
-          {HERO_SLIDES.map((slide) => (
+          {slides.map((slide) => (
             <CarouselItem key={slide.src} className="pl-0">
               <figure className="relative">
                 <img
                   src={slide.src}
                   alt={slide.alt}
-                  className="aspect-[4/5] w-full object-cover"
+                  draggable={false}
+                  className="aspect-[4/5] w-full select-none object-cover"
                 />
                 <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-navy/85 via-navy/35 to-transparent pt-16 pb-6 pl-6 pr-6">
                   <figcaption className="font-serif text-lg leading-snug text-white text-balance">
@@ -125,11 +126,11 @@ function HeroCarousel() {
   )
 }
 
-function StatsBand() {
+function StatsBand({ stats }) {
   return (
     <section className="border-y border-border bg-navy">
       <Container className="grid grid-cols-2 divide-x divide-white/10 py-2 md:grid-cols-4">
-        {STATS.map((s) => (
+        {stats.map((s) => (
           <div key={s.label} className="group px-4 py-8 text-center">
             <div className="font-serif text-4xl font-semibold text-white transition-colors duration-300 group-hover:text-flag-red sm:text-5xl">
               {s.value}
@@ -313,7 +314,7 @@ function LegislationTeaser() {
   )
 }
 
-function ClosingCta() {
+function ClosingCta({ site }) {
   return (
     <section className="relative overflow-hidden bg-navy py-20 text-white sm:py-28">
       <div className="absolute inset-0 navy-grid" aria-hidden />
@@ -334,7 +335,7 @@ function ClosingCta() {
               <Link to="/get-involved">Get Involved</Link>
             </Button>
             <Button asChild size="lg" variant="outline" className="border-white/30 bg-transparent text-white hover:bg-white hover:text-navy">
-              <a href={`mailto:${SITE.email}`}>Email us</a>
+              <a href={`mailto:${site.email}`}>Email us</a>
             </Button>
           </div>
         </div>
@@ -343,7 +344,7 @@ function ClosingCta() {
   )
 }
 
-function ChaptersStrip() {
+function ChaptersStrip({ chapters }) {
   return (
     <section className="py-16 sm:py-20">
       <Container>
@@ -354,7 +355,7 @@ function ChaptersStrip() {
           </h2>
         </div>
         <div className="mt-10 grid grid-cols-3 items-center gap-x-6 gap-y-8 sm:grid-cols-4 md:grid-cols-6">
-          {CHAPTERS.filter((c) => c.logo).map((c) => (
+          {chapters.filter((c) => c.logo).map((c) => (
             <div key={c.short} className="flex items-center justify-center" title={c.name}>
               <img
                 src={c.logo}
