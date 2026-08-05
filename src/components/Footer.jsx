@@ -3,9 +3,14 @@ import { Mail, MapPin } from 'lucide-react'
 import { InstagramIcon, LinkedinIcon } from '@/components/SocialIcons'
 import { Container } from '@/components/Container'
 import { StarRow } from '@/components/Bits'
-import { NAV, SITE } from '@/data/site'
+import { NAV } from '@/data/site'
+import { useSanityQuery } from '@/lib/useSanity'
+import { siteSettingsQuery } from '@/lib/queries'
 
 export function Footer() {
+  const { data: SITE } = useSanityQuery(siteSettingsQuery)
+  if (!SITE) return null
+
   return (
     <footer className="relative overflow-hidden bg-navy text-white">
       <div className="flex h-1 w-full">

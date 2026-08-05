@@ -1,8 +1,10 @@
 import { Link, useParams } from 'react-router-dom'
 import { ArrowLeft, ArrowRight } from 'lucide-react'
+import { PortableText } from '@portabletext/react'
 import { Container } from '@/components/Container'
 import { LinkButton } from '@/components/Bits'
-import { getArticle, ARTICLES } from '@/data/articles'
+import { useSanityQuery } from '@/lib/useSanity'
+import { articleBySlugQuery, articlesListQuery } from '@/lib/queries'
 import NotFound from '@/pages/NotFound'
 
 const fmtDate = (d) =>
@@ -10,10 +12,13 @@ const fmtDate = (d) =>
 
 export default function ArticleDetail() {
   const { slug } = useParams()
-  const article = getArticle(slug)
+  const { data: article, loading } = useSanityQuery(articleBySlugQuery, { slug }, [slug])
+  const { data: allArticles } = useSanityQuery(articlesListQuery)
+
+  if (loading || !allArticles) return null
   if (!article) return <NotFound />
 
-  const more = ARTICLES.filter((a) => a.slug !== slug).slice(0, 3)
+  const more = allArticles.filter((a) => a.slug !== slug).slice(0, 3)
 
   return (
     <article className="pb-24">
@@ -46,12 +51,8 @@ export default function ArticleDetail() {
 
       {/* Body */}
       <Container className="max-w-2xl pt-12">
-        <div className="space-y-6 font-serif text-lg leading-[1.75] text-ink/85 first-letter:float-left first-letter:mr-3 first-letter:font-serif first-letter:text-6xl first-letter:font-semibold first-letter:leading-[0.85] first-letter:text-flag-red">
-          {article.body.map((p, i) => (
-            <p key={i} className={i === 0 ? '' : 'first-letter:float-none first-letter:m-0 first-letter:text-lg first-letter:text-ink/85'}>
-              {p}
-            </p>
-          ))}
+        <div className="space-y-6 font-serif text-lg leading-[1.75] text-ink/85 [&>p:first-child]:first-letter:float-left [&>p:first-child]:first-letter:mr-3 [&>p:first-child]:first-letter:font-serif [&>p:first-child]:first-letter:text-6xl [&>p:first-child]:first-letter:font-semibold [&>p:first-child]:first-letter:leading-[0.85] [&>p:first-child]:first-letter:text-flag-red">
+          <PortableText value={article.body} />
         </div>
 
         <div className="mt-10 rounded-xl border border-dashed border-border bg-secondary/60 px-5 py-4 text-sm text-muted-foreground">

@@ -4,9 +4,11 @@ import { Menu, ChevronDown } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
 import { Sheet, SheetContent, SheetTrigger, SheetClose, SheetTitle } from '@/components/ui/sheet'
-import { NAV, SITE } from '@/data/site'
+import { NAV } from '@/data/site'
+import { useSanityQuery } from '@/lib/useSanity'
+import { siteSettingsQuery } from '@/lib/queries'
 
-function Brand({ onClick }) {
+function Brand({ onClick, tagline }) {
   return (
     <Link to="/" onClick={onClick} className="flex items-center gap-3 group">
       <img
@@ -16,7 +18,7 @@ function Brand({ onClick }) {
       />
       <span className="flex flex-col leading-none">
         <span className="font-serif text-lg font-semibold tracking-tight text-navy">Vote of Teens</span>
-        <span className="eyebrow text-[0.6rem] text-flag-red">{SITE.tagline}</span>
+        <span className="eyebrow text-[0.6rem] text-flag-red">{tagline}</span>
       </span>
     </Link>
   )
@@ -73,6 +75,7 @@ function DesktopItem({ item }) {
 }
 
 export function Navbar() {
+  const { data: site } = useSanityQuery(siteSettingsQuery)
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
   const location = useLocation()
@@ -103,7 +106,7 @@ export function Navbar() {
         )}
       >
         <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5 sm:px-8">
-          <Brand />
+          <Brand tagline={site?.tagline} />
 
           <div className="hidden items-center gap-1 lg:flex">
             {NAV.map((item) => (
@@ -130,7 +133,7 @@ export function Navbar() {
                 <SheetTitle className="sr-only">Menu</SheetTitle>
                 <div className="flex h-full flex-col">
                   <div className="border-b px-6 py-5">
-                    <Brand onClick={() => setOpen(false)} />
+                    <Brand onClick={() => setOpen(false)} tagline={site?.tagline} />
                   </div>
                   <div className="flex flex-1 flex-col gap-1 overflow-y-auto px-4 py-6">
                     {NAV.map((item) => (

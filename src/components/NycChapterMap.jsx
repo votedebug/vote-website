@@ -1,7 +1,8 @@
 import { useMemo, useState } from 'react'
 import { geoMercator, geoPath } from 'd3-geo'
 import boroughs from '@/data/nyc-boroughs.json'
-import { CHAPTERS } from '@/data/chapters'
+import { useSanityQuery } from '@/lib/useSanity'
+import { chaptersQuery } from '@/lib/queries'
 import { cn } from '@/lib/utils'
 
 const W = 720
@@ -19,6 +20,7 @@ const FILTERS = ['All of NYC', 'Manhattan', 'Bronx', 'Brooklyn', 'Queens']
  * to it, which both spreads the pins out and doubles as the list filter.
  */
 export function NycChapterMap({ onSelect }) {
+  const { data: CHAPTERS } = useSanityQuery(chaptersQuery)
   const [filter, setFilter] = useState('All of NYC')
   const [hovered, setHovered] = useState(null)
 
@@ -37,13 +39,13 @@ export function NycChapterMap({ onSelect }) {
       c: pathGen.centroid(f),
     }))
 
-    const pins = CHAPTERS.map((c) => {
+    const pins = (CHAPTERS || []).map((c) => {
       const [x, y] = projection(c.coords)
       return { chapter: c, x, y }
     })
 
     return { shapes, pins, labels }
-  }, [])
+  }, [CHAPTERS])
 
   // Zoom transform for the current filter.
   const { k, tx, ty } = useMemo(() => {
@@ -58,6 +60,8 @@ export function NycChapterMap({ onSelect }) {
       ty: H / 2 - (k * (y0 + y1)) / 2,
     }
   }, [filter, shapes])
+
+  if (!CHAPTERS) return null
 
   const visible = filter === 'All of NYC' ? CHAPTERS : CHAPTERS.filter((c) => c.borough === filter)
 

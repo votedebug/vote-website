@@ -5,8 +5,8 @@ import { Container, Reveal } from '@/components/Container'
 import { PageHero, SectionHeading, LinkButton } from '@/components/Bits'
 import { LegislationMap } from '@/components/LegislationMap'
 import { POLICIES } from '@/data/policies'
-import { getArticle } from '@/data/articles'
-import { SITE } from '@/data/site'
+import { useSanityQuery } from '@/lib/useSanity'
+import { siteSettingsQuery, articlesListQuery } from '@/lib/queries'
 import { cn } from '@/lib/utils'
 
 const HELP = [
@@ -28,6 +28,9 @@ const HELP = [
 ]
 
 export default function Legislation() {
+  const { data: SITE } = useSanityQuery(siteSettingsQuery)
+  if (!SITE) return null
+
   return (
     <>
       <PageHero
@@ -89,6 +92,8 @@ export default function Legislation() {
  */
 function PlatformSection() {
   const [open, setOpen] = useState(0)
+  const { data: articles } = useSanityQuery(articlesListQuery)
+  const getArticle = (slug) => (articles || []).find((a) => a.slug === slug)
 
   return (
     <section className="relative overflow-hidden bg-navy py-20 text-white sm:py-24">

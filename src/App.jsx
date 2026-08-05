@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import { Routes, Route, useLocation } from 'react-router-dom'
+import { VisualEditing } from '@sanity/visual-editing/react-router'
 import { Navbar } from '@/components/Navbar'
 import { Footer } from '@/components/Footer'
 import Home from '@/pages/Home'
@@ -11,6 +12,7 @@ import ArticleDetail from '@/pages/ArticleDetail'
 import Legislation from '@/pages/Legislation'
 import GetInvolved from '@/pages/GetInvolved'
 import NotFound from '@/pages/NotFound'
+import { isPreview } from '@/lib/sanity'
 
 function ScrollToTop() {
   const { pathname, hash } = useLocation()
@@ -53,6 +55,7 @@ export default function App() {
         </Routes>
       </main>
       <Footer />
+      {isPreview && <VisualEditing />}
     </div>
   )
 }

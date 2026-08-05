@@ -1,6 +1,7 @@
 import { ImagePlus } from 'lucide-react'
 import { Container, Reveal } from '@/components/Container'
-import { BOARD, FOUNDERS, EDITORIAL, MEDIA } from '@/data/team'
+import { useSanityQuery } from '@/lib/useSanity'
+import { teamQuery } from '@/lib/queries'
 import { cn } from '@/lib/utils'
 
 function SubHeading({ children, light }) {
@@ -12,6 +13,14 @@ function SubHeading({ children, light }) {
 }
 
 export default function Team() {
+  const { data: team } = useSanityQuery(teamQuery)
+  if (!team) return null
+
+  const BOARD = team.filter((p) => p.category === 'board')
+  const FOUNDERS = team.filter((p) => p.category === 'founder')
+  const EDITORIAL = team.filter((p) => p.category === 'editorial')
+  const MEDIA = team.filter((p) => p.category === 'media')
+
   return (
     <>
       {/* Directors — the page opens straight onto the board */}
