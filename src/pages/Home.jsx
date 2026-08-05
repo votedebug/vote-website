@@ -132,7 +132,7 @@ function StatsBand({ stats }) {
       <Container className="grid grid-cols-2 divide-x divide-white/10 py-2 md:grid-cols-4">
         {stats.map((s) => (
           <div key={s.label} className="group px-4 py-8 text-center">
-            <div className="font-serif text-4xl font-semibold text-white transition-colors duration-300 group-hover:text-flag-red sm:text-5xl">
+            <div className="font-serif text-4xl font-semibold text-white transition-[color,filter] duration-300 group-hover:text-flag-red group-hover:drop-shadow-[0_0_18px_var(--color-flag-red)] sm:text-5xl">
               {s.value}
             </div>
             <div className="eyebrow mt-2 text-white/60">{s.label}</div>
@@ -349,7 +349,7 @@ function ChaptersStrip({ chapters }) {
     <section className="py-16 sm:py-20">
       <Container>
         <div className="flex flex-col items-center text-center">
-          <Eyebrow>15 chapters and counting</Eyebrow>
+          <Eyebrow>{chapters.length} chapters and counting</Eyebrow>
           <h2 className="mt-3 max-w-2xl font-serif text-2xl font-semibold text-navy sm:text-3xl text-balance">
             Trusted by students at New York City’s most storied high schools.
           </h2>
