@@ -13,9 +13,8 @@ export default function Chapters() {
   return (
     <>
       <PageHero
-        eyebrow="Our Chapters"
-        title="One school became fifteen."
-        intro="Each VOTE chapter is a student-run team registering voters inside their own high school. Find one on the map — click a pin to meet its directors."
+        title="Our Chapters"
+        intro="Each VOTE chapter is a student-run team registering voters inside their own high school."
       />
 
       {/* The map is the chapter directory */}
