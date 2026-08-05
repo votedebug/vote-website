@@ -66,7 +66,7 @@ export function NycChapterMap({ onSelect }) {
   const visible = filter === 'All of NYC' ? CHAPTERS : CHAPTERS.filter((c) => c.borough === filter)
 
   return (
-    <div className="grid gap-8 lg:grid-cols-[1.25fr_1fr] lg:items-start">
+    <div className="grid gap-8 lg:grid-cols-[65fr_35fr] lg:items-start">
       <div>
         {/* Borough filter / zoom */}
         <div className="flex flex-wrap gap-2">
