@@ -84,10 +84,6 @@ export default function Team() {
               </Reveal>
             ))}
           </div>
-          <p className="mt-10 text-sm text-muted-foreground">
-            Editorial &amp; Media rosters are placeholders — send the real names, roles, and photos
-            and they’ll drop right in.
-          </p>
         </Container>
       </section>
 
