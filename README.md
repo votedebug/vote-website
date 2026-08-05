@@ -39,17 +39,35 @@ public/img/         Logo, headshots, chapter logos, drive photos
 
 ## Editing content
 
-Almost everything is data-driven — edit these files, no component changes needed:
+Team, chapters, articles, and site settings (hero slides, stats, tagline, contact info) are
+managed in **Sanity** — see [Content & Visual Editing](#content--visual-editing) below.
 
-- **Team** — `src/data/team.js` (Board bios are the site's original text, verbatim; Editorial &
-  Media are **placeholders** — swap in real names/photos).
-- **Chapters** — `src/data/chapters.js`.
-- **Articles** — `src/data/articles.js` (currently **placeholder** posts; replace titles, bodies,
-  authors, images).
+Everything else is still data-driven — edit these files, no component changes needed:
+
 - **Legislation map** — `src/data/states.js`. Pre-registration rules sourced from
   [The Civics Center](https://www.thecivicscenter.org/prereg) for the 2026 cycle.
   **Verify against official state sources before relying on it.**
-- **Site info / nav / stats** — `src/data/site.js`.
+- **Nav structure** — `src/data/site.js` (`NAV`).
+- **Calendar / drive dates** — `src/data/events.js`.
+- **Policy platform** — `src/data/policies.js`.
+
+## Content & Visual Editing
+
+Content lives in Sanity (project `voteofteens`, id `c0h6oqi4`, dataset `production`).
+
+- **Edit content**: https://voteofteens.sanity.studio/, or run the Studio locally with
+  `npm --prefix studio run dev` (http://localhost:3333).
+- **Visual Editing**: open the Studio's **Presentation** tab to edit content with live overlays
+  on the actual site. It previews `SANITY_STUDIO_PREVIEW_ORIGIN` (set in `studio/.env`,
+  defaults to `http://localhost:5173`) — point this at your Vercel URL once deployed, then
+  `npx sanity deploy` (from `studio/`) to republish the hosted Studio with that setting.
+- **App env vars** (see `.env.example`): `VITE_SANITY_PROJECT_ID`, `VITE_SANITY_DATASET`,
+  `VITE_SANITY_API_VERSION`, `VITE_SANITY_STUDIO_URL`. Add the same to your Vercel project's
+  environment variables.
+- **Schemas**: `studio/schemaTypes/`. **One-off migration script** (already run once, do not
+  re-run against a populated dataset): `studio/scripts/migrate.mjs`.
+- `events.js`, `policies.js`, and `states.js` were intentionally left as static data, not
+  migrated to Sanity.
 
 ## Notes / to-dos
 
