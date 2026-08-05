@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { Routes, Route, useLocation } from 'react-router-dom'
-import { VisualEditing } from '@sanity/visual-editing/react-router'
+import { VisualEditing } from '@sanity/visual-editing/react'
 import { Navbar } from '@/components/Navbar'
 import { Footer } from '@/components/Footer'
 import Home from '@/pages/Home'
@@ -55,7 +55,7 @@ export default function App() {
         </Routes>
       </main>
       <Footer />
-      {isPreview && <VisualEditing />}
+      {isPreview && <VisualEditing portal />}
     </div>
   )
 }
