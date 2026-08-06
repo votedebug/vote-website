@@ -18,18 +18,43 @@ function ScrollToTop() {
   const { pathname, hash } = useLocation()
   useEffect(() => {
     if (hash) {
-      // Let the target section render, then scroll to it accounting for the sticky header.
       const id = hash.slice(1)
-      requestAnimationFrame(() => {
+      const scrollToEl = (el) => {
+        const y = el.getBoundingClientRect().top + window.scrollY - 84
+        window.scrollTo({ top: y, behavior: 'smooth' })
+      }
+
+      const immediate = document.getElementById(id)
+      if (immediate) {
+        scrollToEl(immediate)
+        return
+      }
+
+      // The target section usually doesn't exist yet on first navigation —
+      // its page is still waiting on a Sanity fetch to finish rendering.
+      // Poll briefly for it instead of giving up after a single frame.
+      // setTimeout rather than requestAnimationFrame: rAF is paused
+      // entirely in a backgrounded tab, so a poll loop built on it can
+      // just never run; a timer still fires (throttled, but not stalled).
+      let cancelled = false
+      const deadline = Date.now() + 3000
+      const tick = () => {
+        if (cancelled) return
         const el = document.getElementById(id)
         if (el) {
-          const y = el.getBoundingClientRect().top + window.scrollY - 84
-          window.scrollTo({ top: y, behavior: 'smooth' })
+          scrollToEl(el)
           return
         }
-        window.scrollTo(0, 0)
-      })
-      return
+        if (Date.now() < deadline) {
+          setTimeout(tick, 50)
+        } else {
+          window.scrollTo(0, 0)
+        }
+      }
+      tick()
+      return () => {
+        cancelled = true
+      }
     }
     window.scrollTo(0, 0)
   }, [pathname, hash])

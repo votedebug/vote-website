@@ -20,7 +20,6 @@ export default defineType({
     defineField({name: 'category', title: 'Category', type: 'string'}),
     defineField({name: 'readTime', title: 'Read time', type: 'string', description: 'e.g. "6 min read"'}),
     defineField({name: 'image', title: 'Cover image', type: 'image', options: {hotspot: true}}),
-    defineField({name: 'feature', title: 'Feature on Articles page', type: 'boolean', initialValue: false}),
     defineField({
       name: 'body',
       title: 'Body',

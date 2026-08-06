@@ -15,6 +15,14 @@ export default defineType({
     defineField({name: 'linkedin', title: 'LinkedIn URL', type: 'url'}),
     defineField({name: 'founded', title: 'Founded (year)', type: 'number'}),
     defineField({
+      name: 'featuredArticle',
+      title: 'Featured article',
+      description:
+        'The one article shown as the big feature on the Home page and leading the Articles page carousel. Pick exactly one here — there’s no separate "Feature" checkbox on individual articles anymore, so it can’t end up ambiguous.',
+      type: 'reference',
+      to: [{type: 'article'}],
+    }),
+    defineField({
       name: 'stats',
       title: 'Homepage stats',
       type: 'array',

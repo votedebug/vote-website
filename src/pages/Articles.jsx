@@ -5,7 +5,7 @@ import { Container } from '@/components/Container'
 import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel'
 import { useCarouselAutoplay } from '@/lib/useCarouselAutoplay'
 import { useSanityQuery } from '@/lib/useSanity'
-import { articlesListQuery } from '@/lib/queries'
+import { articlesListQuery, siteSettingsQuery } from '@/lib/queries'
 import { cn } from '@/lib/utils'
 
 const fmtDate = (d) =>
@@ -13,6 +13,7 @@ const fmtDate = (d) =>
 
 export default function Articles() {
   const { data: ARTICLES } = useSanityQuery(articlesListQuery)
+  const { data: site } = useSanityQuery(siteSettingsQuery)
   const [active, setActive] = useState('All')
 
   const categories = useMemo(
@@ -20,15 +21,16 @@ export default function Articles() {
     [ARTICLES],
   )
 
-  // The carousel leads with the featured story, then the rest in order.
+  // The carousel leads with the same featured story as the Home page
+  // (Site Settings → Featured article), then the rest in order.
   const featured = useMemo(() => {
-    if (!ARTICLES) return []
-    const lead = ARTICLES.find((a) => a.feature) || ARTICLES[0]
+    if (!ARTICLES || !site) return []
+    const lead = ARTICLES.find((a) => a.slug === site.featuredArticleSlug) || ARTICLES[0]
     if (!lead) return []
     return [lead, ...ARTICLES.filter((a) => a.slug !== lead.slug)].slice(0, 5)
-  }, [ARTICLES])
+  }, [ARTICLES, site])
 
-  if (!ARTICLES) return null
+  if (!ARTICLES || !site) return null
 
   const filtered = active === 'All' ? ARTICLES : ARTICLES.filter((a) => a.category === active)
 

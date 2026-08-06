@@ -4,6 +4,7 @@
 
 export const siteSettingsQuery = `*[_id == "siteSettings"][0]{
   name, short, tagline, email, address, instagram, linkedin, founded,
+  "featuredArticleSlug": featuredArticle->slug.current,
   stats[]{ value, label },
   heroSlides[]{ _key, "src": image.asset->url, caption, alt }
 }`
@@ -20,11 +21,11 @@ export const chaptersQuery = `*[_type == "chapter"] | order(order asc, name asc)
 
 export const articlesListQuery = `*[_type == "article"] | order(date desc) {
   _id, title, "slug": slug.current, dek, author, role, date, category,
-  readTime, "image": image.asset->url, feature
+  readTime, "image": image.asset->url
 }`
 
 export const articleBySlugQuery = `*[_type == "article" && slug.current == $slug][0]{
   _id, title, "slug": slug.current, dek, author, role, date, category,
-  readTime, "image": image.asset->url, feature, body,
+  readTime, "image": image.asset->url, body,
   bibliography[]{ text, url }
 }`

@@ -10,6 +10,28 @@ import NotFound from '@/pages/NotFound'
 const fmtDate = (d) =>
   new Date(d + 'T00:00:00').toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })
 
+// Sanity's default block schema includes a "link" annotation out of the box,
+// but @portabletext/react doesn't render annotations unless told how —
+// without this, links typed in the Studio silently rendered as plain text.
+const portableTextComponents = {
+  marks: {
+    link: ({ value, children }) => {
+      const href = value?.href || '#'
+      const isExternal = /^https?:\/\//.test(href)
+      return (
+        <a
+          href={href}
+          target={isExternal ? '_blank' : undefined}
+          rel={isExternal ? 'noreferrer' : undefined}
+          className="text-royal underline-offset-2 hover:underline"
+        >
+          {children}
+        </a>
+      )
+    },
+  },
+}
+
 export default function ArticleDetail() {
   const { slug } = useParams()
   const { data: article, loading } = useSanityQuery(articleBySlugQuery, { slug }, [slug])
@@ -52,11 +74,7 @@ export default function ArticleDetail() {
       {/* Body */}
       <Container className="max-w-2xl pt-12">
         <div className="space-y-6 font-serif text-lg leading-[1.75] text-ink/85 [&>p:first-child]:first-letter:float-left [&>p:first-child]:first-letter:mr-3 [&>p:first-child]:first-letter:font-serif [&>p:first-child]:first-letter:text-6xl [&>p:first-child]:first-letter:font-semibold [&>p:first-child]:first-letter:leading-[0.85] [&>p:first-child]:first-letter:text-flag-red">
-          <PortableText value={article.body} />
-        </div>
-
-        <div className="mt-10 rounded-xl border border-dashed border-border bg-secondary/60 px-5 py-4 text-sm text-muted-foreground">
-          This is placeholder editorial content. Replace with the real article body when ready.
+          <PortableText value={article.body} components={portableTextComponents} />
         </div>
 
         {article.bibliography?.length > 0 && (
@@ -75,7 +93,6 @@ export default function ArticleDetail() {
                 </li>
               ))}
             </ol>
-            <p className="mt-4 text-xs text-muted-foreground">Placeholder references — replace with the article’s real sources.</p>
           </section>
         )}
 
