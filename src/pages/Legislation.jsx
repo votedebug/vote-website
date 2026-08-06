@@ -23,7 +23,7 @@ const HELP = [
   {
     icon: Users2,
     title: 'Organize a drive',
-    body: 'The fastest way to grow youth turnout is to register the students around you. We’ll give you the playbook.',
+    body: 'The fastest way to grow youth turnout is to register the students around you.',
   },
 ]
 

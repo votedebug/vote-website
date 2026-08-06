@@ -211,7 +211,7 @@ function FeaturedArticles({ featured, secondary }) {
                 <Link to={`/articles/${a.slug}`} className="group flex gap-4 py-5 first:pt-0">
                   <img src={a.image} alt="" className="h-24 w-24 shrink-0 rounded-xl object-cover" />
                   <div>
-                    <span className="eyebrow text-royal-light">{a.category}</span>
+                    <span className="eyebrow text-flag-red">{a.category}</span>
                     <h4 className="mt-1 font-serif text-lg font-semibold leading-snug text-white transition-colors group-hover:text-royal-light">
                       {a.title}
                     </h4>

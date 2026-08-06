@@ -11,7 +11,6 @@ export const EVENTS = [
   { date: '2026-10-27', title: 'Vote Early Day', type: 'national', note: 'Celebrating early and mail-in voting options.' },
 
   // Chapter drives (placeholders)
-  { date: '2026-09-15', title: 'Registration Drive', type: 'drive', chapter: 'Bronx Science', note: 'National Voter Registration Day drive at lunch.' },
   { date: '2026-09-15', title: 'Registration Drive', type: 'drive', chapter: 'Bronx Science', note: 'National Voter Registration Day drive in homerooms.' },
   { date: '2026-09-24', title: 'Registration Drive', type: 'drive', chapter: 'Stuyvesant', note: 'Add time & location.' },
   { date: '2026-10-01', title: 'Registration Drive', type: 'drive', chapter: 'Brooklyn Tech', note: 'Add time & location.' },
