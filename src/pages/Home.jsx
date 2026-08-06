@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { ArrowRight, ArrowUpRight, ClipboardCheck, Megaphone, Users } from 'lucide-react'
+import { ArrowRight, ArrowUpRight } from 'lucide-react'
 import { Container, Reveal } from '@/components/Container'
 import { Eyebrow, SectionHeading, StarRow, LinkButton } from '@/components/Bits'
 import { Button } from '@/components/ui/button'
@@ -26,7 +26,6 @@ export default function Home() {
       <Hero site={site} />
       <StatsBand stats={site.stats} />
       <MissionTeaser />
-      <HowItWorks />
       {featured && <FeaturedArticles featured={featured} secondary={secondary} />}
       <LegislationTeaser />
       <ClosingCta site={site} />
@@ -174,64 +173,15 @@ function MissionTeaser() {
   )
 }
 
-const STEPS = [
-  {
-    icon: ClipboardCheck,
-    title: 'Register',
-    body: 'We run registration and pre-registration drives inside schools, meeting students where they already are.',
-  },
-  {
-    icon: Users,
-    title: 'Organize',
-    body: 'Student directors launch chapters, train volunteers, and build a culture of voting that outlasts any single election.',
-  },
-  {
-    icon: Megaphone,
-    title: 'Advocate',
-    body: 'We track youth-voting laws state by state and connect teens to the legislators who can expand access.',
-  },
-]
-
-function HowItWorks() {
+function FeaturedArticles({ featured, secondary }) {
   return (
     <section className="relative overflow-hidden bg-navy py-20 text-white sm:py-24">
       <div className="absolute inset-0 navy-grid" aria-hidden />
       <div className="pointer-events-none absolute -right-20 top-0 h-72 w-72 rounded-full bg-royal/25 blur-3xl" aria-hidden />
       <Container className="relative">
-        <SectionHeading light center eyebrow="How it works" title="Three moves that turn students into voters." />
-        <div className="mt-16 grid gap-y-14 sm:grid-cols-3 sm:gap-x-0">
-          {STEPS.map((step, i) => (
-            <Reveal
-              key={step.title}
-              delay={i * 90}
-              className={cn(
-                'group relative px-0 sm:px-8',
-                i > 0 && 'sm:border-l sm:border-white/12',
-              )}
-            >
-              <div className="flex items-baseline gap-4">
-                <span className="font-serif text-6xl font-semibold leading-none text-white/12 transition-colors duration-300 group-hover:text-flag-red/70">
-                  0{i + 1}
-                </span>
-                <step.icon className="h-6 w-6 text-royal-light" strokeWidth={1.75} />
-              </div>
-              <h3 className="mt-5 font-serif text-2xl font-semibold text-white">{step.title}</h3>
-              <p className="mt-2.5 text-[0.975rem] leading-relaxed text-white/65">{step.body}</p>
-            </Reveal>
-          ))}
-        </div>
-      </Container>
-    </section>
-  )
-}
-
-function FeaturedArticles({ featured, secondary }) {
-  return (
-    <section className="py-20 sm:py-24">
-      <Container>
         <div className="flex items-end justify-between gap-4">
-          <SectionHeading eyebrow="From the desk" title="Stories on youth & democracy" />
-          <Link to="/articles" className="hidden shrink-0 items-center gap-1 pb-2 text-sm font-semibold text-royal hover:underline sm:flex">
+          <SectionHeading light eyebrow="From the desk" title="Stories on youth & democracy" />
+          <Link to="/articles" className="hidden shrink-0 items-center gap-1 pb-2 text-sm font-semibold text-royal-light hover:underline sm:flex">
             All articles <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
@@ -244,33 +194,33 @@ function FeaturedArticles({ featured, secondary }) {
               </div>
               <div className="mt-5">
                 <span className="eyebrow text-flag-red">{featured.category}</span>
-                <h3 className="mt-2 font-serif text-3xl font-semibold leading-tight text-navy transition-colors group-hover:text-royal">
+                <h3 className="mt-2 font-serif text-3xl font-semibold leading-tight text-white transition-colors group-hover:text-royal-light">
                   {featured.title}
                 </h3>
-                <p className="mt-3 text-[1.02rem] leading-relaxed text-ink/70">{featured.dek}</p>
-                <p className="mt-4 text-sm font-medium text-ink/55">
+                <p className="mt-3 text-[1.02rem] leading-relaxed text-white/70">{featured.dek}</p>
+                <p className="mt-4 text-sm font-medium text-white/55">
                   {featured.author} · {featured.readTime}
                 </p>
               </div>
             </Link>
           </Reveal>
 
-          <div className="flex flex-col divide-y divide-border">
+          <div className="flex flex-col divide-y divide-white/10">
             {secondary.map((a, i) => (
               <Reveal key={a.slug} delay={i * 90}>
                 <Link to={`/articles/${a.slug}`} className="group flex gap-4 py-5 first:pt-0">
                   <img src={a.image} alt="" className="h-24 w-24 shrink-0 rounded-xl object-cover" />
                   <div>
-                    <span className="eyebrow text-royal">{a.category}</span>
-                    <h4 className="mt-1 font-serif text-lg font-semibold leading-snug text-navy transition-colors group-hover:text-royal">
+                    <span className="eyebrow text-royal-light">{a.category}</span>
+                    <h4 className="mt-1 font-serif text-lg font-semibold leading-snug text-white transition-colors group-hover:text-royal-light">
                       {a.title}
                     </h4>
-                    <p className="mt-1 text-xs font-medium text-ink/50">{a.author} · {a.readTime}</p>
+                    <p className="mt-1 text-xs font-medium text-white/50">{a.author} · {a.readTime}</p>
                   </div>
                 </Link>
               </Reveal>
             ))}
-            <Link to="/articles" className="mt-2 flex items-center gap-1 pt-4 text-sm font-semibold text-royal hover:underline sm:hidden">
+            <Link to="/articles" className="mt-2 flex items-center gap-1 pt-4 text-sm font-semibold text-royal-light hover:underline sm:hidden">
               All articles <ArrowRight className="h-4 w-4" />
             </Link>
           </div>

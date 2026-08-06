@@ -70,10 +70,6 @@ function CalendarSection() {
         <div className="mt-12">
           <ChapterCalendar />
         </div>
-        <p className="mt-10 text-sm text-white/45">
-          Chapter drive dates are placeholders — edit them in <code className="text-xs">src/data/events.js</code>.
-          National dates reflect the 2026 cycle; verify before publicizing.
-        </p>
       </Container>
     </section>
   )
