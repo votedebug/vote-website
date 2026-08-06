@@ -18,4 +18,10 @@ export const POLICIES = [
       'Let 17-year-olds who’ll be 18 by the general election vote in that year’s primaries.',
     articleSlug: 'seventeen-in-the-primaries',
   },
+  {
+    title: 'Require instruction on voting in the 12th-grade social studies curriculum',
+    summary:
+      'Teach every 12th grader how to register, find their polling place, and cast a ballot.',
+    articleSlug: 'voting-instruction-in-schools',
+  },
 ]

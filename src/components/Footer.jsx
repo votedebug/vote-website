@@ -30,8 +30,8 @@ export function Footer() {
               </div>
             </div>
             <p className="mt-5 max-w-sm text-sm leading-relaxed text-white/70">
-              A student-led movement registering the next generation of voters — one high school
-              hallway at a time.
+              A student-led movement registering the next generation of voters, one high school
+              at a time.
             </p>
             <StarRow className="mt-6 text-flag-red" />
           </div>

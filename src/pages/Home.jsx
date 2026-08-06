@@ -157,7 +157,7 @@ function MissionTeaser() {
         <Reveal className="order-1 lg:order-2" delay={100}>
           <SectionHeading
             eyebrow="Our mission"
-            title="Young people aren’t the future of democracy. They’re the present."
+            title="Young people are both the present and future of democracy."
             intro="VOTE is a student-led, non-partisan movement dedicated to amplifying young voices and ensuring they play a crucial role in shaping the future of their communities and the nation."
           />
           <div className="mt-8 flex flex-wrap gap-3">
@@ -288,8 +288,8 @@ function LegislationTeaser() {
           <div>
             <SectionHeading
               eyebrow="Know your state"
-              title="Every state writes its own rules. We mapped all of them."
-              intro="From pre-registering at 16 to same-day deadlines, the path to the ballot changes at every state line. Explore the interactive map to see when teens in each state can get on the rolls — and how to help change the law where they can’t."
+              title="We mapped the registration rules across every state."
+              intro="From pre-registering at 16 to same-day deadlines, the path to the ballot changes at every state line. Explore the interactive map to see when teens in each state can get on the rolls and how to help change the law where they can’t."
             />
             <div className="mt-8">
               <LinkButton to="/legislation" className="bg-flag-red text-white hover:bg-flag-red-dark">
@@ -324,7 +324,7 @@ function ClosingCta({ site }) {
         <div className="mx-auto max-w-2xl text-center">
           <StarRow className="mx-auto justify-center text-flag-red" />
           <h2 className="mt-5 font-serif text-3xl font-semibold leading-tight text-balance sm:text-[2.75rem]">
-            Start a chapter. Run a drive. Change who shows up on Election Day.
+            Start a chapter, run a drive, and change who shows up on Election Day.
           </h2>
           <p className="mt-4 text-white/70">
             Whether you want to bring VOTE to your school or help move youth-voting legislation,
@@ -351,7 +351,7 @@ function ChaptersStrip({ chapters }) {
         <div className="flex flex-col items-center text-center">
           <Eyebrow>{chapters.length} chapters and counting</Eyebrow>
           <h2 className="mt-3 max-w-2xl font-serif text-2xl font-semibold text-navy sm:text-3xl text-balance">
-            Trusted by students at New York City’s most storied high schools.
+            Representing high schools across New York City.
           </h2>
         </div>
         <div className="mt-10 grid grid-cols-3 items-center gap-x-6 gap-y-8 sm:grid-cols-4 md:grid-cols-6">
