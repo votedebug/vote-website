@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { ArrowRight, ArrowUpRight, ImagePlus } from 'lucide-react'
+import { ArrowLeft, ArrowRight, ArrowUpRight, ImagePlus } from 'lucide-react'
 import { Container, Reveal } from '@/components/Container'
 import { Eyebrow, SectionHeading, StarRow, LinkButton } from '@/components/Bits'
 import { Button } from '@/components/ui/button'
@@ -111,6 +111,21 @@ function HeroCarousel({ slides }) {
           ))}
         </CarouselContent>
       </Carousel>
+
+      <button
+        onClick={() => api?.scrollPrev()}
+        aria-label="Previous slide"
+        className="absolute left-3 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-white/10 text-white backdrop-blur transition-colors hover:bg-white/25"
+      >
+        <ArrowLeft className="h-5 w-5" />
+      </button>
+      <button
+        onClick={() => api?.scrollNext()}
+        aria-label="Next slide"
+        className="absolute right-3 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-white/10 text-white backdrop-blur transition-colors hover:bg-white/25"
+      >
+        <ArrowRight className="h-5 w-5" />
+      </button>
 
       {/* Slide indicators sit under the frame, not on it */}
       <div className="mt-5 flex items-center gap-2.5">
