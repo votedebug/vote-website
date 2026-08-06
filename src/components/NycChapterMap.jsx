@@ -171,7 +171,7 @@ export function NycChapterMap({ onSelect }) {
               <span className="text-ink/45"> · {CHAPTERS.find((c) => c.short === hovered)?.address}</span>
             </p>
           ) : (
-            <p className="text-sm text-ink/40">Hover a pin to see the school — click to meet its directors.</p>
+            <p className="text-sm text-ink/40">Hover a pin to see the school and meet its directors.</p>
           )}
         </div>
       </div>
