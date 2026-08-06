@@ -15,7 +15,7 @@ export default function About() {
         {/* Wider than the standard Container — at the target font size, the
             quote's line breaks and a 10%-bigger photo don't both fit inside
             the site's normal max-w-6xl content width side by side. */}
-        <div className="relative mx-auto grid w-full max-w-[92rem] items-end gap-6 px-5 pt-16 pb-[84px] sm:px-8 sm:pt-20 min-[1440px]:grid-cols-[max-content_581px] min-[1440px]:gap-4">
+        <div className="relative mx-auto grid w-full max-w-[92rem] items-end gap-6 px-5 pt-16 pb-[84px] sm:pt-20 min-[1462px]:grid-cols-[max-content_581px] min-[1462px]:justify-center min-[1462px]:gap-4 min-[1462px]:px-[112px]">
           <div className="max-w-2xl">
             <Eyebrow light>About VOTE</Eyebrow>
             <blockquote className="mt-8 font-serif text-3xl font-semibold leading-[1.15] sm:text-5xl md:text-[3.4rem]">
@@ -35,7 +35,7 @@ export default function About() {
           {/* Cut-out photo, no border or card, bled flush to the bottom edge
               of the section (10% larger than the original render). A soft
               spotlight keeps the dark suit from disappearing into the navy. */}
-          <div className="relative mx-auto -mb-[84px] max-w-3xl min-[1440px]:mx-0 min-[1440px]:w-full min-[1440px]:max-w-none">
+          <div className="relative mx-auto -mb-[84px] max-w-3xl min-[1462px]:mx-0 min-[1462px]:w-full min-[1462px]:max-w-none">
             <div
               className="pointer-events-none absolute inset-x-0 bottom-0 top-8 rounded-t-full bg-[radial-gradient(ellipse_at_bottom,rgba(255,255,255,0.22),transparent_65%)]"
               aria-hidden
