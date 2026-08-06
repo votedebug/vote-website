@@ -12,22 +12,30 @@ export default function About() {
         <div className="pointer-events-none absolute -right-20 -top-20 h-80 w-80 rounded-full bg-royal/25 blur-3xl" aria-hidden />
         <div className="pointer-events-none absolute -left-24 bottom-10 h-72 w-72 rounded-full bg-flag-red/15 blur-3xl" aria-hidden />
 
-        <Container className="relative grid items-end gap-10 pt-16 pb-16 sm:pt-20 sm:pb-20 lg:grid-cols-2 lg:gap-8">
-          <div className="max-w-xl pb-10 lg:pb-6">
+        {/* Wider than the standard Container — at the target font size, the
+            quote's line breaks and a 10%-bigger photo don't both fit inside
+            the site's normal max-w-6xl content width side by side. */}
+        <div className="relative mx-auto grid w-full max-w-[92rem] items-end gap-10 px-5 pt-16 pb-14 sm:px-8 sm:pt-20 min-[1440px]:grid-cols-[1fr_581px] min-[1440px]:gap-8">
+          <div className="max-w-2xl">
             <Eyebrow light>About VOTE</Eyebrow>
-            <blockquote className="mt-8 font-serif text-3xl font-semibold leading-[1.15] text-balance sm:text-5xl md:text-[3.4rem]">
-              “The future promise of any nation can be directly measured by the present prospects
-              of its youth.”
+            <blockquote className="mt-8 font-serif text-3xl font-semibold leading-[1.15] sm:text-5xl md:text-[3.4rem]">
+              “The future promise of
+              <br />
+              any nation can be directly
+              <br />
+              measured by the present
+              <br />
+              prospects of its youth.”
             </blockquote>
             <p className="mt-6 text-sm font-semibold uppercase tracking-[0.14em] text-white/55">
               — President John F. Kennedy
             </p>
           </div>
 
-          {/* Cut-out photo, no border or card, bled flush to the bottom edge of
-              the section. A soft spotlight keeps the dark suit from
-              disappearing into the navy. */}
-          <div className="relative mx-auto -mb-16 max-w-3xl sm:-mb-20">
+          {/* Cut-out photo, no border or card, bled flush to the bottom edge
+              of the section (10% larger than the original render). A soft
+              spotlight keeps the dark suit from disappearing into the navy. */}
+          <div className="relative mx-auto -mb-14 max-w-3xl min-[1440px]:mx-0 min-[1440px]:w-full min-[1440px]:max-w-none">
             <div
               className="pointer-events-none absolute inset-x-0 bottom-0 top-8 rounded-t-full bg-[radial-gradient(ellipse_at_bottom,rgba(255,255,255,0.22),transparent_65%)]"
               aria-hidden
@@ -35,10 +43,10 @@ export default function About() {
             <img
               src="/img/jfk.png"
               alt="President John F. Kennedy addressing a crowd"
-              className="relative mx-auto block w-full max-w-2xl"
+              className="relative mx-auto block w-full"
             />
           </div>
-        </Container>
+        </div>
       </section>
 
       {/* WHO WE ARE */}
