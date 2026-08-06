@@ -80,7 +80,7 @@ export default function Team() {
           <div className="mt-12 grid gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-4">
             {MEDIA.map((p, i) => (
               <Reveal key={i} delay={i * 70}>
-                <PersonCard person={p} />
+                <RevealCard person={p} />
               </Reveal>
             ))}
           </div>

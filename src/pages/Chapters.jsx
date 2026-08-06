@@ -143,7 +143,7 @@ function ChapterDialog({ chapter, onClose }) {
             </div>
 
             <div className="mt-6 rounded-lg bg-muted px-4 py-3 text-xs leading-relaxed text-muted-foreground">
-              Want to lead this chapter or add your photo here?{' '}
+              Want to lead a chapter?{' '}
               <a href="/get-involved" className="font-semibold text-royal hover:underline">Get involved</a>.
             </div>
           </div>
