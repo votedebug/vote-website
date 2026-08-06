@@ -13,12 +13,18 @@ export const isPreview =
   typeof window !== 'undefined' &&
   (window.self !== window.top || new URLSearchParams(window.location.search).has('sanity-preview'))
 
+// Draft content isn't reliably readable by anonymous requests — Sanity's
+// intended pattern is a read-only token for exactly this case. Only ever
+// sent in preview mode; published-mode visitors get a tokenless client.
+const previewToken = import.meta.env.VITE_SANITY_READ_TOKEN
+
 export const client = createClient({
   projectId,
   dataset,
   apiVersion,
   useCdn: !isPreview,
   perspective: isPreview ? 'drafts' : 'published',
+  token: isPreview ? previewToken : undefined,
   stega: {
     enabled: isPreview,
     studioUrl: import.meta.env.VITE_SANITY_STUDIO_URL || 'http://localhost:3333',
