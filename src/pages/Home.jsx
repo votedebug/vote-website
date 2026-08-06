@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { ArrowRight, ArrowUpRight } from 'lucide-react'
+import { ArrowRight, ArrowUpRight, ImagePlus } from 'lucide-react'
 import { Container, Reveal } from '@/components/Container'
 import { Eyebrow, SectionHeading, StarRow, LinkButton } from '@/components/Bits'
 import { Button } from '@/components/ui/button'
@@ -84,19 +84,28 @@ function HeroCarousel({ slides }) {
       <Carousel setApi={setApi} opts={{ loop: true, dragFree: false }} className="overflow-hidden rounded-[1.75rem] cursor-grab active:cursor-grabbing">
         <CarouselContent className="ml-0">
           {slides.map((slide) => (
-            <CarouselItem key={slide.src} className="pl-0">
+            <CarouselItem key={slide._key} className="pl-0">
               <figure className="relative">
-                <img
-                  src={slide.src}
-                  alt={slide.alt}
-                  draggable={false}
-                  className="aspect-[4/5] w-full select-none object-cover"
-                />
-                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-navy/85 via-navy/35 to-transparent pt-16 pb-6 pl-6 pr-6">
-                  <figcaption className="font-serif text-lg leading-snug text-white text-balance">
-                    {slide.caption}
-                  </figcaption>
-                </div>
+                {slide.src ? (
+                  <img
+                    src={slide.src}
+                    alt={slide.alt}
+                    draggable={false}
+                    className="aspect-[4/5] w-full select-none object-cover"
+                  />
+                ) : (
+                  <div className="flex aspect-[4/5] w-full flex-col items-center justify-center gap-2 border-2 border-dashed border-navy/15 bg-secondary text-ink/40">
+                    <ImagePlus className="h-8 w-8" strokeWidth={1.5} />
+                    <span className="text-xs font-semibold uppercase tracking-wider">Add photo</span>
+                  </div>
+                )}
+                {slide.caption && (
+                  <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-navy/85 via-navy/35 to-transparent pt-16 pb-6 pl-6 pr-6">
+                    <figcaption className="font-serif text-lg leading-snug text-white text-balance">
+                      {slide.caption}
+                    </figcaption>
+                  </div>
+                )}
               </figure>
             </CarouselItem>
           ))}

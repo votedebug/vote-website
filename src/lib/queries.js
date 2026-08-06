@@ -5,7 +5,7 @@
 export const siteSettingsQuery = `*[_id == "siteSettings"][0]{
   name, short, tagline, email, address, instagram, linkedin, founded,
   stats[]{ value, label },
-  heroSlides[]{ "src": image.asset->url, caption, alt }
+  heroSlides[]{ _key, "src": image.asset->url, caption, alt }
 }`
 
 export const teamQuery = `*[_type == "teamMember"] | order(order asc) {
