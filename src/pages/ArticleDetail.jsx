@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { ArrowLeft, ArrowRight } from 'lucide-react'
 import { PortableText } from '@portabletext/react'
@@ -9,6 +10,34 @@ import NotFound from '@/pages/NotFound'
 
 const fmtDate = (d) =>
   new Date(d + 'T00:00:00').toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })
+
+// Thin red bar pinned right under the sticky nav, filling left-to-right as
+// you scroll through the article — a quick visual sense of how much is left.
+function ReadingProgress() {
+  const [progress, setProgress] = useState(0)
+
+  useEffect(() => {
+    const onScroll = () => {
+      const doc = document.documentElement
+      const scrollable = doc.scrollHeight - doc.clientHeight
+      const pct = scrollable > 0 ? (window.scrollY / scrollable) * 100 : 0
+      setProgress(Math.min(100, Math.max(0, pct)))
+    }
+    onScroll()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    window.addEventListener('resize', onScroll)
+    return () => {
+      window.removeEventListener('scroll', onScroll)
+      window.removeEventListener('resize', onScroll)
+    }
+  }, [])
+
+  return (
+    <div className="sticky top-[84px] z-40 h-1 w-full bg-navy/10" aria-hidden>
+      <div className="h-full bg-flag-red transition-[width] duration-150 ease-out" style={{ width: `${progress}%` }} />
+    </div>
+  )
+}
 
 // Sanity's default block schema includes a "link" annotation out of the box,
 // but @portabletext/react doesn't render annotations unless told how —
@@ -44,10 +73,12 @@ export default function ArticleDetail() {
 
   return (
     <article className="pb-24">
+      <ReadingProgress />
+
       {/* Header */}
       <Container className="pt-12">
         <Link to="/articles" className="inline-flex items-center gap-1.5 text-sm font-semibold text-royal hover:underline">
-          <ArrowLeft className="h-4 w-4" /> The Reader
+          <ArrowLeft className="h-4 w-4" /> All Stories
         </Link>
       </Container>
 
