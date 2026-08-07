@@ -33,7 +33,7 @@ function ReadingProgress() {
   }, [])
 
   return (
-    <div className="sticky top-[84px] z-40 h-1 w-full bg-navy/10" aria-hidden>
+    <div className="sticky top-[69px] z-40 h-1 w-full bg-navy/10" aria-hidden>
       <div className="h-full bg-flag-red transition-[width] duration-150 ease-out" style={{ width: `${progress}%` }} />
     </div>
   )
