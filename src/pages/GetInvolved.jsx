@@ -162,9 +162,6 @@ function ContactForm({ email }) {
       <Button type="submit" className="mt-6 w-full bg-flag-red text-white hover:bg-flag-red-dark">
         Send message
       </Button>
-      <p className="mt-3 text-center text-xs text-muted-foreground">
-        Opens your email app addressed to us. Prefer a hosted form? This can be wired to Formspree or a backend.
-      </p>
     </form>
   )
 }
