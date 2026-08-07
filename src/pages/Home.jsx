@@ -205,7 +205,7 @@ function FeaturedArticles({ featured, secondary }) {
       <Container className="relative">
         <div className="flex items-end justify-between gap-4">
           <SectionHeading light eyebrow="From the desk" title="Stories on youth & democracy" />
-          <Link to="/articles" className="hidden shrink-0 items-center gap-1 pb-2 text-sm font-semibold text-royal-light hover:underline sm:flex">
+          <Link to="/articles" className="hidden shrink-0 items-center gap-1 pb-2 text-sm font-semibold text-flag-red hover:underline sm:flex">
             All articles <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
