@@ -55,7 +55,7 @@ export default function Team() {
             <SubHeading light>The voices</SubHeading>
           </div>
           <p className="mt-3 max-w-2xl text-white/65">
-            Our editorial desk reports on youth civic power and writes the stories in The Reader.
+            Our editorial desk reports on youth civic power and publishes student journalism.
           </p>
           <div className="mt-12 grid gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
             {EDITORIAL.map((p, i) => (

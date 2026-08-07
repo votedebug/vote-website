@@ -36,7 +36,7 @@ export default function Legislation() {
       <PageHero
         eyebrow="Legislation"
         title="Where can teens get on the rolls? Find your state."
-        intro="Voter-registration law changes at every state line. Click a state to see when young people can register or pre-register — and how to help expand access where they can’t."
+        intro="Voter-registration law changes at every state line. Click a state to see when young people can register or pre-register. Learn how to help expand access where they can’t."
       />
 
       <section className="py-14 sm:py-16">
