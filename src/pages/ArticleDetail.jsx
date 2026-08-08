@@ -129,33 +129,33 @@ export default function ArticleDetail() {
         </div>
       </Container>
 
-      {/* Body */}
+      {/* Body — bodyRef spans through the bibliography so the reading
+          progress bar finishes at the end of the sources, not the page. */}
       <Container className="max-w-2xl pt-12">
-        <div
-          ref={bodyRef}
-          className="space-y-6 font-serif text-lg leading-[1.75] text-ink/85 [&>p:first-child]:first-letter:float-left [&>p:first-child]:first-letter:mr-3 [&>p:first-child]:first-letter:font-serif [&>p:first-child]:first-letter:text-6xl [&>p:first-child]:first-letter:font-semibold [&>p:first-child]:first-letter:leading-[0.85] [&>p:first-child]:first-letter:text-flag-red"
-        >
-          <PortableText value={article.body} components={portableTextComponents} />
-        </div>
+        <div ref={bodyRef}>
+          <div className="space-y-6 font-serif text-lg leading-[1.75] text-ink/85 [&>p:first-child]:first-letter:float-left [&>p:first-child]:first-letter:mr-3 [&>p:first-child]:first-letter:font-serif [&>p:first-child]:first-letter:text-6xl [&>p:first-child]:first-letter:font-semibold [&>p:first-child]:first-letter:leading-[0.85] [&>p:first-child]:first-letter:text-flag-red">
+            <PortableText value={article.body} components={portableTextComponents} />
+          </div>
 
-        {article.bibliography?.length > 0 && (
-          <section className="mt-12 border-t border-border pt-8">
-            <h2 className="eyebrow text-flag-red">Bibliography</h2>
-            <ol className="mt-4 list-decimal space-y-3 pl-5 text-sm leading-relaxed text-ink/70 marker:text-ink/40">
-              {article.bibliography.map((b, i) => (
-                <li key={i}>
-                  {b.url ? (
-                    <a href={b.url} target="_blank" rel="noreferrer" className="text-royal underline-offset-2 hover:underline">
-                      {b.text}
-                    </a>
-                  ) : (
-                    b.text
-                  )}
-                </li>
-              ))}
-            </ol>
-          </section>
-        )}
+          {article.bibliography?.length > 0 && (
+            <section className="mt-12 border-t border-border pt-8">
+              <h2 className="eyebrow text-flag-red">Bibliography</h2>
+              <ol className="mt-4 list-decimal space-y-3 pl-5 text-sm leading-relaxed text-ink/70 marker:text-ink/40">
+                {article.bibliography.map((b, i) => (
+                  <li key={i}>
+                    {b.url ? (
+                      <a href={b.url} target="_blank" rel="noreferrer" className="text-royal underline-offset-2 hover:underline">
+                        {b.text}
+                      </a>
+                    ) : (
+                      b.text
+                    )}
+                  </li>
+                ))}
+              </ol>
+            </section>
+          )}
+        </div>
 
         <div className="mt-10 flex flex-wrap items-center gap-3 border-t border-border pt-8">
           <LinkButton to="/get-involved" className="bg-flag-red text-white hover:bg-flag-red-dark">
