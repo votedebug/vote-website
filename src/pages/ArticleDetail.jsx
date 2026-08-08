@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { ArrowLeft, ArrowRight } from 'lucide-react'
 import { PortableText } from '@portabletext/react'
@@ -11,26 +11,43 @@ import NotFound from '@/pages/NotFound'
 const fmtDate = (d) =>
   new Date(d + 'T00:00:00').toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })
 
+// Sticky bar height (tricolor stripe + nav row + border) — the bar tracks
+// how much of the article text has scrolled past this line, not the top of
+// the viewport, since that's the line reading actually happens under.
+const STICKY_OFFSET = 69
+
 // Thin red bar pinned right under the sticky nav, filling left-to-right as
-// you scroll through the article — a quick visual sense of how much is left.
-function ReadingProgress() {
+// you scroll through the article body — reaches 100% when the last line of
+// the article text (not the bibliography, buttons, or "Keep reading" cards
+// below it) clears the bottom of the viewport.
+function ReadingProgress({ targetRef }) {
   const [progress, setProgress] = useState(0)
 
   useEffect(() => {
     const onScroll = () => {
-      const doc = document.documentElement
-      const scrollable = doc.scrollHeight - doc.clientHeight
-      const pct = scrollable > 0 ? (window.scrollY / scrollable) * 100 : 0
+      const el = targetRef.current
+      if (!el) return
+      const rect = el.getBoundingClientRect()
+      const scrolled = STICKY_OFFSET - rect.top
+      const total = rect.height - (window.innerHeight - STICKY_OFFSET)
+      const pct = total > 0 ? (scrolled / total) * 100 : 100
       setProgress(Math.min(100, Math.max(0, pct)))
     }
     onScroll()
     window.addEventListener('scroll', onScroll, { passive: true })
     window.addEventListener('resize', onScroll)
+
+    // Images loading in the article body shift its height after mount —
+    // recheck whenever that happens instead of only on scroll/resize.
+    const ro = new ResizeObserver(onScroll)
+    if (targetRef.current) ro.observe(targetRef.current)
+
     return () => {
       window.removeEventListener('scroll', onScroll)
       window.removeEventListener('resize', onScroll)
+      ro.disconnect()
     }
-  }, [])
+  }, [targetRef])
 
   return (
     <div className="sticky top-[69px] z-40 h-1 w-full bg-navy/10" aria-hidden>
@@ -74,6 +91,7 @@ export default function ArticleDetail() {
   const { slug } = useParams()
   const { data: article, loading } = useSanityQuery(articleBySlugQuery, { slug }, [slug])
   const { data: allArticles } = useSanityQuery(articlesListQuery)
+  const bodyRef = useRef(null)
 
   if (loading || !allArticles) return null
   if (!article) return <NotFound />
@@ -82,7 +100,7 @@ export default function ArticleDetail() {
 
   return (
     <article className="pb-24">
-      <ReadingProgress />
+      <ReadingProgress targetRef={bodyRef} />
 
       {/* Header */}
       <Container className="pt-12">
@@ -113,7 +131,10 @@ export default function ArticleDetail() {
 
       {/* Body */}
       <Container className="max-w-2xl pt-12">
-        <div className="space-y-6 font-serif text-lg leading-[1.75] text-ink/85 [&>p:first-child]:first-letter:float-left [&>p:first-child]:first-letter:mr-3 [&>p:first-child]:first-letter:font-serif [&>p:first-child]:first-letter:text-6xl [&>p:first-child]:first-letter:font-semibold [&>p:first-child]:first-letter:leading-[0.85] [&>p:first-child]:first-letter:text-flag-red">
+        <div
+          ref={bodyRef}
+          className="space-y-6 font-serif text-lg leading-[1.75] text-ink/85 [&>p:first-child]:first-letter:float-left [&>p:first-child]:first-letter:mr-3 [&>p:first-child]:first-letter:font-serif [&>p:first-child]:first-letter:text-6xl [&>p:first-child]:first-letter:font-semibold [&>p:first-child]:first-letter:leading-[0.85] [&>p:first-child]:first-letter:text-flag-red"
+        >
           <PortableText value={article.body} components={portableTextComponents} />
         </div>
 

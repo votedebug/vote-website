@@ -19,7 +19,7 @@ export default function Home() {
   if (!site || !chapters || !articles) return null
 
   const featured = articles.find((a) => a.slug === site.featuredArticleSlug) || articles[0]
-  const secondary = articles.filter((a) => a.slug !== featured?.slug).slice(0, 4)
+  const secondary = articles.filter((a) => a.slug !== featured?.slug).slice(0, 5)
 
   return (
     <>
