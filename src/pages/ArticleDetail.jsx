@@ -63,7 +63,7 @@ const portableTextComponents = {
     // Sanity's default "Quote" style — otherwise indistinguishable from a
     // regular paragraph since it inherits the same prose classes.
     blockquote: ({ children }) => (
-      <blockquote className="my-8 border-l-4 border-flag-red pl-6 font-serif text-2xl italic leading-snug text-navy">
+      <blockquote className="my-8 border-l-4 border-flag-red pl-6 italic text-navy">
         {children}
       </blockquote>
     ),
