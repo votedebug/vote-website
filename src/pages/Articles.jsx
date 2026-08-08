@@ -70,7 +70,7 @@ export default function Articles() {
                   className="group grid grid-cols-1 items-center gap-5 border-b border-border py-7 sm:grid-cols-[1fr_auto] sm:gap-8"
                 >
                   <div>
-                    <div className="flex items-center gap-2 text-[0.7rem] font-bold uppercase tracking-wider text-royal">
+                    <div className="flex items-center gap-2 text-[0.7rem] font-bold uppercase tracking-wider text-flag-red">
                       {a.category}
                       <span className="text-ink/30">·</span>
                       <span className="font-medium normal-case tracking-normal text-ink/45">{fmtDate(a.date)}</span>
