@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { Routes, Route, useLocation } from 'react-router-dom'
 import { VisualEditing } from '@sanity/visual-editing/react'
+import { Analytics } from '@vercel/analytics/react'
 import { Navbar } from '@/components/Navbar'
 import { Footer } from '@/components/Footer'
 import Home from '@/pages/Home'
@@ -81,6 +82,7 @@ export default function App() {
       </main>
       <Footer />
       {isPreview && <VisualEditing portal />}
+      <Analytics />
     </div>
   )
 }
