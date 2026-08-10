@@ -6,8 +6,8 @@
 // via OpenStreetMap/Nominatim. They drive the pin positions on the NYC map.
 
 const PLACEHOLDER_DIRECTORS = [
-  { name: 'Chapter Director', role: 'Add name & photo', photo: null },
-  { name: 'Chapter Director', role: 'Add name & photo', photo: null },
+  { name: 'Chapter Leader', role: 'Add name & photo', photo: null },
+  { name: 'Chapter Leader', role: 'Add name & photo', photo: null },
 ]
 
 export const CHAPTERS = [
@@ -19,9 +19,9 @@ export const CHAPTERS = [
     address: '75 West 205th Street, Bronx, NY 10468',
     coords: [-73.89056, 40.87829],
     directors: [
-      { name: 'Cooper Halpern', role: 'Chapter Director', photo: '/img/cooper.jpg' },
-      { name: 'Joshua Isaacs', role: 'Chapter Director', photo: '/img/joshua.jpg' },
-      { name: 'Rachel Tan', role: 'Chapter Director', photo: '/img/rachel.jpg' },
+      { name: 'Cooper Halpern', role: 'Chapter Leader', photo: '/img/cooper.jpg' },
+      { name: 'Joshua Isaacs', role: 'Chapter Leader', photo: '/img/joshua.jpg' },
+      { name: 'Rachel Tan', role: 'Chapter Leader', photo: '/img/rachel.jpg' },
     ],
   },
   {

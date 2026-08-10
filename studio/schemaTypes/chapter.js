@@ -25,7 +25,7 @@ export default defineType({
     }),
     defineField({
       name: 'directors',
-      title: 'Chapter directors',
+      title: 'Chapter leaders',
       type: 'array',
       of: [
         {

@@ -24,7 +24,7 @@ const WAYS = [
   {
     icon: Landmark,
     title: 'Lead a state chapter',
-    body: 'Take VOTE beyond New York. State chapter leads recruit schools, support new chapter directors, and coordinate drives across their state.',
+    body: 'Take VOTE beyond New York. State chapter leads recruit schools, support new chapter leaders, and coordinate drives across their state.',
     tag: 'Leads',
   },
   {

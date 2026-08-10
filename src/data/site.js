@@ -15,7 +15,7 @@ export const HERO_SLIDES = [
   { src: '/img/drive-2.jpg', caption: 'Registering voters at Bronx Science', alt: 'Vote of Teens students running a voter registration drive' },
   { src: '/img/drive-1.jpg', caption: 'A drive table between class periods', alt: 'Students at a Vote of Teens registration table' },
   { src: '/img/drive-3.jpg', caption: 'Student organizers on the ground', alt: 'A Vote of Teens organizer talking with a student' },
-  { src: '/img/drive-4.jpg', caption: 'Chapter directors after a drive', alt: 'Vote of Teens chapter directors together after a drive' },
+  { src: '/img/drive-4.jpg', caption: 'Chapter leaders after a drive', alt: 'Vote of Teens chapter leaders together after a drive' },
 ]
 
 export const STATS = [

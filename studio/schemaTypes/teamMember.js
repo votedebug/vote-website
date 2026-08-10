@@ -7,7 +7,7 @@ export default defineType({
   fields: [
     defineField({name: 'name', title: 'Name', type: 'string', validation: (r) => r.required()}),
     defineField({name: 'role', title: 'Role', type: 'string'}),
-    defineField({name: 'chapter', title: 'Chapter line', type: 'string', description: 'e.g. "Chapter Director — VOTE Bronx Science"'}),
+    defineField({name: 'chapter', title: 'Chapter line', type: 'string', description: 'e.g. "Chapter Leader — VOTE Bronx Science"'}),
     defineField({name: 'photo', title: 'Photo', type: 'image', options: {hotspot: true}}),
     defineField({name: 'bio', title: 'Bio', type: 'text', rows: 4}),
     defineField({

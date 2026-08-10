@@ -117,7 +117,7 @@ function ChapterDialog({ chapter, onClose }) {
             </div>
 
             <div className="mt-6">
-              <h4 className="eyebrow text-royal">Chapter Directors</h4>
+              <h4 className="eyebrow text-royal">Chapter Leaders</h4>
               <div className="mt-4 grid grid-cols-3 gap-4">
                 {(chapter.directors || []).map((d, i) => (
                   <div key={i} className="text-center">

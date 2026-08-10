@@ -142,7 +142,7 @@ export function NycChapterMap({ onSelect }) {
                   onClick={() => shown && onSelect(chapter)}
                   tabIndex={shown ? 0 : -1}
                   role="button"
-                  aria-label={`${chapter.name} — view chapter directors`}
+                  aria-label={`${chapter.name} — view chapter leaders`}
                   onKeyDown={(e) => {
                     if (shown && (e.key === 'Enter' || e.key === ' ')) {
                       e.preventDefault()
@@ -171,7 +171,7 @@ export function NycChapterMap({ onSelect }) {
               <span className="text-ink/45"> · {CHAPTERS.find((c) => c.short === hovered)?.address}</span>
             </p>
           ) : (
-            <p className="text-sm text-ink/40">Hover a pin to see the school and meet its directors.</p>
+            <p className="text-sm text-ink/40">Hover a pin to see the school and meet its leaders.</p>
           )}
         </div>
       </div>
