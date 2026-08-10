@@ -117,6 +117,37 @@ export function websiteSchema() {
   }
 }
 
+/**
+ * Person entries for the team page. Google reads /team as "a team page", not
+ * as a page about any one member, so naming each person explicitly and tying
+ * them to the organisation is what makes an individual findable by name.
+ */
+export function personSchema(person) {
+  return {
+    '@type': 'Person',
+    name: person.name,
+    ...(person.role ? { jobTitle: person.role } : {}),
+    ...(person.bio ? { description: person.bio } : {}),
+    ...(person.image ? { image: person.image } : {}),
+    ...(person.chapter ? { affiliation: { '@type': 'Organization', name: person.chapter } } : {}),
+    worksFor: { '@type': 'NGO', name: SITE_NAME, url: SITE_URL },
+    url: `${SITE_URL}/team`,
+  }
+}
+
+export function teamSchema(team) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: `${SITE_NAME} team`,
+    itemListElement: (team || []).map((person, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      item: personSchema(person),
+    })),
+  }
+}
+
 export function articleSchema(article) {
   return {
     '@context': 'https://schema.org',

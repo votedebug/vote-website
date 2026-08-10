@@ -26,6 +26,7 @@ const {
   organizationSchema,
   websiteSchema,
   articleSchema,
+  teamSchema,
   SITE_URL,
   OG_IMAGE,
 } = await import(pathToFileURL(path.join(root, 'dist-ssr', 'entry-server.js')).href)
@@ -39,11 +40,12 @@ const client = createClient({
 })
 
 console.log('Fetching published content from Sanity…')
-const [site, team, chapters, articles] = await Promise.all([
+const [site, team, chapters, articles, teamForSchema] = await Promise.all([
   client.fetch(queries.siteSettingsQuery),
   client.fetch(queries.teamQuery),
   client.fetch(queries.chaptersQuery),
   client.fetch(queries.articlesListQuery),
+  client.fetch(queries.teamSchemaQuery),
 ])
 
 if (!articles?.length) throw new Error('Sanity returned no articles — refusing to prerender empty pages.')
@@ -90,6 +92,7 @@ function buildHead(meta) {
   if (meta.noindex) tags.push('<meta name="robots" content="noindex, follow" />')
   if (meta.article) tags.push(jsonLd(articleSchema(meta.article)))
   else if (meta.canonical === `${SITE_URL}/`) tags.push(jsonLd(organizationSchema(site)), jsonLd(websiteSchema()))
+  else if (meta.canonical === `${SITE_URL}/team`) tags.push(jsonLd(teamSchema(teamForSchema)))
   return tags.join('\n    ')
 }
 
