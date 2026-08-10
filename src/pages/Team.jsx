@@ -5,11 +5,11 @@ import { teamQuery } from '@/lib/queries'
 import { urlFor } from '@/lib/sanity'
 import { cn } from '@/lib/utils'
 
-function SubHeading({ children, light }) {
+function SubHeading({ children, light, as: Tag = 'h2' }) {
   return (
-    <h2 className={cn('font-serif text-3xl font-semibold tracking-tight sm:text-4xl', light ? 'text-white' : 'text-navy')}>
+    <Tag className={cn('font-serif text-3xl font-semibold tracking-tight sm:text-4xl', light ? 'text-white' : 'text-navy')}>
       {children}
-    </h2>
+    </Tag>
   )
 }
 
@@ -29,7 +29,7 @@ export default function Team() {
         <Container>
           <span className="eyebrow text-flag-red">Our Board</span>
           <div className="mt-3">
-            <SubHeading>Executive Directors</SubHeading>
+            <SubHeading as="h1">Executive Directors</SubHeading>
           </div>
           <p className="mt-3 max-w-2xl text-ink/70">
             Our directors set strategy, lead the flagship Bronx Science chapter, and support chapters across the city.

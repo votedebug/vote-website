@@ -12,18 +12,20 @@ export function Eyebrow({ children, className, light = false }) {
   )
 }
 
-export function SectionHeading({ eyebrow, title, intro, center, light, className }) {
+// `as` lets the first heading on a page render as the h1 without changing how
+// it looks — every page needs exactly one for search engines.
+export function SectionHeading({ eyebrow, title, intro, center, light, className, as: Tag = 'h2' }) {
   return (
     <div className={cn(center && 'mx-auto max-w-2xl text-center', 'max-w-3xl', className)}>
       {eyebrow && <Eyebrow light={light} className={cn(center && 'justify-center')}>{eyebrow}</Eyebrow>}
-      <h2
+      <Tag
         className={cn(
           'mt-4 font-serif text-3xl leading-[1.08] tracking-tight text-balance sm:text-4xl md:text-[2.75rem]',
           light ? 'text-white' : 'text-navy',
         )}
       >
         {title}
-      </h2>
+      </Tag>
       {intro && (
         <p className={cn('mt-4 text-base leading-relaxed sm:text-lg text-pretty', light ? 'text-white/75' : 'text-muted-foreground')}>
           {intro}
