@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { Routes, Route, useLocation } from 'react-router-dom'
 import { VisualEditing } from '@sanity/visual-editing/react'
+import { SpeedInsights } from '@vercel/speed-insights/react'
 import { Seo } from '@/components/Seo'
 import { Navbar } from '@/components/Navbar'
 import { Footer } from '@/components/Footer'
@@ -83,6 +84,7 @@ export default function App() {
       </main>
       <Footer />
       {isPreview && <VisualEditing portal />}
+      <SpeedInsights />
     </div>
   )
 }
