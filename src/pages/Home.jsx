@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { ArrowLeft, ArrowRight, ArrowUpRight, ImagePlus } from 'lucide-react'
 import { Container, Reveal } from '@/components/Container'
@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button'
 import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel'
 import { MiniUsMap } from '@/components/MiniUsMap'
 import { useCarouselIndex } from '@/lib/useCarouselAutoplay'
+import { useReveal } from '@/lib/useReveal'
 import { useSanityQuery } from '@/lib/useSanity'
 import { siteSettingsQuery, chaptersQuery, articlesListQuery } from '@/lib/queries'
 import { cn } from '@/lib/utils'
@@ -149,14 +150,63 @@ function HeroCarousel({ slides }) {
   )
 }
 
+// Splits a stat string like "2,000+" into its animatable pieces — the
+// leading/trailing non-digits are kept static, only the number counts up.
+function parseStatValue(raw) {
+  const match = String(raw).match(/^(\D*)([\d,]+)(.*)$/)
+  if (!match) return null
+  const [, prefix, digits, suffix] = match
+  return { prefix, target: parseInt(digits.replace(/,/g, ''), 10), suffix }
+}
+
+function CountUp({ value, start, delay = 0 }) {
+  const parsed = useMemo(() => parseStatValue(value), [value])
+  const [display, setDisplay] = useState(parsed ? `${parsed.prefix}0${parsed.suffix}` : value)
+
+  useEffect(() => {
+    if (!start || !parsed) return
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      setDisplay(value)
+      return
+    }
+
+    const duration = 1400
+    let raf
+    let startTime
+
+    const tick = (now) => {
+      if (startTime === undefined) startTime = now
+      const progress = Math.min(1, (now - startTime) / duration)
+      // easeOutExpo — quick at first, settles gently into the final number.
+      const eased = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress)
+      const current = Math.round(parsed.target * eased)
+      setDisplay(`${parsed.prefix}${current.toLocaleString('en-US')}${parsed.suffix}`)
+      if (progress < 1) raf = requestAnimationFrame(tick)
+    }
+
+    const timeout = setTimeout(() => {
+      raf = requestAnimationFrame(tick)
+    }, delay)
+
+    return () => {
+      clearTimeout(timeout)
+      cancelAnimationFrame(raf)
+    }
+  }, [start, parsed, value, delay])
+
+  return display
+}
+
 function StatsBand({ stats }) {
+  const [ref, visible] = useReveal({ threshold: 0.4 })
+
   return (
-    <section className="border-y border-border bg-navy">
+    <section ref={ref} className="border-y border-border bg-navy">
       <Container className="grid grid-cols-2 divide-x divide-white/10 py-2 md:grid-cols-4">
-        {stats.map((s) => (
+        {stats.map((s, i) => (
           <div key={s.label} className="group px-4 py-8 text-center">
-            <div className="font-serif text-4xl font-semibold text-white transition-[color,filter] duration-300 group-hover:text-flag-red group-hover:drop-shadow-[0_0_18px_var(--color-flag-red)] sm:text-5xl">
-              {s.value}
+            <div className="font-serif text-4xl font-semibold tabular-nums text-white transition-[color,filter] duration-300 group-hover:text-flag-red group-hover:drop-shadow-[0_0_18px_var(--color-flag-red)] sm:text-5xl">
+              <CountUp value={s.value} start={visible} delay={i * 120} />
             </div>
             <div className="eyebrow mt-2 text-white/60">{s.label}</div>
           </div>
