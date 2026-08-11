@@ -2,6 +2,12 @@ export const SITE_URL = 'https://vote-of-teens.org'
 export const OG_IMAGE = `${SITE_URL}/img/og-cover.png`
 export const SITE_NAME = 'Vote of Teens'
 
+// Google's site-name docs require the WebSite `url` to be the canonical home
+// page of the domain, spelled the same way the canonical link is — which here
+// carries a trailing slash. SITE_URL has none because every other route
+// concatenates a path onto it.
+export const SITE_HOME = `${SITE_URL}/`
+
 const DEFAULT_DESCRIPTION =
   'Vote of Teens (VOTE) is a student-led, non-partisan movement registering the next generation of voters across New York City high schools — for teens, by teens.'
 
@@ -94,7 +100,7 @@ export function organizationSchema(site) {
     '@type': 'NGO',
     name: SITE_NAME,
     alternateName: ['VOTE', 'Vote of Teens in Elections'],
-    url: SITE_URL,
+    url: SITE_HOME,
     logo: `${SITE_URL}/img/logo.png`,
     image: OG_IMAGE,
     description: DEFAULT_DESCRIPTION,
@@ -107,13 +113,17 @@ export function organizationSchema(site) {
   }
 }
 
+/**
+ * The single signal Google weighs most when picking the site name shown above
+ * a search result. Must live on the domain root, and only the root.
+ */
 export function websiteSchema() {
   return {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
     name: SITE_NAME,
     alternateName: 'VOTE',
-    url: SITE_URL,
+    url: SITE_HOME,
   }
 }
 
