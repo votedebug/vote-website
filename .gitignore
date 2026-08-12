@@ -26,3 +26,6 @@ dist-ssr
 .env
 .env.local
 .env*
+
+# SSR bundle used only by scripts/prerender.mjs
+dist-ssr

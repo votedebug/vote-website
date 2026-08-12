@@ -3,7 +3,9 @@ import { useEffect, useRef, useState } from 'react'
 // Lightweight reveal-on-scroll. Adds `is-visible` when the element enters view.
 export function useReveal({ threshold = 0.15, once = true } = {}) {
   const ref = useRef(null)
-  const [visible, setVisible] = useState(false)
+  // Render visible during prerender so crawlers never see opacity-0 content.
+  // The client boots with createRoot (not hydrate), so there is no mismatch.
+  const [visible, setVisible] = useState(typeof window === 'undefined')
 
   useEffect(() => {
     const el = ref.current

@@ -41,9 +41,9 @@ export default function Articles() {
       <section className="pb-24 pt-16">
         <Container>
           <span className="eyebrow text-flag-red">All Stories</span>
-          <h2 className="mt-3 font-serif text-3xl font-semibold tracking-tight text-navy sm:text-4xl">
+          <h1 className="mt-3 font-serif text-3xl font-semibold tracking-tight text-navy sm:text-4xl">
             Browse our full collection
-          </h2>
+          </h1>
 
           <div className="mt-8 flex flex-wrap gap-2 border-b border-navy/15 pb-6">
             {categories.map((c) => (

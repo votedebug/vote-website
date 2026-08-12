@@ -13,6 +13,12 @@ export const teamQuery = `*[_type == "teamMember"] | order(order asc) {
   _id, name, role, chapter, bio, category, photo
 }`
 
+// Build-time only: same people, but with the photo projected to a plain URL so
+// scripts/prerender.mjs can emit Person JSON-LD without the image builder.
+export const teamSchemaQuery = `*[_type == "teamMember"] | order(order asc) {
+  name, role, chapter, bio, "image": photo.asset->url
+}`
+
 export const chaptersQuery = `*[_type == "chapter"] | order(order asc, name asc) {
   _id, name, short, "logo": logo.asset->url, monogram, borough, address,
   "coords": [coords.lng, coords.lat],

@@ -57,7 +57,7 @@ export default function About() {
       <section className="py-20 sm:py-24">
         <Container className="grid items-start gap-14 lg:grid-cols-[1fr_0.85fr]">
           <Reveal>
-            <SectionHeading eyebrow="Who we are" title="A student-led, non-partisan movement." />
+            <SectionHeading as="h1" eyebrow="Who we are" title="A student-led, non-partisan movement." />
             <p className="mt-6 text-lg leading-relaxed text-ink/75">
               Vote of Teens in Elections (VOTE) was founded by two Bronx Science students with a
               passion for politics and American history. Inspired by the success of their school’s
