@@ -23,7 +23,7 @@ export default function Chapters() {
   const { state: stateParam } = useParams()
   const [active, setActive] = useState(null)
 
-  const { data: chapters } = useSanityQuery(chaptersQuery)
+  const { data: chapters, loading, error } = useSanityQuery(chaptersQuery)
   const { data: stateDocs } = useSanityQuery(stateChaptersQuery)
 
   const chaptersByState = useMemo(() => groupByState(chapters), [chapters])
@@ -68,7 +68,12 @@ export default function Chapters() {
               />
             ) : null
           ) : (
-            <UsChapterMap chaptersByState={chaptersByState} directorsByState={directorsByState} />
+            <UsChapterMap
+              chaptersByState={chaptersByState}
+              directorsByState={directorsByState}
+              loading={loading}
+              error={error}
+            />
           )}
         </Container>
       </section>

@@ -23,7 +23,7 @@ const TIERS = {
  * flat and inert, since /chapters/oh would be a dead URL. Hovering one still
  * reads out as an invitation in the rail under the map.
  */
-export function UsChapterMap({ chaptersByState, directorsByState }) {
+export function UsChapterMap({ chaptersByState, directorsByState, loading, error }) {
   const navigate = useNavigate()
   const [hover, setHover] = useState(null)
 
@@ -170,7 +170,18 @@ export function UsChapterMap({ chaptersByState, directorsByState }) {
             </li>
           ))}
         </ul>
-        {active.length === 0 && <p className="py-8 text-sm text-ink/50">Chapters are loading.</p>}
+        {active.length === 0 && (
+          <p className="py-8 text-sm text-ink/50">
+            {error
+              ? // Nearly always the Sanity CORS allowlist: published content is
+                // readable without a token, but only from an approved origin, so
+                // preview URLs and non-5173 localhost ports get a 403.
+                'Chapters could not be loaded. If this is a preview URL, add its origin to the Sanity CORS allowlist.'
+              : loading
+                ? 'Chapters are loading.'
+                : 'No chapters yet.'}
+          </p>
+        )}
       </div>
     </div>
   )
