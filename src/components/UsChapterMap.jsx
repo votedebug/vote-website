@@ -119,7 +119,7 @@ export function UsChapterMap({ chaptersByState, directorsByState, loading, error
             <p className="text-sm text-ink/45">No chapter in {hovered.name} yet — it could start with you.</p>
           )
         ) : (
-          <p className="text-sm text-ink/40">Hover a state to see what we have there. Click to open it.</p>
+          <p className="text-sm text-ink/40">Hover a state to see what we have there and click to open it.</p>
         )}
       </div>
 

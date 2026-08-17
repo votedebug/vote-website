@@ -57,13 +57,22 @@ export default defineConfig({
             }),
           }),
           chapter: defineLocations({
-            select: {title: 'name'},
-            resolve: (doc) => ({
-              locations: [
-                {title: doc?.title || 'Untitled', href: '/chapters'},
-                {title: 'Home (chapters strip)', href: '/'},
-              ],
-            }),
+            // The national /chapters map only shows state-level dots — an
+            // individual school is only actually visible (and editable) on
+            // its own state's page. Same state-from-address fallback as
+            // src/lib/chapterStates.js, since the twenty-one original NYC
+            // chapters predate the `state` field.
+            select: {title: 'name', state: 'state', address: 'address'},
+            resolve: (doc) => {
+              const abbr = doc?.state || /,\s*([A-Za-z]{2})\s+\d{5}/.exec(doc?.address || '')?.[1]
+              return {
+                locations: [
+                  {title: doc?.title || 'Untitled', href: abbr ? `/chapters/${abbr.toLowerCase()}` : '/chapters'},
+                  {title: 'All chapters', href: '/chapters'},
+                  {title: 'Home (chapters strip)', href: '/'},
+                ],
+              }
+            },
           }),
           teamMember: defineLocations({
             select: {title: 'name'},
