@@ -68,24 +68,21 @@ export function StateChapterView({ abbr, name, chapters, stateDoc, onSelectChapt
           <NycChapterMap onSelect={onSelectChapter} />
         </div>
       ) : (
-        <div key={abbr} className="mt-10 grid gap-12 animate-in fade-in zoom-in-95 duration-500 lg:grid-cols-[1.25fr_1fr] lg:items-start">
-          <div>
-            <StateMap
-              abbr={abbr}
-              chapters={chapters}
-              nycChapters={hasNycCluster ? nycChapters : []}
-              onSelectChapter={onSelectChapter}
-              onOpenNyc={() => setZoomedToNyc(true)}
-            />
-            <ChapterList
-              chapters={chapters}
-              nycCount={hasNycCluster ? nycChapters.length : 0}
-              onSelectChapter={onSelectChapter}
-              onOpenNyc={() => setZoomedToNyc(true)}
-            />
-          </div>
-
+        <div key={abbr} className="mt-10 animate-in fade-in zoom-in-95 duration-500">
+          <StateMap
+            abbr={abbr}
+            chapters={chapters}
+            nycChapters={hasNycCluster ? nycChapters : []}
+            onSelectChapter={onSelectChapter}
+            onOpenNyc={() => setZoomedToNyc(true)}
+          />
           <DirectorPanel name={name} stateDoc={stateDoc} />
+          <ChapterList
+            chapters={chapters}
+            nycCount={hasNycCluster ? nycChapters.length : 0}
+            onSelectChapter={onSelectChapter}
+            onOpenNyc={() => setZoomedToNyc(true)}
+          />
         </div>
       )}
     </div>
@@ -130,7 +127,7 @@ function StateMap({ abbr, chapters, nycChapters, onSelectChapter, onOpenNyc }) {
       <svg
         viewBox={geo.viewBox}
         style={{ aspectRatio: geo.ratio }}
-        className="w-full"
+        className="mx-auto block max-h-[78vh] w-full"
         role="img"
         aria-label={`Map of ${abbr} showing every Vote of Teens school chapter.`}
       >
@@ -224,7 +221,7 @@ function StateMap({ abbr, chapters, nycChapters, onSelectChapter, onOpenNyc }) {
       </svg>
 
       {/* Hover rail */}
-      <div className="mt-2 flex min-h-[2.5rem] items-center">
+      <div className="mt-4 flex min-h-[2.5rem] items-center justify-center text-center">
         {hovered === 'nyc' ? (
           <p className="text-sm text-ink/70">
             <span className="font-semibold text-navy">New York City</span>
@@ -246,7 +243,7 @@ function StateMap({ abbr, chapters, nycChapters, onSelectChapter, onOpenNyc }) {
 function ChapterList({ chapters, nycCount, onSelectChapter, onOpenNyc }) {
   const listed = nycCount ? chapters.filter((c) => !isInNyc(c)) : chapters
   return (
-    <ul className="mt-4 divide-y divide-border border-t border-border">
+    <ul className="mx-auto mt-12 max-w-2xl divide-y divide-border border-t border-border">
       {nycCount > 0 && (
         <li>
           <button
@@ -285,14 +282,14 @@ function DirectorPanel({ name, stateDoc }) {
   const directors = stateDoc?.directors || []
 
   return (
-    <aside className="lg:sticky lg:top-24">
-      <p className="eyebrow text-royal">State Directors</p>
-      <h3 className="mt-2 font-serif text-2xl font-semibold leading-tight text-navy">
+    <section className="mt-12 border-t border-border pt-8">
+      <p className="eyebrow text-center text-royal">State Directors</p>
+      <h3 className="mt-2 text-center font-serif text-2xl font-semibold leading-tight text-navy">
         Running VOTE across {name}
       </h3>
 
       {directors.length === 0 ? (
-        <p className="mt-5 border-t border-border pt-5 text-sm leading-relaxed text-ink/60">
+        <p className="mx-auto mt-5 max-w-xl text-center text-sm leading-relaxed text-ink/60">
           State directors for {name} are being announced.{' '}
           <Link to="/get-involved" className="font-semibold text-royal underline-offset-2 hover:underline">
             Get involved
@@ -300,34 +297,45 @@ function DirectorPanel({ name, stateDoc }) {
           if you want to help lead them.
         </p>
       ) : (
-        <ul className="mt-5 divide-y divide-border border-t border-border">
+        // Up to four across, which is what a state leadership team runs to.
+        <ul
+          className={cn(
+            'mx-auto mt-10 grid max-w-5xl gap-x-10 gap-y-12 sm:grid-cols-2',
+            directors.length >= 3 ? 'lg:grid-cols-4' : 'lg:grid-cols-2',
+          )}
+        >
           {directors.map((d, i) => (
-            <li key={i} className="flex gap-4 py-5">
-              <div className="h-20 w-20 shrink-0 overflow-hidden rounded-xl bg-secondary">
+            <li key={i} className="text-center">
+              <div className="mx-auto aspect-square w-32 overflow-hidden rounded-2xl bg-secondary">
                 {d.photo ? (
                   <img
-                    src={urlFor(d.photo).width(320).height(320).fit('crop').auto('format').url()}
+                    src={urlFor(d.photo).width(400).height(400).fit('crop').auto('format').url()}
                     alt={d.name || `${name} state director`}
                     className="h-full w-full object-cover"
                   />
                 ) : (
-                  <div className="flex h-full w-full flex-col items-center justify-center gap-1 rounded-xl border-2 border-dashed border-border text-ink/40">
-                    <ImagePlus className="h-5 w-5" strokeWidth={1.5} />
+                  <div className="flex h-full w-full flex-col items-center justify-center gap-1 rounded-2xl border-2 border-dashed border-border text-ink/40">
+                    <ImagePlus className="h-6 w-6" strokeWidth={1.5} />
                     <span className="text-[0.6rem] font-semibold uppercase">Add</span>
                   </div>
                 )}
               </div>
-              <div className="min-w-0">
-                <p className={cn('font-serif text-lg font-semibold leading-tight', d.name ? 'text-navy' : 'text-ink/40')}>
-                  {d.name || 'Director to be announced'}
-                </p>
-                {d.role && <p className="text-xs font-semibold uppercase tracking-wide text-flag-red">{d.role}</p>}
-                {d.bio && <p className="mt-2 text-sm leading-relaxed text-ink/65">{d.bio}</p>}
-              </div>
+              <p
+                className={cn(
+                  'mt-4 font-serif text-lg font-semibold leading-tight',
+                  d.name ? 'text-navy' : 'text-ink/40',
+                )}
+              >
+                {d.name || 'Director to be announced'}
+              </p>
+              {d.role && (
+                <p className="mt-0.5 text-xs font-semibold uppercase tracking-wide text-flag-red">{d.role}</p>
+              )}
+              {d.bio && <p className="mt-3 text-sm leading-relaxed text-ink/65">{d.bio}</p>}
             </li>
           ))}
         </ul>
       )}
-    </aside>
+    </section>
   )
 }
