@@ -90,6 +90,15 @@ export const STATES = {
 export const STATE_PORTAL = (abbr) =>
   `https://www.vote.org/register-to-vote/${abbr.toLowerCase()}/`
 
+/**
+ * Postal code → { id (FIPS), name, abbr }. Lives here rather than alongside the
+ * map helpers so modules that only need a state's name — the SEO metadata, for
+ * one — do not have to pull in the topojson to get it.
+ */
+export const STATE_BY_ABBR = Object.fromEntries(
+  Object.entries(STATES).map(([id, s]) => [s.abbr, { id, name: s.name, abbr: s.abbr }]),
+)
+
 export function getStateById(id) {
   const s = STATES[id]
   if (!s) return null

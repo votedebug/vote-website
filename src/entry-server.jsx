@@ -16,5 +16,6 @@ export function render(url) {
 
 // Re-exported so the prerender script gets these with the `@/` alias resolved.
 export * from './lib/seo.js'
+export { groupByState } from './lib/chapterStates.js'
 export { preloadSanityData } from './lib/useSanity.js'
 export * as queries from './lib/queries.js'

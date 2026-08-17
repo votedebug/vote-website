@@ -15,6 +15,15 @@ export default defineType({
       description: 'Two-letter fallback shown when no logo is set (e.g. "CZ").',
     }),
     defineField({name: 'borough', title: 'Borough', type: 'string'}),
+    defineField({
+      name: 'state',
+      title: 'State code',
+      type: 'string',
+      description:
+        'Two-letter postal code, e.g. "NY". Decides which state map the chapter appears on. ' +
+        'Left blank, it is read off the end of the street address.',
+      validation: (r) => r.uppercase().length(2),
+    }),
     defineField({name: 'order', title: 'Sort order', type: 'number'}),
     defineField({name: 'address', title: 'Street address', type: 'string'}),
     defineField({

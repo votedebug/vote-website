@@ -22,6 +22,7 @@ const {
   preloadSanityData,
   queries,
   allRoutes,
+  groupByState,
   metaForPath,
   organizationSchema,
   websiteSchema,
@@ -40,10 +41,11 @@ const client = createClient({
 })
 
 console.log('Fetching published content from Sanity…')
-const [site, team, chapters, articles, teamForSchema] = await Promise.all([
+const [site, team, chapters, stateChapters, articles, teamForSchema] = await Promise.all([
   client.fetch(queries.siteSettingsQuery),
   client.fetch(queries.teamQuery),
   client.fetch(queries.chaptersQuery),
+  client.fetch(queries.stateChaptersQuery),
   client.fetch(queries.articlesListQuery),
   client.fetch(queries.teamSchemaQuery),
 ])
@@ -54,8 +56,12 @@ const entries = [
   { query: queries.siteSettingsQuery, data: site },
   { query: queries.teamQuery, data: team },
   { query: queries.chaptersQuery, data: chapters },
+  { query: queries.stateChaptersQuery, data: stateChapters },
   { query: queries.articlesListQuery, data: articles },
 ]
+
+// One /chapters/xx page per state that actually has a chapter.
+const stateCodes = Object.keys(groupByState(chapters)).sort()
 
 // ArticleDetail fetches one article by slug.
 for (const { slug } of articles) {
@@ -67,7 +73,10 @@ for (const { slug } of articles) {
 }
 
 preloadSanityData(entries)
-console.log(`  ${articles.length} articles, ${team?.length ?? 0} team members, ${chapters?.length ?? 0} chapters`)
+console.log(
+  `  ${articles.length} articles, ${team?.length ?? 0} team members, ` +
+    `${chapters?.length ?? 0} chapters in ${stateCodes.length} states (${stateCodes.join(', ')})`,
+)
 
 const template = fs.readFileSync(path.join(dist, 'index.html'), 'utf8')
 
@@ -118,7 +127,7 @@ function renderPage(route) {
     .replace('<div id="root"></div>', `<div id="root">${appHtml}</div>`)
 }
 
-const routes = allRoutes(articles)
+const routes = allRoutes(articles, stateCodes)
 const failures = []
 
 for (const route of routes) {

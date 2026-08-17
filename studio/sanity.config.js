@@ -71,10 +71,10 @@ export default defineConfig({
               locations: [{title: doc?.title || 'Untitled', href: '/team'}],
             }),
           }),
-          state: defineLocations({
-            select: {title: 'name'},
+          stateChapter: defineLocations({
+            select: {title: 'name', code: 'code'},
             resolve: (doc) => ({
-              locations: [{title: doc?.title || 'Untitled', href: '/chapters'}],
+              locations: [{title: doc?.title || 'Untitled', href: doc?.code ? `/chapters/${doc.code.toLowerCase()}` : '/chapters'}],
             }),
           }),
         },

@@ -1,3 +1,5 @@
+import { STATE_BY_ABBR } from '@/data/states'
+
 export const SITE_URL = 'https://vote-of-teens.org'
 export const OG_IMAGE = `${SITE_URL}/img/og-cover.png`
 export const SITE_NAME = 'Vote of Teens'
@@ -29,9 +31,9 @@ export const STATIC_ROUTES = {
       'Meet the student directors, editorial team, media team, and founders running Vote of Teens across New York City high schools.',
   },
   '/chapters': {
-    title: 'Our Chapters — Vote of Teens High School Chapters in NYC',
+    title: 'Our Chapters — Vote of Teens High School Chapters',
     description:
-      'Vote of Teens chapters registering student voters at high schools across all five New York City boroughs.',
+      'Every state where Vote of Teens is registering student voters. Open a state to meet its directors and find the high school chapters running drives there.',
   },
   '/articles': {
     title: 'Articles — Vote of Teens',
@@ -70,6 +72,19 @@ export function metaForPath(pathname, articles = null) {
 
   if (STATIC_ROUTES[path]) return { ...STATIC_ROUTES[path], canonical }
 
+  const stateMatch = path.match(/^\/chapters\/([a-z]{2})$/)
+  if (stateMatch) {
+    const state = STATE_BY_ABBR[stateMatch[1].toUpperCase()]
+    if (state) {
+      return {
+        title: `${state.name} Chapters — Vote of Teens`,
+        description: `Vote of Teens state directors and high school chapters across ${state.name} — see every school registering student voters, and the students leading them.`,
+        canonical,
+      }
+    }
+    return { ...NOT_FOUND, canonical }
+  }
+
   const match = path.match(/^\/articles\/([^/]+)$/)
   if (match) {
     const article = (articles || []).find((a) => a.slug === match[1])
@@ -88,9 +103,19 @@ export function metaForPath(pathname, articles = null) {
   return { ...NOT_FOUND, canonical }
 }
 
-/** Every URL to prerender and list in the sitemap. */
-export function allRoutes(articles = []) {
-  return [...Object.keys(STATIC_ROUTES), ...articles.map((a) => `/articles/${a.slug}`)]
+/**
+ * Every URL to prerender and list in the sitemap.
+ *
+ * State pages are driven by the chapters in Sanity: a state only gets a URL
+ * once it has a chapter, so adding one in the CMS is all it takes for the next
+ * build to publish /chapters/xx.
+ */
+export function allRoutes(articles = [], stateCodes = []) {
+  return [
+    ...Object.keys(STATIC_ROUTES),
+    ...stateCodes.map((code) => `/chapters/${code.toLowerCase()}`),
+    ...articles.map((a) => `/articles/${a.slug}`),
+  ]
 }
 
 /** JSON-LD for the organisation — the entity signal behind brand search. */

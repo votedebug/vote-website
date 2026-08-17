@@ -74,6 +74,7 @@ export default function App() {
           <Route path="/about" element={<About />} />
           <Route path="/team" element={<Team />} />
           <Route path="/chapters" element={<Chapters />} />
+          <Route path="/chapters/:state" element={<Chapters />} />
           <Route path="/articles" element={<Articles />} />
           <Route path="/articles/:slug" element={<ArticleDetail />} />
           <Route path="/legislation" element={<Legislation />} />

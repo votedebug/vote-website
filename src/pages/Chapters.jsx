@@ -1,22 +1,50 @@
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
+import { useParams } from 'react-router-dom'
 import { ArrowRight, ImagePlus } from 'lucide-react'
 import { Container } from '@/components/Container'
 import { PageHero, SectionHeading, LinkButton, Eyebrow } from '@/components/Bits'
 import { Dialog, DialogContent, DialogTitle } from '@/components/ui/dialog'
-import { NycChapterMap } from '@/components/NycChapterMap'
+import { UsChapterMap } from '@/components/UsChapterMap'
+import { StateChapterView } from '@/components/StateChapterView'
 import { ChapterCalendar } from '@/components/ChapterCalendar'
 import { useSanityQuery } from '@/lib/useSanity'
-import { statesQuery } from '@/lib/queries'
+import { chaptersQuery, stateChaptersQuery } from '@/lib/queries'
+import { groupByState, STATE_BY_ABBR } from '@/lib/chapterStates'
+import NotFound from '@/pages/NotFound'
 import { urlFor } from '@/lib/sanity'
 import { cn } from '@/lib/utils'
 
+/**
+ * Two views behind one page: /chapters is the national map, /chapters/:state
+ * zooms into a single state. Both keep the calendar and CTA underneath so the
+ * page has the same shape wherever you are in it.
+ */
 export default function Chapters() {
+  const { state: stateParam } = useParams()
   const [active, setActive] = useState(null)
+
+  const { data: chapters, loading, error } = useSanityQuery(chaptersQuery)
+  const { data: stateDocs } = useSanityQuery(stateChaptersQuery)
+
+  const chaptersByState = useMemo(() => groupByState(chapters), [chapters])
+  const directorsByState = useMemo(
+    () => Object.fromEntries((stateDocs || []).filter((s) => s.code).map((s) => [s.code.toUpperCase(), s])),
+    [stateDocs],
+  )
+
+  const abbr = stateParam ? stateParam.toUpperCase() : null
+  const meta = abbr ? STATE_BY_ABBR[abbr] : null
+  const stateChapters = abbr ? chaptersByState[abbr] : null
+
+  // A state URL that is not a state, or a state with nothing in it, is a real
+  // 404 — but only once the chapters have actually arrived, otherwise every
+  // state page would flash "not found" while Sanity is still loading.
+  if (abbr && chapters && (!meta || !stateChapters?.length)) return <NotFound />
 
   return (
     <>
       <PageHero
-        title="Our Chapters"
+        title={meta ? `Our Chapters in ${meta.name}` : 'Our Chapters'}
         intro={
           <>
             Each VOTE chapter is a student-run team registering voters
@@ -29,11 +57,26 @@ export default function Chapters() {
       {/* The map is the chapter directory */}
       <section className="py-14 sm:py-20">
         <Container>
-          <NycChapterMap onSelect={setActive} />
+          {abbr ? (
+            meta && stateChapters?.length > 0 ? (
+              <StateChapterView
+                abbr={abbr}
+                name={meta.name}
+                chapters={stateChapters}
+                stateDoc={directorsByState[abbr]}
+                onSelectChapter={setActive}
+              />
+            ) : null
+          ) : (
+            <UsChapterMap
+              chaptersByState={chaptersByState}
+              directorsByState={directorsByState}
+              loading={loading}
+              error={error}
+            />
+          )}
         </Container>
       </section>
-
-      <StateChaptersSection />
 
       <CalendarSection />
 
@@ -56,63 +99,6 @@ export default function Chapters() {
 
       <ChapterDialog chapter={active} onClose={() => setActive(null)} />
     </>
-  )
-}
-
-// VOTE beyond NYC: each state has its own directors, and — outside New
-// York, whose schools already get the full map/popup treatment above —
-// its own plain-text list of school chapters (no address/logo/map pin).
-function StateChaptersSection() {
-  const { data: states } = useSanityQuery(statesQuery)
-  if (!states?.length) return null
-
-  return (
-    <section className="border-t border-border py-20 sm:py-24">
-      <Container>
-        <SectionHeading
-          eyebrow="Beyond NYC"
-          title="State chapters"
-          intro="VOTE is growing beyond New York City — meet the state directors leading the movement, and the school chapters they're building."
-        />
-
-        <div className="mt-12 grid gap-14 lg:grid-cols-3">
-          {states.map((s) => (
-            <div key={s._id}>
-              <h3 className="font-serif text-2xl font-semibold text-navy">{s.name}</h3>
-
-              {s.chapters?.length > 0 && (
-                <p className="mt-2 text-sm leading-relaxed text-ink/60">{s.chapters.join(' · ')}</p>
-              )}
-
-              {s.directors?.length > 0 && (
-                <div className="mt-5 grid grid-cols-3 gap-4">
-                  {s.directors.map((d, i) => (
-                    <div key={i} className="text-center">
-                      <div className="relative mx-auto aspect-square w-full overflow-hidden rounded-xl bg-secondary">
-                        {d.photo ? (
-                          <img
-                            src={urlFor(d.photo).width(240).height(240).fit('crop').auto('format').url()}
-                            alt={d.name}
-                            className="h-full w-full object-cover"
-                          />
-                        ) : (
-                          <div className="flex h-full w-full flex-col items-center justify-center gap-1 border-2 border-dashed border-border text-ink/40">
-                            <ImagePlus className="h-5 w-5" strokeWidth={1.5} />
-                            <span className="text-[0.55rem] font-semibold uppercase">Add</span>
-                          </div>
-                        )}
-                      </div>
-                      <p className="mt-2 text-xs font-semibold leading-tight text-navy">{d.name}</p>
-                      <p className="text-[0.7rem] text-ink/55">{d.role}</p>
-                    </div>
-                  ))}
-                </div>
-              )}
-            </div>
-          ))}
-        </div>
-      </Container>
-    </section>
   )
 }
 
