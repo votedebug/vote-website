@@ -1,8 +1,6 @@
 import { useMemo, useState } from 'react'
 import { geoMercator, geoPath } from 'd3-geo'
 import boroughs from '@/data/nyc-boroughs.json'
-import { useSanityQuery } from '@/lib/useSanity'
-import { chaptersQuery } from '@/lib/queries'
 import { cn } from '@/lib/utils'
 
 const W = 720
@@ -18,9 +16,14 @@ const FILTERS = ['All of NYC', 'Manhattan', 'Bronx', 'Brooklyn', 'Queens']
  * Nine of the fifteen chapters sit in Manhattan, which is narrow enough that
  * their pins overlap at citywide zoom — so selecting a borough zooms the map
  * to it, which both spreads the pins out and doubles as the list filter.
+ *
+ * `chapters` must already be filtered down to the ones actually inside NYC —
+ * this used to fetch and show every chapter in the dataset itself, which
+ * leaked GISNY (Westchester, not a borough) and every other state's schools
+ * in here once chapters started carrying a `state` field. The caller (the
+ * state-level chapters page) is the one that knows which chapters are NYC's.
  */
-export function NycChapterMap({ onSelect }) {
-  const { data: CHAPTERS } = useSanityQuery(chaptersQuery)
+export function NycChapterMap({ chapters: CHAPTERS, onSelect }) {
   const [filter, setFilter] = useState('All of NYC')
   const [hovered, setHovered] = useState(null)
 

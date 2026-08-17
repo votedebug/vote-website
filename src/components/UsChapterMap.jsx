@@ -125,7 +125,7 @@ export function UsChapterMap({ chaptersByState, directorsByState, loading, error
 
       {/* State index, under the map */}
       <div className="mt-8 border-t border-border pt-8">
-        <p className="eyebrow text-center text-royal">Where we are</p>
+        <p className="eyebrow text-center text-flag-red">Where we are</p>
         <ul className="mt-6 flex flex-wrap items-start justify-center gap-x-14 gap-y-8">
           {active.map((s) => (
             <li key={s.abbr}>

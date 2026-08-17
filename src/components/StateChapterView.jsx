@@ -65,7 +65,7 @@ export function StateChapterView({ abbr, name, chapters, stateDoc, onSelectChapt
 
       {zoomedToNyc ? (
         <div key="nyc" className="mt-10 animate-in fade-in zoom-in-95 duration-500">
-          <NycChapterMap onSelect={onSelectChapter} />
+          <NycChapterMap chapters={nycChapters} onSelect={onSelectChapter} />
         </div>
       ) : (
         <div key={abbr} className="mt-10 animate-in fade-in zoom-in-95 duration-500">
