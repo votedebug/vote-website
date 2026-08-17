@@ -25,6 +25,11 @@ export const chaptersQuery = `*[_type == "chapter"] | order(order asc, name asc)
   directors[]{ name, role, photo }
 }`
 
+export const statesQuery = `*[_type == "state"] | order(order asc, name asc) {
+  _id, name, chapters,
+  directors[]{ name, role, photo }
+}`
+
 export const articlesListQuery = `*[_type == "article"] | order(date desc) {
   _id, title, "slug": slug.current, dek, author, role, date, category,
   readTime, "image": image.asset->url

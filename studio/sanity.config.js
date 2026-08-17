@@ -71,6 +71,12 @@ export default defineConfig({
               locations: [{title: doc?.title || 'Untitled', href: '/team'}],
             }),
           }),
+          state: defineLocations({
+            select: {title: 'name'},
+            resolve: (doc) => ({
+              locations: [{title: doc?.title || 'Untitled', href: '/chapters'}],
+            }),
+          }),
         },
       },
     }),
