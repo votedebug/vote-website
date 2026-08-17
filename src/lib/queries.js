@@ -20,9 +20,16 @@ export const teamSchemaQuery = `*[_type == "teamMember"] | order(order asc) {
 }`
 
 export const chaptersQuery = `*[_type == "chapter"] | order(order asc, name asc) {
-  _id, name, short, "logo": logo.asset->url, monogram, borough, address,
+  _id, name, short, "logo": logo.asset->url, monogram, borough, address, state,
   "coords": [coords.lng, coords.lat],
   directors[]{ name, role, photo }
+}`
+
+// The state layer above chapters: who runs VOTE statewide. A state with no
+// document here still appears on the map if it has chapters.
+export const stateChaptersQuery = `*[_type == "stateChapter"] | order(order asc, name asc) {
+  _id, code, name, blurb,
+  directors[]{ name, role, bio, photo }
 }`
 
 export const articlesListQuery = `*[_type == "article"] | order(date desc) {

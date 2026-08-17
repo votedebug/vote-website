@@ -1,20 +1,50 @@
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
+import { useParams } from 'react-router-dom'
 import { ArrowRight, ImagePlus } from 'lucide-react'
 import { Container } from '@/components/Container'
 import { PageHero, SectionHeading, LinkButton, Eyebrow } from '@/components/Bits'
 import { Dialog, DialogContent, DialogTitle } from '@/components/ui/dialog'
-import { NycChapterMap } from '@/components/NycChapterMap'
+import { UsChapterMap } from '@/components/UsChapterMap'
+import { StateChapterView } from '@/components/StateChapterView'
 import { ChapterCalendar } from '@/components/ChapterCalendar'
+import { useSanityQuery } from '@/lib/useSanity'
+import { chaptersQuery, stateChaptersQuery } from '@/lib/queries'
+import { groupByState, STATE_BY_ABBR } from '@/lib/chapterStates'
+import NotFound from '@/pages/NotFound'
 import { urlFor } from '@/lib/sanity'
 import { cn } from '@/lib/utils'
 
+/**
+ * Two views behind one page: /chapters is the national map, /chapters/:state
+ * zooms into a single state. Both keep the calendar and CTA underneath so the
+ * page has the same shape wherever you are in it.
+ */
 export default function Chapters() {
+  const { state: stateParam } = useParams()
   const [active, setActive] = useState(null)
+
+  const { data: chapters } = useSanityQuery(chaptersQuery)
+  const { data: stateDocs } = useSanityQuery(stateChaptersQuery)
+
+  const chaptersByState = useMemo(() => groupByState(chapters), [chapters])
+  const directorsByState = useMemo(
+    () => Object.fromEntries((stateDocs || []).filter((s) => s.code).map((s) => [s.code.toUpperCase(), s])),
+    [stateDocs],
+  )
+
+  const abbr = stateParam ? stateParam.toUpperCase() : null
+  const meta = abbr ? STATE_BY_ABBR[abbr] : null
+  const stateChapters = abbr ? chaptersByState[abbr] : null
+
+  // A state URL that is not a state, or a state with nothing in it, is a real
+  // 404 — but only once the chapters have actually arrived, otherwise every
+  // state page would flash "not found" while Sanity is still loading.
+  if (abbr && chapters && (!meta || !stateChapters?.length)) return <NotFound />
 
   return (
     <>
       <PageHero
-        title="Our Chapters"
+        title={meta ? `Our Chapters in ${meta.name}` : 'Our Chapters'}
         intro={
           <>
             Each VOTE chapter is a student-run team registering voters
@@ -27,7 +57,19 @@ export default function Chapters() {
       {/* The map is the chapter directory */}
       <section className="py-14 sm:py-20">
         <Container>
-          <NycChapterMap onSelect={setActive} />
+          {abbr ? (
+            meta && stateChapters?.length > 0 ? (
+              <StateChapterView
+                abbr={abbr}
+                name={meta.name}
+                chapters={stateChapters}
+                stateDoc={directorsByState[abbr]}
+                onSelectChapter={setActive}
+              />
+            ) : null
+          ) : (
+            <UsChapterMap chaptersByState={chaptersByState} directorsByState={directorsByState} />
+          )}
         </Container>
       </section>
 
