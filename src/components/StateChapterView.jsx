@@ -297,15 +297,12 @@ function DirectorPanel({ name, stateDoc }) {
           if you want to help lead them.
         </p>
       ) : (
-        // Up to four across, which is what a state leadership team runs to.
-        <ul
-          className={cn(
-            'mx-auto mt-10 grid max-w-5xl gap-x-10 gap-y-12 sm:grid-cols-2',
-            directors.length >= 3 ? 'lg:grid-cols-4' : 'lg:grid-cols-2',
-          )}
-        >
+        // Flex + wrap + justify-center instead of a fixed grid so any count —
+        // three directors, four, whatever — reads as one centered cluster
+        // rather than a grid row with an awkward empty trailing cell.
+        <ul className="mx-auto mt-10 flex max-w-5xl flex-wrap justify-center gap-x-10 gap-y-12">
           {directors.map((d, i) => (
-            <li key={i} className="text-center">
+            <li key={i} className="w-40 text-center">
               <div className="mx-auto aspect-square w-32 overflow-hidden rounded-2xl bg-secondary">
                 {d.photo ? (
                   <img
