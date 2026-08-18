@@ -140,12 +140,15 @@
     text-transform: uppercase;
     font-size: 0.75rem;
   }
-  /* Faint grid used to give the deep-navy bands some texture. */
+  /* Faint grid used to give the deep-navy bands some texture, plus a soft
+     warm wash so the band doesn't read as pure blue-on-blue. */
   .navy-grid {
     background-image:
+      radial-gradient(ellipse 60% 50% at 80% 15%, color-mix(in srgb, var(--color-flag-red) 20%, transparent), transparent 70%),
+      radial-gradient(ellipse 80% 65% at 8% 100%, color-mix(in srgb, var(--color-flag-red) 22%, transparent), transparent 70%),
       linear-gradient(to right, rgba(255, 255, 255, 0.055) 1px, transparent 1px),
       linear-gradient(to bottom, rgba(255, 255, 255, 0.055) 1px, transparent 1px);
-    background-size: 56px 56px;
+    background-size: 100% 100%, 100% 100%, 56px 56px, 56px 56px;
   }
   /* Hairline rule that fades out at both ends — used instead of card borders. */
   .rule-fade {
