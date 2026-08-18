@@ -30,13 +30,26 @@ export const client = createClient({
     studioUrl: import.meta.env.VITE_SANITY_STUDIO_URL || 'http://localhost:3333',
     // Stega embeds invisible characters in string values so Presentation can
     // find what to edit. That breaks any value our own code treats as data
-    // rather than prose: filter/comparison keys (category, borough, slug),
+    // rather than prose: filter/comparison keys (category, borough, slug,
+    // state, code), the address regex fallback in chapterStates.js#stateOf,
     // hrefs (email, instagram, linkedin), and date parsing (date). Skip
     // encoding those; keep it for everything actually rendered as editable
     // copy.
     filter: (props) => {
       const field = props.resultPath[props.resultPath.length - 1]
-      const NON_PROSE_FIELDS = ['category', 'slug', 'borough', 'email', 'instagram', 'linkedin', 'date', 'alt']
+      const NON_PROSE_FIELDS = [
+        'category',
+        'slug',
+        'borough',
+        'email',
+        'instagram',
+        'linkedin',
+        'date',
+        'alt',
+        'state',
+        'address',
+        'code',
+      ]
       if (NON_PROSE_FIELDS.includes(field)) return false
       return props.filterDefault(props)
     },
