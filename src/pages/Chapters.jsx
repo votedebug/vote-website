@@ -56,7 +56,7 @@ export default function Chapters() {
 
       {/* The map is the chapter directory */}
       <section className="py-14 sm:py-20">
-        <Container>
+        <Container className={cn(!abbr && '!max-w-[88rem]')}>
           {abbr ? (
             meta && stateChapters?.length > 0 ? (
               <StateChapterView

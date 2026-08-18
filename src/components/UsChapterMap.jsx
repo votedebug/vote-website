@@ -63,7 +63,7 @@ export function UsChapterMap({ chaptersByState, directorsByState, loading, error
     <div>
       <svg
         viewBox={`0 0 ${WIDTH} ${HEIGHT}`}
-        className="mx-auto block h-auto w-full max-h-[78vh]"
+        className="mx-auto block h-auto w-full max-h-[92vh] overflow-visible"
         role="img"
         aria-label="Map of the United States. States with Vote of Teens chapters are highlighted — select one to see its directors and schools."
       >

@@ -63,7 +63,7 @@ export function PageHero({ eyebrow, title, intro, children }) {
       <div className="absolute inset-0 opacity-[0.06] stripe-accent" aria-hidden />
       <div className="pointer-events-none absolute -right-16 -top-16 h-64 w-64 rounded-full bg-royal/30 blur-3xl" aria-hidden />
       <div className="pointer-events-none absolute -bottom-24 left-1/3 h-64 w-64 rounded-full bg-flag-red/20 blur-3xl" aria-hidden />
-      <Container className="relative py-16 sm:py-20">
+      <Container className="relative py-12 sm:py-16">
         <div className="max-w-3xl">
           {eyebrow && <Eyebrow light>{eyebrow}</Eyebrow>}
           <h1 className="mt-4 font-serif text-4xl font-semibold leading-[1.05] tracking-tight text-balance sm:text-5xl md:text-6xl">
