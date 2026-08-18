@@ -251,7 +251,7 @@ function FeaturedArticles({ featured, secondary }) {
   return (
     <section className="relative overflow-hidden bg-navy py-20 text-white sm:py-24">
       <div className="absolute inset-0 navy-grid" aria-hidden />
-      <div className="pointer-events-none absolute -right-20 top-0 h-72 w-72 rounded-full bg-royal/25 blur-3xl" aria-hidden />
+      <div className="pointer-events-none absolute -right-20 top-0 h-72 w-72 rounded-full bg-flag-red/20 blur-3xl" aria-hidden />
       <Container className="relative">
         <div className="flex items-end justify-between gap-4">
           <SectionHeading light eyebrow="From the desk" title="Stories on youth & democracy" />

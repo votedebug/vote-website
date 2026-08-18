@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button'
 // Small uppercase label with a red tick — used above section titles.
 export function Eyebrow({ children, className, light = false }) {
   return (
-    <span className={cn('eyebrow inline-flex items-center gap-2', light ? 'text-white/80' : 'text-royal', className)}>
+    <span className={cn('eyebrow inline-flex items-center gap-2', light ? 'text-white/80' : 'text-flag-red', className)}>
       <span className="h-px w-6 bg-flag-red" aria-hidden />
       {children}
     </span>

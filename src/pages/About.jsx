@@ -83,7 +83,7 @@ export default function About() {
       {/* WHY VOTE */}
       <section className="relative overflow-hidden bg-navy py-20 text-white sm:py-24">
         <div className="absolute inset-0 navy-grid" aria-hidden />
-        <div className="pointer-events-none absolute -left-20 top-10 h-72 w-72 rounded-full bg-royal/20 blur-3xl" aria-hidden />
+        <div className="pointer-events-none absolute -left-20 top-10 h-72 w-72 rounded-full bg-flag-red/15 blur-3xl" aria-hidden />
         <Container className="relative">
           <div className="mx-auto max-w-3xl">
             <StarRow />
