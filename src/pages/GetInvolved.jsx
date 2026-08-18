@@ -65,7 +65,7 @@ export default function GetInvolved() {
                 )}
               >
                 <div className="flex items-center justify-between">
-                  <w.icon className="h-7 w-7 text-royal" strokeWidth={1.75} />
+                  <w.icon className="h-7 w-7 text-flag-red" strokeWidth={1.75} />
                   <span className="eyebrow text-flag-red">{w.tag}</span>
                 </div>
                 <h3 className="mt-5 font-serif text-xl font-semibold text-navy">{w.title}</h3>
@@ -79,7 +79,7 @@ export default function GetInvolved() {
       {/* Contact form + info */}
       <section className="relative overflow-hidden bg-navy py-20 text-white sm:py-24">
         <div className="absolute inset-0 navy-grid" aria-hidden />
-        <div className="pointer-events-none absolute -left-20 top-10 h-72 w-72 rounded-full bg-royal/25 blur-3xl" aria-hidden />
+        <div className="pointer-events-none absolute -left-20 top-10 h-72 w-72 rounded-full bg-flag-red/20 blur-3xl" aria-hidden />
         <Container className="relative">
           <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
             <div>

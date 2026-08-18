@@ -106,7 +106,7 @@ function CalendarSection() {
   return (
     <section className="relative overflow-hidden bg-navy py-16 text-white sm:py-20">
       <div className="absolute inset-0 navy-grid" aria-hidden />
-      <div className="pointer-events-none absolute -right-24 top-10 h-72 w-72 rounded-full bg-royal/25 blur-3xl" aria-hidden />
+      <div className="pointer-events-none absolute -right-24 top-10 h-72 w-72 rounded-full bg-flag-red/20 blur-3xl" aria-hidden />
       <Container className="relative">
         <SectionHeading
           light

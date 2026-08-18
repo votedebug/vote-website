@@ -59,7 +59,7 @@ export default function Legislation() {
           <div className="mt-14 grid gap-10 md:grid-cols-3">
             {HELP.map((h, i) => (
               <Reveal key={h.title} delay={i * 90}>
-                <h.icon className="h-7 w-7 text-royal" strokeWidth={1.75} />
+                <h.icon className="h-7 w-7 text-flag-red" strokeWidth={1.75} />
                 <h3 className="mt-4 font-serif text-xl font-semibold text-navy">{h.title}</h3>
                 <p className="mt-2 leading-relaxed text-ink/70">{h.body}</p>
               </Reveal>
