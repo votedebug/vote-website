@@ -10,6 +10,7 @@ export const EVENTS = [
 
   // Chapter drives (placeholders)
   { date: '2026-09-15', title: 'Registration Drive', type: 'drive', chapter: 'Bronx Science', note: 'National Voter Registration Day drive in homerooms.' },
+  { date: '2026-09-03', title: 'Collaboration with NYC Votes (Training)', type: 'drive', chapter: 'Virtual', note: 'A virtual training session with NYC Votes.' },
 ]
 
 export function upcomingEvents(from = new Date()) {

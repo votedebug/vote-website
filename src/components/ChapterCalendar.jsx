@@ -1,6 +1,8 @@
 import { useMemo, useState } from 'react'
 import { MapPin } from 'lucide-react'
 import { Calendar } from '@/components/ui/calendar'
+import { Container } from '@/components/Container'
+import { SectionHeading } from '@/components/Bits'
 import { EVENTS } from '@/data/events'
 import { cn } from '@/lib/utils'
 
@@ -189,5 +191,27 @@ export function ChapterCalendar() {
         )}
       </div>
     </div>
+  )
+}
+
+// The navy calendar band, as a section — shared by the Chapters page and
+// the Home page rather than duplicated, so the two never drift apart.
+export function CalendarSection() {
+  return (
+    <section className="relative overflow-hidden bg-navy py-16 text-white sm:py-20">
+      <div className="absolute inset-0 navy-grid" aria-hidden />
+      <div className="pointer-events-none absolute -right-24 top-10 h-72 w-72 rounded-full bg-flag-red/20 blur-3xl" aria-hidden />
+      <Container className="relative">
+        <SectionHeading
+          light
+          eyebrow="Calendar"
+          title="Upcoming drives & civic dates"
+          intro="When our chapters are registering voters, plus the national days worth building around. Pick a day to see what’s on."
+        />
+        <div className="mt-12">
+          <ChapterCalendar />
+        </div>
+      </Container>
+    </section>
   )
 }

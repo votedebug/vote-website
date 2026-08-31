@@ -2,11 +2,11 @@ import { useMemo, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { ArrowRight, ImagePlus } from 'lucide-react'
 import { Container } from '@/components/Container'
-import { PageHero, SectionHeading, LinkButton, Eyebrow } from '@/components/Bits'
+import { PageHero, LinkButton, Eyebrow } from '@/components/Bits'
 import { Dialog, DialogContent, DialogTitle } from '@/components/ui/dialog'
 import { UsChapterMap } from '@/components/UsChapterMap'
 import { StateChapterView } from '@/components/StateChapterView'
-import { ChapterCalendar } from '@/components/ChapterCalendar'
+import { CalendarSection } from '@/components/ChapterCalendar'
 import { useSanityQuery } from '@/lib/useSanity'
 import { chaptersQuery, stateChaptersQuery } from '@/lib/queries'
 import { groupByState, STATE_BY_ABBR } from '@/lib/chapterStates'
@@ -99,26 +99,6 @@ export default function Chapters() {
 
       <ChapterDialog chapter={active} onClose={() => setActive(null)} />
     </>
-  )
-}
-
-function CalendarSection() {
-  return (
-    <section className="relative overflow-hidden bg-navy py-16 text-white sm:py-20">
-      <div className="absolute inset-0 navy-grid" aria-hidden />
-      <div className="pointer-events-none absolute -right-24 top-10 h-72 w-72 rounded-full bg-flag-red/20 blur-3xl" aria-hidden />
-      <Container className="relative">
-        <SectionHeading
-          light
-          eyebrow="Calendar"
-          title="Upcoming drives & civic dates"
-          intro="When our chapters are registering voters, plus the national days worth building around. Pick a day to see what’s on."
-        />
-        <div className="mt-12">
-          <ChapterCalendar />
-        </div>
-      </Container>
-    </section>
   )
 }
 

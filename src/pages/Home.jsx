@@ -6,6 +6,7 @@ import { Eyebrow, SectionHeading, StarRow, LinkButton } from '@/components/Bits'
 import { Button } from '@/components/ui/button'
 import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel'
 import { MiniUsMap } from '@/components/MiniUsMap'
+import { CalendarSection } from '@/components/ChapterCalendar'
 import { useCarouselIndex } from '@/lib/useCarouselAutoplay'
 import { useReveal } from '@/lib/useReveal'
 import { useSanityQuery } from '@/lib/useSanity'
@@ -28,6 +29,7 @@ export default function Home() {
       <StatsBand stats={site.stats} />
       <MissionTeaser />
       {featured && <FeaturedArticles featured={featured} secondary={secondary} />}
+      <CalendarSection />
       <LegislationTeaser />
       <ClosingCta site={site} />
       <ChaptersStrip chapters={chapters} />
