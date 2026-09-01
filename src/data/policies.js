@@ -22,6 +22,6 @@ export const POLICIES = [
     title: 'Require instruction on voting in the 12th-grade social studies curriculum',
     summary:
       'Teach every 12th grader how to register, find their polling place, and cast a ballot.',
-    articleSlug: 'voting-instruction-in-schools',
+    articleSlug: 'new-jersey-bill-s2912-voting-instruction',
   },
 ]
