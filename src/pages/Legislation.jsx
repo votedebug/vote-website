@@ -161,9 +161,9 @@ function PlatformSection() {
                         <Link
                           to={`/articles/${p.articleSlug}`}
                           tabIndex={isOpen ? 0 : -1}
-                          className="group/link mt-5 inline-flex items-center gap-2 text-sm font-semibold text-flag-red"
+                          className="group/link mt-5 inline-flex items-center gap-2 text-lg font-semibold text-flag-red"
                         >
-                          Read the case
+                          Read more
                           <span className="text-white/40">· {article.readTime}</span>
                           <ArrowRight className="h-4 w-4 transition-transform group-hover/link:translate-x-1" />
                         </Link>
