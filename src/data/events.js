@@ -12,6 +12,7 @@ export const EVENTS = [
   { date: '2026-10-01', title: 'Upperclassmen Voting Instruction Assembly', type: 'drive', chapter: 'Hunter College HS', note: 'An assembly teaching upperclassmen how to register and vote.' },
   { date: '2026-10-06', title: 'Registration Drive at Club Fair', type: 'drive', chapter: 'Cardozo', note: 'A registration table at the school club fair.' },
   { date: '2026-10-08', title: 'Registration Drive at Club Fair', type: 'drive', chapter: 'Queens HS for the Sciences', note: 'A registration table at the school club fair.' },
+  { date: '2026-10-29', title: 'Voter Registration Drive', type: 'drive', chapter: 'Bard Queens', note: 'A voter registration drive at Bard Queens.' },
   { date: '2026-09-15', title: 'Registration Drive', type: 'drive', chapter: 'Bronx Science', note: 'National Voter Registration Day drive in homerooms.' },
   { date: '2026-09-03', title: 'Collaboration with NYC Votes (Training)', type: 'drive', chapter: 'Virtual', note: 'A virtual training session with NYC Votes.' },
 ]
