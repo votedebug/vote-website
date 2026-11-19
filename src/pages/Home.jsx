@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button'
 import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel'
 import { MiniUsMap } from '@/components/MiniUsMap'
 import { CalendarSection } from '@/components/ChapterCalendar'
-import { TornEdge, LogoButtonSticker, RegisteredSticker, PreRegisterSticker, FirstTimeVoterSticker } from '@/components/Decor'
+import { TornEdge, LogoButtonSticker, FutureVoterSticker, PreRegisterSticker, FirstTimeVoterSticker } from '@/components/Decor'
 import { useCarouselIndex } from '@/lib/useCarouselAutoplay'
 import { useReveal } from '@/lib/useReveal'
 import { useSanityQuery } from '@/lib/useSanity'
@@ -65,7 +65,7 @@ function Hero({ site }) {
 
         <div className="relative">
           <LogoButtonSticker className="-left-3 -top-4 h-20 w-20 -rotate-12 sm:-left-6 sm:-top-6 sm:h-24 sm:w-24" />
-          <RegisteredSticker className="-right-2 -bottom-3 w-32 rotate-[8deg] sm:-right-6 sm:w-40" />
+          <FutureVoterSticker className="-right-2 -bottom-3 w-32 rotate-[8deg] sm:-right-6 sm:w-40" />
           <HeroCarousel slides={site.heroSlides} />
         </div>
       </Container>

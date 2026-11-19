@@ -56,17 +56,17 @@ export function LogoButtonSticker({ className }) {
   )
 }
 
-export function RegisteredSticker({ className }) {
+export function FutureVoterSticker({ className }) {
   return (
     <svg viewBox="0 0 220 120" className={cn(stickerBase, className)} aria-hidden>
       <ellipse cx="110" cy="60" rx="106" ry="56" fill="#fff" />
       <ellipse cx="110" cy="60" rx="97" ry="47" fill="var(--color-navy)" />
       <ellipse cx="110" cy="60" rx="88" ry="38" fill="none" stroke="var(--color-flag-red)" strokeWidth="3" />
-      <text x="110" y="54" textAnchor="middle" fill="#fff" fontFamily="'Hanken Grotesk', sans-serif" fontWeight="800" fontSize="22" letterSpacing="1">
-        I’M
+      <text x="110" y="56" textAnchor="middle" fill="#fff" fontFamily="'Hanken Grotesk', sans-serif" fontWeight="800" fontSize="24" letterSpacing="2">
+        FUTURE
       </text>
-      <text x="110" y="80" textAnchor="middle" fill="#fff" fontFamily="'Hanken Grotesk', sans-serif" fontWeight="800" fontSize="24" letterSpacing="1">
-        REGISTERED
+      <text x="110" y="82" textAnchor="middle" fill="#fff" fontFamily="'Hanken Grotesk', sans-serif" fontWeight="800" fontSize="24" letterSpacing="2">
+        VOTER
       </text>
     </svg>
   )
