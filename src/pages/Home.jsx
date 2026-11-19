@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { ArrowLeft, ArrowRight, ArrowUpRight, ImagePlus } from 'lucide-react'
 import { Container, Reveal } from '@/components/Container'
-import { Eyebrow, SectionHeading, LinkButton } from '@/components/Bits'
+import { SectionHeading, LinkButton } from '@/components/Bits'
 import { Button } from '@/components/ui/button'
 import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel'
 import { MiniUsMap } from '@/components/MiniUsMap'
@@ -29,10 +29,10 @@ export default function Home() {
       <StatsBand stats={site.stats} />
       <MissionTeaser />
       {featured && <FeaturedArticles featured={featured} secondary={secondary} />}
-      <CalendarSection showIntro={false} />
       <LegislationTeaser />
-      <ClosingCta site={site} />
+      <CalendarSection showIntro={false} />
       <ChaptersStrip chapters={chapters} />
+      <ClosingCta site={site} />
     </>
   )
 }
@@ -42,8 +42,7 @@ function Hero({ site }) {
     <section className="relative overflow-hidden">
       <Container className="relative grid items-center gap-12 pt-10 pb-14 lg:grid-cols-[1.05fr_0.95fr] lg:pt-8 lg:pb-14">
         <div>
-          <Eyebrow>{site.tagline}</Eyebrow>
-          <h1 className="mt-5 font-serif text-[2.6rem] font-bold leading-[1.03] tracking-tight text-navy text-balance sm:text-6xl">
+          <h1 className="font-serif text-[2.6rem] font-bold leading-[1.03] tracking-tight text-navy text-balance sm:text-6xl">
             Registering the next
             <span className="relative whitespace-nowrap text-flag-red"> generation </span>
             of American voters.
@@ -293,7 +292,7 @@ function FeaturedArticles({ featured, secondary }) {
 
 function LegislationTeaser() {
   return (
-    <section className="overflow-hidden border-y border-border py-20 sm:py-24">
+    <section className="overflow-hidden py-20 sm:py-24">
       <Container>
         <div className="grid items-center gap-12 lg:grid-cols-[0.95fr_1.05fr]">
           <div>
@@ -326,17 +325,17 @@ function LegislationTeaser() {
 
 function ClosingCta({ site }) {
   return (
-    <section className="relative overflow-hidden bg-navy py-20 text-white sm:py-28">
+    <section className="relative overflow-hidden bg-flag-red py-20 text-white sm:py-28">
       <Container className="relative">
         <div className="mx-auto max-w-2xl text-center">
           <h2 className="font-serif text-3xl font-bold leading-tight text-balance sm:text-[2.75rem]">
             Start a chapter, run a drive, and change who shows up on Election Day.
           </h2>
-          <p className="mt-4 text-white/70">
+          <p className="mt-4 text-white/85">
             Email us to bring VOTE to your school or to work on youth-voting legislation.
           </p>
           <div className="mt-9 flex flex-wrap justify-center gap-3">
-            <Button asChild size="lg" className="bg-flag-red text-white hover:bg-flag-red-dark">
+            <Button asChild size="lg" className="bg-white text-flag-red hover:bg-navy hover:text-white">
               <Link to="/get-involved">Get Involved</Link>
             </Button>
             <Button asChild size="lg" variant="outline" className="border-white/30 bg-transparent text-white hover:bg-white hover:text-navy">

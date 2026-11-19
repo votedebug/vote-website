@@ -25,7 +25,6 @@ export function Footer() {
               <img src="/img/logo.png" alt="" className="h-12 w-12 rounded-md object-contain" />
               <div className="leading-none">
                 <div className="font-reading text-xl font-semibold">Vote of Teens</div>
-                <div className="eyebrow font-brand mt-1 text-[0.6rem] text-white/60">{SITE.tagline}</div>
               </div>
             </div>
             <p className="mt-5 max-w-sm text-sm leading-relaxed text-white/70">
@@ -79,7 +78,7 @@ export function Footer() {
         </div>
 
         <div className="mt-12 flex flex-col items-start justify-between gap-3 border-t border-white/15 pt-6 text-xs text-white/55 sm:flex-row sm:items-center">
-          <p>© {new Date().getFullYear()} Vote of Teens. For teens, by teens.</p>
+          <p>© {new Date().getFullYear()} Vote of Teens.</p>
           <p>Made with civic spirit in New York City.</p>
         </div>
       </Container>
