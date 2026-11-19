@@ -17,7 +17,7 @@ function Brand({ onClick, tagline }) {
         className="h-11 w-11 rounded-md object-contain transition-transform duration-200 group-hover:scale-105"
       />
       <span className="flex flex-col leading-none">
-        <span className="font-logo text-lg uppercase text-navy">Vote of Teens</span>
+        <span className="font-reading text-lg font-semibold tracking-tight text-navy">Vote of Teens</span>
         <span className="eyebrow text-[0.6rem] text-flag-red">{tagline}</span>
       </span>
     </Link>

@@ -24,7 +24,7 @@ export function Footer() {
             <div className="flex items-center gap-3">
               <img src="/img/logo.png" alt="" className="h-12 w-12 rounded-md object-contain" />
               <div className="leading-none">
-                <div className="font-logo text-xl uppercase">Vote of Teens</div>
+                <div className="font-reading text-xl font-semibold">Vote of Teens</div>
                 <div className="eyebrow mt-1 text-[0.6rem] text-white/60">{SITE.tagline}</div>
               </div>
             </div>
