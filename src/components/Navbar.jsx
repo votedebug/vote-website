@@ -18,7 +18,7 @@ function Brand({ onClick, tagline }) {
       />
       <span className="flex flex-col leading-none">
         <span className="font-reading text-lg font-semibold tracking-tight text-navy">Vote of Teens</span>
-        <span className="eyebrow text-[0.6rem] text-flag-red">{tagline}</span>
+        <span className="eyebrow font-brand text-[0.6rem] text-flag-red">{tagline}</span>
       </span>
     </Link>
   )
