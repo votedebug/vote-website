@@ -2,11 +2,10 @@ import { cn } from '@/lib/utils'
 import { Link } from 'react-router-dom'
 import { Button } from '@/components/ui/button'
 
-// Small uppercase label with a red tick — used above section titles.
+// Small uppercase label used above a few section titles.
 export function Eyebrow({ children, className, light = false }) {
   return (
     <span className={cn('eyebrow inline-flex items-center gap-2', light ? 'text-white/80' : 'text-flag-red', className)}>
-      <span className="h-px w-6 bg-flag-red" aria-hidden />
       {children}
     </span>
   )
@@ -20,7 +19,8 @@ export function SectionHeading({ eyebrow, title, intro, center, light, className
       {eyebrow && <Eyebrow light={light} className={cn(center && 'justify-center')}>{eyebrow}</Eyebrow>}
       <Tag
         className={cn(
-          'mt-4 font-serif text-3xl leading-[1.08] tracking-tight text-balance sm:text-4xl md:text-[2.75rem]',
+          eyebrow && 'mt-4',
+          'font-serif text-3xl font-semibold leading-[1.08] tracking-tight text-balance sm:text-4xl md:text-[2.75rem]',
           light ? 'text-white' : 'text-navy',
         )}
       >
@@ -60,9 +60,6 @@ import { Container } from '@/components/Container'
 export function PageHero({ eyebrow, title, intro, children }) {
   return (
     <section className="relative overflow-hidden bg-navy text-white">
-      <div className="absolute inset-0 opacity-[0.06] stripe-accent" aria-hidden />
-      <div className="pointer-events-none absolute -right-16 -top-16 h-64 w-64 rounded-full bg-royal/30 blur-3xl" aria-hidden />
-      <div className="pointer-events-none absolute -bottom-24 left-1/3 h-64 w-64 rounded-full bg-flag-red/20 blur-3xl" aria-hidden />
       <Container className="relative py-12 sm:py-16">
         <div className="max-w-3xl">
           {eyebrow && <Eyebrow light>{eyebrow}</Eyebrow>}

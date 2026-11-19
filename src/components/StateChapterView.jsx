@@ -150,7 +150,7 @@ function StateMap({ abbr, chapters, nycChapters, onSelectChapter, onOpenNyc }) {
               className="cursor-pointer outline-none"
               tabIndex={0}
               role="button"
-              aria-label={`${chapter.name} — view chapter leaders`}
+              aria-label={`${chapter.name}: view chapter leaders`}
               onMouseEnter={() => setHovered(chapter._id)}
               onMouseLeave={() => setHovered(null)}
               onFocus={() => setHovered(chapter._id)}
@@ -180,7 +180,7 @@ function StateMap({ abbr, chapters, nycChapters, onSelectChapter, onOpenNyc }) {
             className="cursor-pointer outline-none"
             tabIndex={0}
             role="button"
-            aria-label={`New York City — ${nycChapters.length} chapters. Open the borough map.`}
+            aria-label={`New York City: ${nycChapters.length} chapters. Open the borough map.`}
             onMouseEnter={() => setHovered('nyc')}
             onMouseLeave={() => setHovered(null)}
             onFocus={() => setHovered('nyc')}
@@ -225,7 +225,7 @@ function StateMap({ abbr, chapters, nycChapters, onSelectChapter, onOpenNyc }) {
         {hovered === 'nyc' ? (
           <p className="text-sm text-ink/70">
             <span className="font-semibold text-navy">New York City</span>
-            <span className="text-ink/45"> · {nycChapters.length} chapters — click to open the borough map</span>
+            <span className="text-ink/45"> · {nycChapters.length} chapters. Click to open the borough map</span>
           </p>
         ) : hovered ? (
           <p className="text-sm text-ink/70">

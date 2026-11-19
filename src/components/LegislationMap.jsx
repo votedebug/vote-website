@@ -115,7 +115,6 @@ function StatePanel({ selected }) {
     <aside className="lg:sticky lg:top-24">
       <div className="overflow-hidden rounded-2xl bg-white shadow-[0_18px_40px_-24px_rgba(11,42,107,0.45)]">
         <div className="relative px-6 pt-6 pb-5" style={{ background: cat.color }}>
-          <div className="absolute inset-0 opacity-15 stripe-accent" aria-hidden />
           <div className="relative">
             <span className="eyebrow text-white/80">{selected.abbr} · United States</span>
             <h3 className="mt-1 font-serif text-3xl font-semibold text-white">{selected.name}</h3>
@@ -151,7 +150,7 @@ function StatePanel({ selected }) {
             <Link to="/get-involved" className="font-semibold text-royal underline-offset-2 hover:underline">
               Get involved
             </Link>{' '}
-            and email us — we’ll connect you with the tools and people to make it happen.
+            and email us. We’ll connect you with the tools and people to make it happen.
           </div>
         </div>
       </div>

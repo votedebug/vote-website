@@ -2,7 +2,7 @@ import { useMemo, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { ArrowRight, ImagePlus } from 'lucide-react'
 import { Container } from '@/components/Container'
-import { PageHero, LinkButton, Eyebrow } from '@/components/Bits'
+import { PageHero, LinkButton } from '@/components/Bits'
 import { Dialog, DialogContent, DialogTitle } from '@/components/ui/dialog'
 import { UsChapterMap } from '@/components/UsChapterMap'
 import { StateChapterView } from '@/components/StateChapterView'
@@ -84,8 +84,7 @@ export default function Chapters() {
       <section className="py-20 sm:py-24">
         <Container>
           <div className="mx-auto max-w-2xl text-center">
-            <Eyebrow className="justify-center">Your school next</Eyebrow>
-            <h2 className="mt-4 font-serif text-3xl font-semibold uppercase tracking-tight text-navy text-balance sm:text-4xl">
+            <h2 className="font-serif text-3xl font-semibold uppercase tracking-tight text-navy text-balance sm:text-4xl">
               Join our mission and start your own chapter today
             </h2>
             <div className="mt-8">

@@ -65,7 +65,7 @@ export function UsChapterMap({ chaptersByState, directorsByState, loading, error
         viewBox={`0 0 ${WIDTH} ${HEIGHT}`}
         className="mx-auto block h-auto w-full max-h-[92vh] overflow-visible"
         role="img"
-        aria-label="Map of the United States. States with Vote of Teens chapters are highlighted — select one to see its directors and schools."
+        aria-label="Map of the United States. States with Vote of Teens chapters are highlighted. Select one to see its directors and schools."
       >
         {paths.map((s) => {
           const tier = tierOf(s.abbr)
@@ -80,7 +80,7 @@ export function UsChapterMap({ chaptersByState, directorsByState, loading, error
               strokeWidth={isHover && clickable ? 2 : 0.75}
               tabIndex={clickable ? 0 : -1}
               role={clickable ? 'button' : undefined}
-              aria-label={clickable ? `${s.name}: ${chaptersByState[s.abbr].length} chapters — open` : undefined}
+              aria-label={clickable ? `${s.name}: ${chaptersByState[s.abbr].length} chapters, open` : undefined}
               onMouseEnter={() => setHover(s.abbr)}
               onMouseLeave={() => setHover(null)}
               onClick={() => clickable && open(s.abbr)}
@@ -116,7 +116,7 @@ export function UsChapterMap({ chaptersByState, directorsByState, loading, error
               </span>
             </p>
           ) : (
-            <p className="text-sm text-ink/45">No chapter in {hovered.name} yet — it could start with you.</p>
+            <p className="text-sm text-ink/45">No chapter in {hovered.name} yet. It could start with you.</p>
           )
         ) : (
           <p className="text-sm text-ink/40">Hover a state to see what we have there and click to open it.</p>

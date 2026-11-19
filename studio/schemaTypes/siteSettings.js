@@ -18,7 +18,7 @@ export default defineType({
       name: 'featuredArticle',
       title: 'Featured article',
       description:
-        'The one article shown as the big feature on the Home page and leading the Articles page carousel. Pick exactly one here — there’s no separate "Feature" checkbox on individual articles anymore, so it can’t end up ambiguous.',
+        'The one article shown as the big feature on the Home page and leading the Articles page carousel. Pick exactly one here. There’s no separate "Feature" checkbox on individual articles anymore, so it can’t end up ambiguous.',
       type: 'reference',
       to: [{type: 'article'}],
     }),

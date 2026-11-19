@@ -11,49 +11,49 @@ export const SITE_NAME = 'Vote of Teens'
 export const SITE_HOME = `${SITE_URL}/`
 
 const DEFAULT_DESCRIPTION =
-  'Vote of Teens (VOTE) is a student-led, non-partisan movement registering the next generation of voters across New York City high schools — for teens, by teens.'
+  'Vote of Teens (VOTE) is a student-led, non-partisan movement registering the next generation of voters across New York City high schools. For teens, by teens.'
 
 // Static routes. Titles lead with the page and close with the brand so every
 // result in a search page carries "Vote of Teens".
 export const STATIC_ROUTES = {
   '/': {
-    title: 'Vote of Teens — Student-Led Voter Registration | For Teens, By Teens',
+    title: 'Vote of Teens',
     description: DEFAULT_DESCRIPTION,
   },
   '/about': {
-    title: 'About Vote of Teens — A Student-Led Voter Registration Movement',
+    title: 'About | Vote of Teens',
     description:
       'How Vote of Teens started, what the movement stands for, and why high school students are the ones registering the next generation of American voters.',
   },
   '/team': {
-    title: 'Our Team — Vote of Teens',
+    title: 'Our Team | Vote of Teens',
     description:
       'Meet the student directors, editorial team, media team, and founders running Vote of Teens across New York City high schools.',
   },
   '/chapters': {
-    title: 'Our Chapters — Vote of Teens High School Chapters',
+    title: 'Our Chapters | Vote of Teens',
     description:
       'Every state where Vote of Teens is registering student voters. Open a state to meet its directors and find the high school chapters running drives there.',
   },
   '/articles': {
-    title: 'Articles — Vote of Teens',
+    title: 'Articles | Vote of Teens',
     description:
       'Reporting and analysis from the Vote of Teens editorial team on youth voting, pre-registration, and student-run registration drives.',
   },
   '/legislation': {
-    title: 'Youth Voting Legislation Tracker — Vote of Teens',
+    title: 'Legislation Tracker | Vote of Teens',
     description:
       'A state-by-state tracker of pre-registration ages, 17-year-old primary voting, and the laws shaping when young Americans can register and vote.',
   },
   '/get-involved': {
-    title: 'Get Involved — Start a Vote of Teens Chapter at Your School',
+    title: 'Get Involved | Vote of Teens',
     description:
       'Register to vote, volunteer at a drive, or start a Vote of Teens chapter at your high school. Here is how to join the movement.',
   },
 }
 
 const NOT_FOUND = {
-  title: 'Page Not Found — Vote of Teens',
+  title: 'Page Not Found | Vote of Teens',
   description: DEFAULT_DESCRIPTION,
   noindex: true,
 }
@@ -77,8 +77,8 @@ export function metaForPath(pathname, articles = null) {
     const state = STATE_BY_ABBR[stateMatch[1].toUpperCase()]
     if (state) {
       return {
-        title: `${state.name} Chapters — Vote of Teens`,
-        description: `Vote of Teens state directors and high school chapters across ${state.name} — see every school registering student voters, and the students leading them.`,
+        title: `${state.name} Chapters | Vote of Teens`,
+        description: `Vote of Teens state directors and high school chapters across ${state.name}. See every school registering student voters, and the students leading them.`,
         canonical,
       }
     }
@@ -90,7 +90,7 @@ export function metaForPath(pathname, articles = null) {
     const article = (articles || []).find((a) => a.slug === match[1])
     if (article) {
       return {
-        title: `${article.title} — ${SITE_NAME}`,
+        title: `${article.title} | ${SITE_NAME}`,
         description: article.dek || DEFAULT_DESCRIPTION,
         canonical,
         article,

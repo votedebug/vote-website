@@ -196,17 +196,14 @@ export function ChapterCalendar() {
 
 // The navy calendar band, as a section — shared by the Chapters page and
 // the Home page rather than duplicated, so the two never drift apart.
-export function CalendarSection() {
+export function CalendarSection({ showIntro = true }) {
   return (
     <section className="relative overflow-hidden bg-navy py-16 text-white sm:py-20">
-      <div className="absolute inset-0 navy-grid" aria-hidden />
-      <div className="pointer-events-none absolute -right-24 top-10 h-72 w-72 rounded-full bg-flag-red/20 blur-3xl" aria-hidden />
       <Container className="relative">
         <SectionHeading
           light
-          eyebrow="Calendar"
           title="Upcoming drives & civic dates"
-          intro="When our chapters are registering voters, plus the national days worth building around. Pick a day to see what’s on."
+          intro={showIntro ? 'When our chapters are registering voters, plus national civic dates. Pick a day to see what’s on.' : undefined}
         />
         <div className="mt-12">
           <ChapterCalendar />

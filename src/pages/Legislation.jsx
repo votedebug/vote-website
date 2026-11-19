@@ -34,7 +34,6 @@ export default function Legislation() {
   return (
     <>
       <PageHero
-        eyebrow="Legislation"
         title="Where can teens get on the rolls? Find your state."
         intro="Voter-registration law changes at every state line. Click a state to see when young people can register or pre-register. Learn how to help expand access where they can’t."
       />
@@ -52,9 +51,8 @@ export default function Legislation() {
         <Container>
           <SectionHeading
             center
-            eyebrow="Make it change"
             title="Want to help write the next law?"
-            intro="You don’t have to be old enough to vote to move legislation. Here’s how VOTE helps students turn a map into momentum."
+            intro="You don’t have to be old enough to vote to move legislation. Here’s how VOTE helps students push for changes in their state."
           />
           <div className="mt-14 grid gap-10 md:grid-cols-3">
             {HELP.map((h, i) => (
@@ -97,9 +95,6 @@ function PlatformSection() {
 
   return (
     <section className="relative overflow-hidden bg-navy py-20 text-white sm:py-24">
-      <div className="absolute inset-0 navy-grid" aria-hidden />
-      <div className="pointer-events-none absolute -left-24 top-8 h-72 w-72 rounded-full bg-royal/25 blur-3xl" aria-hidden />
-      <div className="pointer-events-none absolute -right-20 bottom-0 h-64 w-64 rounded-full bg-flag-red/15 blur-3xl" aria-hidden />
 
       <Container className="relative">
         <SectionHeading

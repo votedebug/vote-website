@@ -1,6 +1,6 @@
 import { ArrowRight } from 'lucide-react'
 import { Container, Reveal } from '@/components/Container'
-import { SectionHeading, Eyebrow, LinkButton, StarRow } from '@/components/Bits'
+import { SectionHeading, Eyebrow, LinkButton } from '@/components/Bits'
 
 export default function About() {
   return (
@@ -8,9 +8,6 @@ export default function About() {
       {/* Giant blue section — the JFK quote and the cut-out photo sit directly
           on the navy, no frame, mirroring the original voteofteens.org. */}
       <section className="relative overflow-hidden bg-navy text-white">
-        <div className="absolute inset-0 navy-grid" aria-hidden />
-        <div className="pointer-events-none absolute -right-20 -top-20 h-80 w-80 rounded-full bg-royal/25 blur-3xl" aria-hidden />
-        <div className="pointer-events-none absolute -left-24 bottom-10 h-72 w-72 rounded-full bg-flag-red/15 blur-3xl" aria-hidden />
 
         {/* Wider than the standard Container — at the target font size, the
             quote's 4 fixed line breaks need more room than the site's normal
@@ -32,7 +29,7 @@ export default function About() {
               prospects of its youth.”
             </blockquote>
             <p className="mt-6 text-sm font-semibold uppercase tracking-[0.14em] text-white/55">
-              — President John F. Kennedy
+              President John F. Kennedy
             </p>
           </div>
 
@@ -82,14 +79,10 @@ export default function About() {
 
       {/* WHY VOTE */}
       <section className="relative overflow-hidden bg-navy py-20 text-white sm:py-24">
-        <div className="absolute inset-0 navy-grid" aria-hidden />
-        <div className="pointer-events-none absolute -left-20 top-10 h-72 w-72 rounded-full bg-flag-red/15 blur-3xl" aria-hidden />
         <Container className="relative">
           <div className="mx-auto max-w-3xl">
-            <StarRow />
             <SectionHeading
               light
-              className="mt-5"
               eyebrow="Why VOTE?"
               title="Every vote is a seed planted for a more inclusive democracy."
             />
@@ -115,8 +108,7 @@ export default function About() {
         <Container>
           <div className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-center">
             <div className="max-w-xl">
-              <Eyebrow>Join us</Eyebrow>
-              <h2 className="mt-3 font-serif text-3xl font-semibold text-navy text-balance sm:text-4xl">
+              <h2 className="font-serif text-3xl font-semibold text-navy text-balance sm:text-4xl">
                 Bring Vote of Teens to your school.
               </h2>
             </div>

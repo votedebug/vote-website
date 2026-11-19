@@ -118,7 +118,6 @@ function StoriesCarousel({ stories }) {
       onMouseLeave={() => setPaused(false)}
       aria-label="Featured stories"
     >
-      <div className="absolute inset-0 navy-grid" aria-hidden />
 
       <div className="relative">
         <Carousel setApi={setApi} opts={{ loop: true, align: 'center' }}>

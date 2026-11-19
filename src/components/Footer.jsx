@@ -2,7 +2,6 @@ import { Link } from 'react-router-dom'
 import { Mail, MapPin } from 'lucide-react'
 import { InstagramIcon, LinkedinIcon } from '@/components/SocialIcons'
 import { Container } from '@/components/Container'
-import { StarRow } from '@/components/Bits'
 import { NAV } from '@/data/site'
 import { useSanityQuery } from '@/lib/useSanity'
 import { siteSettingsQuery } from '@/lib/queries'
@@ -30,10 +29,8 @@ export function Footer() {
               </div>
             </div>
             <p className="mt-5 max-w-sm text-sm leading-relaxed text-white/70">
-              A student-led movement registering the next generation of voters, one high school
-              at a time.
+              A student-led movement registering high school students to vote.
             </p>
-            <StarRow className="mt-6 text-flag-red" />
           </div>
 
           <div>

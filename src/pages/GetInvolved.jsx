@@ -49,8 +49,8 @@ export default function GetInvolved() {
             Ways to help.
           </h1>
           <p className="mt-4 max-w-2xl text-lg leading-relaxed text-ink/70 text-pretty">
-            However you want to help — starting a chapter, volunteering at a drive, leading a state,
-            or moving legislation — we’ll meet you where you are.
+            Start a chapter, volunteer at a drive, lead a state, or help move legislation. We’ll
+            help you get started.
           </p>
 
           <div className="mt-14 grid gap-y-12 sm:grid-cols-2 sm:gap-x-0 lg:grid-cols-4">
@@ -78,12 +78,10 @@ export default function GetInvolved() {
 
       {/* Contact form + info */}
       <section className="relative overflow-hidden bg-navy py-20 text-white sm:py-24">
-        <div className="absolute inset-0 navy-grid" aria-hidden />
-        <div className="pointer-events-none absolute -left-20 top-10 h-72 w-72 rounded-full bg-flag-red/20 blur-3xl" aria-hidden />
         <Container className="relative">
           <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
             <div>
-              <SectionHeading light eyebrow="Say hello" title="Send us a message." intro="Tell us a little about you and what you’d like to do. We read every note." />
+              <SectionHeading light title="Send us a message." intro="Tell us a little about you and what you’d like to do. We read every note." />
               <div className="mt-8 space-y-4">
                 <a href={`mailto:${SITE.email}`} className="flex items-center gap-3 text-white transition-colors hover:text-flag-red">
                   <span className="flex h-11 w-11 items-center justify-center rounded-full bg-white/10">

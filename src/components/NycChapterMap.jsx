@@ -145,7 +145,7 @@ export function NycChapterMap({ chapters: CHAPTERS, onSelect }) {
                   onClick={() => shown && onSelect(chapter)}
                   tabIndex={shown ? 0 : -1}
                   role="button"
-                  aria-label={`${chapter.name} — view chapter leaders`}
+                  aria-label={`${chapter.name}: view chapter leaders`}
                   onKeyDown={(e) => {
                     if (shown && (e.key === 'Enter' || e.key === ' ')) {
                       e.preventDefault()
@@ -210,7 +210,7 @@ export function NycChapterMap({ chapters: CHAPTERS, onSelect }) {
           ))}
         </ul>
         {visible.length === 0 && (
-          <p className="py-8 text-sm text-ink/50">No chapters here yet — this could be the first.</p>
+          <p className="py-8 text-sm text-ink/50">No chapters here yet. This could be the first.</p>
         )}
       </div>
     </div>

@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { ArrowLeft, ArrowRight, ArrowUpRight, ImagePlus } from 'lucide-react'
 import { Container, Reveal } from '@/components/Container'
-import { Eyebrow, SectionHeading, StarRow, LinkButton } from '@/components/Bits'
+import { Eyebrow, SectionHeading, LinkButton } from '@/components/Bits'
 import { Button } from '@/components/ui/button'
 import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel'
 import { MiniUsMap } from '@/components/MiniUsMap'
@@ -29,7 +29,7 @@ export default function Home() {
       <StatsBand stats={site.stats} />
       <MissionTeaser />
       {featured && <FeaturedArticles featured={featured} secondary={secondary} />}
-      <CalendarSection />
+      <CalendarSection showIntro={false} />
       <LegislationTeaser />
       <ClosingCta site={site} />
       <ChaptersStrip chapters={chapters} />
@@ -40,8 +40,6 @@ export default function Home() {
 function Hero({ site }) {
   return (
     <section className="relative overflow-hidden">
-      <div className="pointer-events-none absolute -left-32 top-16 h-80 w-80 rounded-full bg-royal/8 blur-3xl" aria-hidden />
-      <div className="pointer-events-none absolute -right-24 bottom-0 h-72 w-72 rounded-full bg-flag-red/6 blur-3xl" aria-hidden />
       <Container className="relative grid items-center gap-12 py-16 lg:grid-cols-[1.05fr_0.95fr] lg:py-24">
         <div>
           <Eyebrow>{site.tagline}</Eyebrow>
@@ -51,8 +49,7 @@ function Hero({ site }) {
             of American voters.
           </h1>
           <p className="mt-6 max-w-xl text-lg leading-relaxed text-ink/75 text-pretty">
-            Vote of Teens is a student-led movement turning high school hallways into the front
-            line of democracy — one registration, one chapter, one first-time voter at a time.
+            Vote of Teens is a student-led movement registering high school students to vote.
           </p>
           <div className="mt-8 flex flex-wrap items-center gap-3">
             <Button asChild size="lg" className="bg-flag-red text-white hover:bg-flag-red-dark">
@@ -63,12 +60,6 @@ function Hero({ site }) {
             <Button asChild size="lg" variant="outline" className="border-navy/20 text-navy hover:bg-navy hover:text-white">
               <Link to="/chapters">Explore our chapters</Link>
             </Button>
-          </div>
-          <div className="mt-10 flex flex-wrap items-center gap-x-4 gap-y-2">
-            <StarRow />
-            <p className="min-w-0 text-sm font-medium text-ink/60">
-              <span className="font-bold text-navy">2,000+</span> teens registered across New York City
-            </p>
           </div>
         </div>
 
@@ -144,9 +135,6 @@ function HeroCarousel({ slides }) {
             )}
           />
         ))}
-        <span className="ml-auto text-xs font-semibold tabular-nums text-ink/45">
-          {String(index + 1).padStart(2, '0')} / {String(count).padStart(2, '0')}
-        </span>
       </div>
     </div>
   )
@@ -206,8 +194,8 @@ function StatsBand({ stats }) {
     <section ref={ref} className="border-y border-border bg-navy">
       <Container className="grid grid-cols-2 divide-x divide-white/10 py-2 md:grid-cols-4">
         {stats.map((s, i) => (
-          <div key={s.label} className="group px-4 py-8 text-center">
-            <div className="font-serif text-4xl font-semibold tabular-nums text-white transition-[color,filter] duration-300 group-hover:text-flag-red group-hover:drop-shadow-[0_0_18px_var(--color-flag-red)] sm:text-5xl">
+          <div key={s.label} className="px-4 py-8 text-center">
+            <div className="font-serif text-4xl font-semibold tabular-nums text-white sm:text-5xl">
               <CountUp value={s.value} start={visible} delay={i * 120} />
             </div>
             <div className="eyebrow mt-2 text-white/60">{s.label}</div>
@@ -231,7 +219,6 @@ function MissionTeaser() {
         </Reveal>
         <Reveal className="order-1 lg:order-2" delay={100}>
           <SectionHeading
-            eyebrow="Our mission"
             title="Young people are both the present and future of democracy."
             intro="VOTE is a student-led, non-partisan movement dedicated to amplifying young voices and ensuring they play a crucial role in shaping the future of their communities and the nation."
           />
@@ -252,11 +239,9 @@ function MissionTeaser() {
 function FeaturedArticles({ featured, secondary }) {
   return (
     <section className="relative overflow-hidden bg-navy py-20 text-white sm:py-24">
-      <div className="absolute inset-0 navy-grid" aria-hidden />
-      <div className="pointer-events-none absolute -right-20 top-0 h-72 w-72 rounded-full bg-flag-red/20 blur-3xl" aria-hidden />
       <Container className="relative">
         <div className="flex items-end justify-between gap-4">
-          <SectionHeading light eyebrow="From the desk" title="Stories on youth & democracy" />
+          <SectionHeading light title="Stories on youth & democracy" />
           <Link to="/articles" className="hidden shrink-0 items-center gap-1 pb-2 text-sm font-semibold text-flag-red hover:underline sm:flex">
             All articles <ArrowRight className="h-4 w-4" />
           </Link>
@@ -313,7 +298,6 @@ function LegislationTeaser() {
         <div className="grid items-center gap-12 lg:grid-cols-[0.95fr_1.05fr]">
           <div>
             <SectionHeading
-              eyebrow="Know your state"
               title="We mapped the registration rules across every state."
               intro="From pre-registering at 16 to same-day deadlines, the path to the ballot changes at every state line. Explore the interactive map to see when teens in each state can get on the rolls and how to help change the law where they can’t."
             />
@@ -343,18 +327,13 @@ function LegislationTeaser() {
 function ClosingCta({ site }) {
   return (
     <section className="relative overflow-hidden bg-navy py-20 text-white sm:py-28">
-      <div className="absolute inset-0 navy-grid" aria-hidden />
-      <div className="pointer-events-none absolute -left-16 -top-16 h-64 w-64 rounded-full bg-flag-red/25 blur-3xl" aria-hidden />
-      <div className="pointer-events-none absolute -right-20 bottom-0 h-72 w-72 rounded-full bg-royal/25 blur-3xl" aria-hidden />
       <Container className="relative">
         <div className="mx-auto max-w-2xl text-center">
-          <StarRow className="mx-auto justify-center text-flag-red" />
-          <h2 className="mt-5 font-serif text-3xl font-semibold leading-tight text-balance sm:text-[2.75rem]">
+          <h2 className="font-serif text-3xl font-semibold leading-tight text-balance sm:text-[2.75rem]">
             Start a chapter, run a drive, and change who shows up on Election Day.
           </h2>
           <p className="mt-4 text-white/70">
-            Whether you want to bring VOTE to your school or help move youth-voting legislation,
-            it starts with one email.
+            Email us to bring VOTE to your school or to work on youth-voting legislation.
           </p>
           <div className="mt-9 flex flex-wrap justify-center gap-3">
             <Button asChild size="lg" className="bg-flag-red text-white hover:bg-flag-red-dark">
@@ -375,8 +354,7 @@ function ChaptersStrip({ chapters }) {
     <section className="py-16 sm:py-20">
       <Container>
         <div className="flex flex-col items-center text-center">
-          <Eyebrow>{chapters.length} chapters and counting</Eyebrow>
-          <h2 className="mt-3 max-w-2xl font-serif text-2xl font-semibold text-navy sm:text-3xl text-balance">
+          <h2 className="max-w-2xl font-serif text-2xl font-semibold text-navy sm:text-3xl text-balance">
             Representing high schools across New York City.
           </h2>
         </div>

@@ -155,7 +155,7 @@ export default function ArticleDetail() {
           progress bar finishes at the end of the sources, not the page. */}
       <Container className="max-w-2xl pt-12">
         <div ref={bodyRef}>
-          <div className="space-y-6 font-serif text-lg leading-[1.75] text-ink/85 [&>p:first-child]:first-letter:float-left [&>p:first-child]:first-letter:mr-3 [&>p:first-child]:first-letter:font-serif [&>p:first-child]:first-letter:text-6xl [&>p:first-child]:first-letter:font-semibold [&>p:first-child]:first-letter:leading-[0.85] [&>p:first-child]:first-letter:text-flag-red">
+          <div className="space-y-6 font-reading text-lg leading-[1.75] text-ink/85">
             <PortableText value={article.body} components={portableTextComponents} />
           </div>
 
