@@ -80,7 +80,7 @@ export function UsChapterMap({ chaptersByState, directorsByState, loading, error
               strokeWidth={isHover && clickable ? 2 : 0.75}
               tabIndex={clickable ? 0 : -1}
               role={clickable ? 'button' : undefined}
-              aria-label={clickable ? `${s.name}: ${chaptersByState[s.abbr].length} chapters, open` : undefined}
+              aria-label={clickable ? `${s.name}: open chapters` : undefined}
               onMouseEnter={() => setHover(s.abbr)}
               onMouseLeave={() => setHover(null)}
               onClick={() => clickable && open(s.abbr)}
@@ -106,14 +106,7 @@ export function UsChapterMap({ chaptersByState, directorsByState, loading, error
           chaptersByState[hovered.abbr]?.length ? (
             <p className="text-sm text-ink/70">
               <span className="font-semibold text-navy">{hovered.name}</span>
-              <span className="text-ink/45">
-                {' '}
-                · {chaptersByState[hovered.abbr].length} school chapter
-                {chaptersByState[hovered.abbr].length === 1 ? '' : 's'}
-                {directorsByState[hovered.abbr]?.directors?.length
-                  ? ` · ${directorsByState[hovered.abbr].directors.length} state directors`
-                  : ''}
-              </span>
+              <span className="text-ink/45"> · Click to see its chapters</span>
             </p>
           ) : (
             <p className="text-sm text-ink/45">No chapter in {hovered.name} yet. It could start with you.</p>
@@ -139,12 +132,6 @@ export function UsChapterMap({ chaptersByState, directorsByState, loading, error
                   {s.abbr}
                 </span>
                 <span className="mt-2 font-serif text-lg font-bold leading-tight text-navy">{s.name}</span>
-                <span className="mt-0.5 text-xs text-ink/50">
-                  {s.chapters.length} chapter{s.chapters.length === 1 ? '' : 's'}
-                  {s.state?.directors?.length
-                    ? ` · ${s.state.directors.length} state director${s.state.directors.length === 1 ? '' : 's'}`
-                    : ''}
-                </span>
                 <span className="mt-2 inline-flex items-center gap-1 text-xs font-semibold text-flag-red opacity-0 transition-opacity group-hover:opacity-100">
                   Open <ArrowRight className="h-3 w-3" aria-hidden />
                 </span>
