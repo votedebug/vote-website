@@ -1,3 +1,4 @@
+import { TornEdge } from '@/components/Decor'
 import { useMemo, useState } from 'react'
 import { MapPin } from 'lucide-react'
 import { Calendar } from '@/components/ui/calendar'
@@ -196,9 +197,11 @@ export function ChapterCalendar() {
 
 // The navy calendar band, as a section — shared by the Chapters page and
 // the Home page rather than duplicated, so the two never drift apart.
-export function CalendarSection({ showIntro = true }) {
+export function CalendarSection({ showIntro = true, tornEdges = false }) {
   return (
     <section className="relative overflow-hidden bg-navy py-16 text-white sm:py-20">
+      {tornEdges && <TornEdge position="top" className="text-white" seed={7} />}
+      {tornEdges && <TornEdge position="bottom" className="text-white" seed={37} />}
       <Container className="relative">
         <SectionHeading
           light

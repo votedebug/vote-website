@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button'
 import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel'
 import { MiniUsMap } from '@/components/MiniUsMap'
 import { CalendarSection } from '@/components/ChapterCalendar'
+import { TornEdge, LogoButtonSticker, RegisteredSticker, PreRegisterSticker, FirstTimeVoterSticker } from '@/components/Decor'
 import { useCarouselIndex } from '@/lib/useCarouselAutoplay'
 import { useReveal } from '@/lib/useReveal'
 import { useSanityQuery } from '@/lib/useSanity'
@@ -30,7 +31,7 @@ export default function Home() {
       <MissionTeaser />
       {featured && <FeaturedArticles featured={featured} secondary={secondary} />}
       <LegislationTeaser />
-      <CalendarSection showIntro={false} />
+      <CalendarSection showIntro={false} tornEdges />
       <ChaptersStrip chapters={chapters} />
       <ClosingCta site={site} />
     </>
@@ -62,7 +63,11 @@ function Hero({ site }) {
           </div>
         </div>
 
-        <HeroCarousel slides={site.heroSlides} />
+        <div className="relative">
+          <LogoButtonSticker className="-left-3 -top-4 h-20 w-20 -rotate-12 sm:-left-6 sm:-top-6 sm:h-24 sm:w-24" />
+          <RegisteredSticker className="-right-2 -bottom-3 w-32 rotate-[8deg] sm:-right-6 sm:w-40" />
+          <HeroCarousel slides={site.heroSlides} />
+        </div>
       </Container>
     </section>
   )
@@ -190,8 +195,10 @@ function StatsBand({ stats }) {
   const [ref, visible] = useReveal({ threshold: 0.4 })
 
   return (
-    <section ref={ref} className="border-y border-border bg-navy">
-      <Container className="grid grid-cols-2 divide-x divide-white/10 py-2 md:grid-cols-4">
+    <section ref={ref} className="relative bg-navy">
+      <TornEdge position="top" className="text-white" seed={3} />
+      <TornEdge position="bottom" className="text-white" seed={17} />
+      <Container className="grid grid-cols-2 divide-x divide-white/10 py-5 md:grid-cols-4">
         {stats.map((s, i) => (
           <div key={s.label} className="px-4 py-8 text-center">
             <div className="font-serif text-4xl font-bold tabular-nums text-white sm:text-5xl">
@@ -207,10 +214,12 @@ function StatsBand({ stats }) {
 
 function MissionTeaser() {
   return (
-    <section className="py-20 sm:py-24">
+    <section className="overflow-hidden py-20 sm:py-24">
       <Container className="grid items-center gap-12 lg:grid-cols-2">
         <Reveal className="order-2 lg:order-1">
-          <div className="grid grid-cols-2 gap-4">
+          <div className="relative grid grid-cols-2 gap-4">
+            <PreRegisterSticker className="-right-2 -top-5 w-36 rotate-[7deg] sm:-right-5 sm:w-44" />
+            <FirstTimeVoterSticker className="-bottom-6 -left-2 w-24 -rotate-[14deg] sm:-left-6 sm:w-28" />
             <img src="/img/drive-1.jpg" alt="Students at a registration table" className="col-span-2 aspect-[16/9] w-full rounded-2xl object-cover" />
             <img src="/img/drive-3.jpg" alt="A Vote of Teens organizer" className="aspect-square w-full rounded-2xl object-cover" />
             <img src="/img/drive-4.jpg" alt="Registration drive in action" className="aspect-square w-full rounded-2xl object-cover" />
@@ -238,6 +247,8 @@ function MissionTeaser() {
 function FeaturedArticles({ featured, secondary }) {
   return (
     <section className="relative overflow-hidden bg-navy py-20 text-white sm:py-24">
+      <TornEdge position="top" className="text-white" seed={29} />
+      <TornEdge position="bottom" className="text-white" seed={41} />
       <Container className="relative">
         <div className="flex items-end justify-between gap-4">
           <SectionHeading light title="Stories on youth & democracy" />
@@ -326,6 +337,8 @@ function LegislationTeaser() {
 function ClosingCta({ site }) {
   return (
     <section className="relative overflow-hidden bg-flag-red py-20 text-white sm:py-28">
+      <TornEdge position="top" className="text-white" seed={53} />
+      <TornEdge position="bottom" className="text-navy" seed={61} />
       <Container className="relative">
         <div className="mx-auto max-w-2xl text-center">
           <h2 className="font-serif text-3xl font-bold leading-tight text-balance sm:text-[2.75rem]">
