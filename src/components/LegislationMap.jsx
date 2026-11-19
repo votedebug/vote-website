@@ -117,7 +117,7 @@ function StatePanel({ selected }) {
         <div className="relative px-6 pt-6 pb-5" style={{ background: cat.color }}>
           <div className="relative">
             <span className="eyebrow text-white/80">{selected.abbr} · United States</span>
-            <h3 className="mt-1 font-serif text-3xl font-semibold text-white">{selected.name}</h3>
+            <h3 className="mt-1 font-serif text-3xl font-bold text-white">{selected.name}</h3>
           </div>
         </div>
 
@@ -127,7 +127,7 @@ function StatePanel({ selected }) {
             {cat.label}
           </span>
 
-          <p className="mt-4 font-serif text-xl leading-snug text-navy">{selected.rule}</p>
+          <p className="mt-4 font-serif font-bold text-xl leading-snug text-navy">{selected.rule}</p>
           <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{cat.blurb}</p>
 
           <div className="mt-6 space-y-3">

@@ -20,7 +20,7 @@ export function SectionHeading({ eyebrow, title, intro, center, light, className
       <Tag
         className={cn(
           eyebrow && 'mt-4',
-          'font-serif text-3xl font-semibold leading-[1.08] tracking-tight text-balance sm:text-4xl md:text-[2.75rem]',
+          'font-serif text-3xl font-bold leading-[1.08] tracking-tight text-balance sm:text-4xl md:text-[2.75rem]',
           light ? 'text-white' : 'text-navy',
         )}
       >
@@ -63,7 +63,7 @@ export function PageHero({ eyebrow, title, intro, children }) {
       <Container className="relative py-12 sm:py-16">
         <div className="max-w-3xl">
           {eyebrow && <Eyebrow light>{eyebrow}</Eyebrow>}
-          <h1 className="mt-4 font-serif text-4xl font-semibold leading-[1.05] tracking-tight text-balance sm:text-5xl md:text-6xl">
+          <h1 className="mt-4 font-serif text-4xl font-bold leading-[1.05] tracking-tight text-balance sm:text-5xl md:text-6xl">
             {title}
           </h1>
           {intro && <p className="mt-5 max-w-2xl text-lg leading-relaxed text-white/75 text-pretty">{intro}</p>}

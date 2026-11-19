@@ -84,7 +84,7 @@ export default function Chapters() {
       <section className="py-20 sm:py-24">
         <Container>
           <div className="mx-auto max-w-2xl text-center">
-            <h2 className="font-serif text-3xl font-semibold uppercase tracking-tight text-navy text-balance sm:text-4xl">
+            <h2 className="font-serif text-3xl font-bold uppercase tracking-tight text-navy text-balance sm:text-4xl">
               Join our mission and start your own chapter today
             </h2>
             <div className="mt-8">
@@ -114,7 +114,7 @@ function ChapterMark({ c, large }) {
   return (
     <div
       className={cn(
-        'flex items-center justify-center rounded-2xl bg-gradient-to-br from-navy to-royal font-serif font-semibold text-white',
+        'flex items-center justify-center rounded-2xl bg-gradient-to-br from-navy to-royal font-serif font-bold text-white',
         large ? 'h-24 w-24 text-3xl' : 'h-16 w-16 text-xl',
       )}
     >
@@ -135,7 +135,7 @@ function ChapterDialog({ chapter, onClose }) {
               </div>
               <div>
                 <span className="eyebrow text-flag-red">VOTE Chapter · {chapter.borough}</span>
-                <DialogTitle className="mt-1 font-serif text-2xl font-semibold leading-tight text-navy">
+                <DialogTitle className="mt-1 font-serif text-2xl font-bold leading-tight text-navy">
                   {chapter.name}
                 </DialogTitle>
                 <p className="mt-1 text-xs text-ink/50">{chapter.address}</p>

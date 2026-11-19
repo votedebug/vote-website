@@ -19,7 +19,7 @@ export default function About() {
         <div className="relative mx-auto grid w-full max-w-[100rem] items-end gap-6 px-5 pt-16 pb-[140px] sm:pt-20 min-[1340px]:grid-cols-[max-content_1fr] min-[1340px]:gap-4 min-[1340px]:px-[140px]">
           <div className="max-w-2xl">
             <Eyebrow light>About VOTE</Eyebrow>
-            <blockquote className="mt-8 font-serif text-3xl font-semibold leading-[1.15] sm:text-5xl md:text-[3.4rem]">
+            <blockquote className="mt-8 font-serif text-3xl font-bold leading-[1.15] sm:text-5xl md:text-[3.4rem]">
               “The future promise of
               <br />
               any nation can be directly
@@ -108,7 +108,7 @@ export default function About() {
         <Container>
           <div className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-center">
             <div className="max-w-xl">
-              <h2 className="font-serif text-3xl font-semibold text-navy text-balance sm:text-4xl">
+              <h2 className="font-serif text-3xl font-bold text-navy text-balance sm:text-4xl">
                 Bring Vote of Teens to your school.
               </h2>
             </div>

@@ -55,7 +55,7 @@ export function StateChapterView({ abbr, name, chapters, stateDoc, onSelectChapt
       {/* The page hero already carries the state as the h1, so the state name
           is not repeated here — only the borough view needs its own title. */}
       {zoomedToNyc && (
-        <h2 className="mt-3 font-serif text-4xl font-semibold uppercase leading-none tracking-tight text-navy sm:text-5xl">
+        <h2 className="mt-3 font-serif text-4xl font-bold uppercase leading-none tracking-tight text-navy sm:text-5xl">
           New York City
         </h2>
       )}
@@ -251,7 +251,7 @@ function ChapterList({ chapters, nycCount, onSelectChapter, onOpenNyc }) {
             className="group flex w-full items-center gap-3 py-3 text-left text-ink/75 transition-colors hover:text-navy"
           >
             <span className="h-2 w-2 shrink-0 rounded-full bg-flag-red" aria-hidden />
-            <span className="min-w-0 flex-1 truncate font-serif text-[0.975rem] font-semibold">
+            <span className="min-w-0 flex-1 truncate font-serif text-[0.975rem] font-bold">
               New York City
             </span>
             <span className="shrink-0 text-xs text-ink/40 group-hover:hidden">{nycCount} chapters</span>
@@ -266,7 +266,7 @@ function ChapterList({ chapters, nycCount, onSelectChapter, onOpenNyc }) {
             className="group flex w-full items-center gap-3 py-3 text-left text-ink/75 transition-colors hover:text-navy"
           >
             <span className="h-2 w-2 shrink-0 rounded-full bg-navy/20 transition-all group-hover:scale-125 group-hover:bg-flag-red" aria-hidden />
-            <span className="min-w-0 flex-1 truncate font-serif text-[0.975rem] font-semibold">
+            <span className="min-w-0 flex-1 truncate font-serif text-[0.975rem] font-bold">
               {c.short || c.name}
             </span>
             <span className="shrink-0 text-xs text-ink/40 group-hover:hidden">{c.borough}</span>
@@ -284,7 +284,7 @@ function DirectorPanel({ name, stateDoc }) {
   return (
     <section className="mt-12 border-t border-border pt-8">
       <p className="eyebrow text-center text-royal">State Directors</p>
-      <h3 className="mt-2 text-center font-serif text-2xl font-semibold leading-tight text-navy">
+      <h3 className="mt-2 text-center font-serif text-2xl font-bold leading-tight text-navy">
         Running VOTE across {name}
       </h3>
 
@@ -319,7 +319,7 @@ function DirectorPanel({ name, stateDoc }) {
               </div>
               <p
                 className={cn(
-                  'mt-4 font-serif text-lg font-semibold leading-tight',
+                  'mt-4 font-serif text-lg font-bold leading-tight',
                   d.name ? 'text-navy' : 'text-ink/40',
                 )}
               >

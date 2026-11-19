@@ -58,7 +58,7 @@ export default function Legislation() {
             {HELP.map((h, i) => (
               <Reveal key={h.title} delay={i * 90}>
                 <h.icon className="h-7 w-7 text-flag-red" strokeWidth={1.75} />
-                <h3 className="mt-4 font-serif text-xl font-semibold text-navy">{h.title}</h3>
+                <h3 className="mt-4 font-serif text-xl font-bold text-navy">{h.title}</h3>
                 <p className="mt-2 leading-relaxed text-ink/70">{h.body}</p>
               </Reveal>
             ))}
@@ -119,7 +119,7 @@ function PlatformSection() {
                   >
                     <span
                       className={cn(
-                        'font-serif text-3xl font-semibold leading-none transition-colors duration-300 sm:text-4xl',
+                        'font-serif text-3xl font-bold leading-none transition-colors duration-300 sm:text-4xl',
                         isOpen ? 'text-flag-red' : 'text-white/20 group-hover:text-white/45',
                       )}
                     >
@@ -127,7 +127,7 @@ function PlatformSection() {
                     </span>
                     <span
                       className={cn(
-                        'flex-1 font-serif text-xl font-semibold leading-snug transition-all duration-300 sm:text-[1.65rem]',
+                        'flex-1 font-serif text-xl font-bold leading-snug transition-all duration-300 sm:text-[1.65rem]',
                         isOpen ? 'text-white' : 'text-white/75 group-hover:translate-x-1 group-hover:text-white',
                       )}
                     >

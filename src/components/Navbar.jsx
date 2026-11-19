@@ -17,7 +17,7 @@ function Brand({ onClick, tagline }) {
         className="h-11 w-11 rounded-md object-contain transition-transform duration-200 group-hover:scale-105"
       />
       <span className="flex flex-col leading-none">
-        <span className="font-serif text-lg font-semibold tracking-tight text-navy">Vote of Teens</span>
+        <span className="font-logo text-lg uppercase text-navy">Vote of Teens</span>
         <span className="eyebrow text-[0.6rem] text-flag-red">{tagline}</span>
       </span>
     </Link>
@@ -144,7 +144,7 @@ export function Navbar() {
                             end={item.to === '/'}
                             className={({ isActive }) =>
                               cn(
-                                'block rounded-lg px-4 py-3 font-serif text-xl tracking-tight transition-colors',
+                                'block rounded-lg px-4 py-3 font-serif font-bold text-xl tracking-tight transition-colors',
                                 isActive ? 'bg-secondary text-navy' : 'text-ink hover:bg-secondary/60',
                               )
                             }

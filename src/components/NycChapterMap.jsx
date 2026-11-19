@@ -200,7 +200,7 @@ export function NycChapterMap({ chapters: CHAPTERS, onSelect }) {
                   )}
                   aria-hidden
                 />
-                <span className="min-w-0 flex-1 truncate font-serif text-[0.975rem] font-semibold">{c.short}</span>
+                <span className="min-w-0 flex-1 truncate font-serif text-[0.975rem] font-bold">{c.short}</span>
                 <span className="shrink-0 text-xs text-ink/40 group-hover:hidden">{c.borough}</span>
                 <span className="hidden shrink-0 text-xs font-semibold text-flag-red group-hover:inline">
                   View →

@@ -111,7 +111,7 @@ export function ChapterCalendar() {
           className="w-full bg-transparent p-0 [--cell-size:--spacing(11)]"
           classNames={{
             month_caption: 'flex h-(--cell-size) w-full items-center justify-center px-(--cell-size)',
-            caption_label: 'font-serif text-xl font-semibold text-white',
+            caption_label: 'font-serif text-xl font-bold text-white',
             button_previous:
               'size-(--cell-size) rounded-lg p-0 text-white/70 hover:bg-white/10 hover:text-white aria-disabled:opacity-40',
             button_next:
@@ -136,7 +136,7 @@ export function ChapterCalendar() {
       {/* Agenda */}
       <div className="min-w-0">
         <div className="flex items-baseline justify-between gap-4">
-          <h3 className="font-serif text-2xl font-semibold text-white">
+          <h3 className="font-serif text-2xl font-bold text-white">
             {selected
               ? selected.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' })
               : month.toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}
@@ -165,13 +165,13 @@ export function ChapterCalendar() {
                     <div className={cn('text-[0.65rem] font-bold uppercase', drive ? 'text-flag-red' : 'text-royal-light')}>
                       {parse(e.date).toLocaleDateString('en-US', { month: 'short' })}
                     </div>
-                    <div className="font-serif text-2xl font-semibold leading-tight text-white">
+                    <div className="font-serif text-2xl font-bold leading-tight text-white">
                       {parse(e.date).getDate()}
                     </div>
                   </div>
                   <div className="min-w-0 flex-1">
                     <div className="flex flex-wrap items-center gap-2">
-                      <h4 className="font-serif text-lg font-semibold text-white">{e.title}</h4>
+                      <h4 className="font-serif text-lg font-bold text-white">{e.title}</h4>
                       {drive && e.chapter ? (
                         <span className="inline-flex items-center gap-1 rounded-full bg-flag-red/20 px-2 py-0.5 text-xs font-semibold text-flag-red">
                           <MapPin className="h-3 w-3" /> {e.chapter}

@@ -45,7 +45,7 @@ export default function GetInvolved() {
       <section className="pt-14 pb-16 sm:pt-20 sm:pb-20">
         <Container>
           <span className="eyebrow text-flag-red">Get Involved</span>
-          <h1 className="mt-3 font-serif text-4xl font-semibold leading-[1.05] tracking-tight text-navy text-balance sm:text-5xl">
+          <h1 className="mt-3 font-serif text-4xl font-bold leading-[1.05] tracking-tight text-navy text-balance sm:text-5xl">
             Ways to help.
           </h1>
           <p className="mt-4 max-w-2xl text-lg leading-relaxed text-ink/70 text-pretty">
@@ -68,7 +68,7 @@ export default function GetInvolved() {
                   <w.icon className="h-7 w-7 text-flag-red" strokeWidth={1.75} />
                   <span className="eyebrow text-flag-red">{w.tag}</span>
                 </div>
-                <h3 className="mt-5 font-serif text-xl font-semibold text-navy">{w.title}</h3>
+                <h3 className="mt-5 font-serif text-xl font-bold text-navy">{w.title}</h3>
                 <p className="mt-2 leading-relaxed text-ink/70">{w.body}</p>
               </Reveal>
             ))}

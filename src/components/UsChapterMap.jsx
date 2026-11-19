@@ -135,10 +135,10 @@ export function UsChapterMap({ chaptersByState, directorsByState, loading, error
                 onMouseLeave={() => setHover(null)}
                 className="group flex flex-col items-center text-center"
               >
-                <span className="font-serif text-3xl font-semibold leading-none text-navy/25 transition-colors group-hover:text-flag-red">
+                <span className="font-serif text-3xl font-bold leading-none text-navy/25 transition-colors group-hover:text-flag-red">
                   {s.abbr}
                 </span>
-                <span className="mt-2 font-serif text-lg font-semibold leading-tight text-navy">{s.name}</span>
+                <span className="mt-2 font-serif text-lg font-bold leading-tight text-navy">{s.name}</span>
                 <span className="mt-0.5 text-xs text-ink/50">
                   {s.chapters.length} chapter{s.chapters.length === 1 ? '' : 's'}
                   {s.state?.directors?.length

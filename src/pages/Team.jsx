@@ -7,7 +7,7 @@ import { cn } from '@/lib/utils'
 
 function SubHeading({ children, light, as: Tag = 'h2' }) {
   return (
-    <Tag className={cn('font-serif text-3xl font-semibold tracking-tight sm:text-4xl', light ? 'text-white' : 'text-navy')}>
+    <Tag className={cn('font-serif text-3xl font-bold tracking-tight sm:text-4xl', light ? 'text-white' : 'text-navy')}>
       {children}
     </Tag>
   )
@@ -132,7 +132,7 @@ function PersonCard({ person, center }) {
       <div className="relative aspect-[4/5] overflow-hidden rounded-xl bg-secondary text-ink">
         <Portrait person={person} />
       </div>
-      <h3 className="mt-4 font-serif text-xl font-semibold text-navy">{person.name}</h3>
+      <h3 className="mt-4 font-serif text-xl font-bold text-navy">{person.name}</h3>
       <p className="mt-0.5 text-sm font-semibold text-royal">{person.role}</p>
       {person.chapter && <p className="text-xs font-medium text-ink/50">{person.chapter}</p>}
       <p className={cn('mt-2.5 text-sm leading-relaxed text-ink/70', center && 'mx-auto max-w-xs')}>{person.bio}</p>
@@ -156,14 +156,14 @@ function RevealCard({ person }) {
 
       {/* Resting state: name + role over a gradient */}
       <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-navy-dark via-navy-dark/80 to-transparent px-4 pb-4 pt-14 transition-opacity duration-300 group-hover:opacity-0 group-focus-visible:opacity-0">
-        <h3 className="font-serif text-lg font-semibold leading-tight">{person.name}</h3>
+        <h3 className="font-serif text-lg font-bold leading-tight">{person.name}</h3>
         <p className="mt-0.5 text-xs font-semibold uppercase tracking-wider text-royal-light">{person.role}</p>
       </div>
 
       {/* Hover / focus state: full bio */}
       <div className="absolute inset-0 flex translate-y-3 flex-col justify-end bg-navy-dark/92 px-4 pb-4 pt-6 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100 group-focus-visible:translate-y-0 group-focus-visible:opacity-100">
         <span className="h-0.5 w-8 bg-flag-red" aria-hidden />
-        <h3 className="mt-3 font-serif text-lg font-semibold leading-tight">{person.name}</h3>
+        <h3 className="mt-3 font-serif text-lg font-bold leading-tight">{person.name}</h3>
         <p className="mt-0.5 text-xs font-semibold uppercase tracking-wider text-royal-light">{person.role}</p>
         <p className="mt-2.5 text-[0.8rem] leading-relaxed text-white/75">{person.bio}</p>
       </div>

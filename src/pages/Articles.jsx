@@ -41,7 +41,7 @@ export default function Articles() {
       <section className="pb-24 pt-16">
         <Container>
           <span className="eyebrow text-flag-red">All Stories</span>
-          <h1 className="mt-3 font-serif text-3xl font-semibold tracking-tight text-navy sm:text-4xl">
+          <h1 className="mt-3 font-serif text-3xl font-bold tracking-tight text-navy sm:text-4xl">
             Browse our full collection
           </h1>
 
@@ -75,7 +75,7 @@ export default function Articles() {
                       <span className="text-ink/30">·</span>
                       <span className="font-medium normal-case tracking-normal text-ink/45">{fmtDate(a.date)}</span>
                     </div>
-                    <h3 className="mt-1.5 font-serif text-2xl font-semibold leading-snug text-navy transition-colors group-hover:text-royal sm:text-[1.7rem]">
+                    <h3 className="mt-1.5 font-serif text-2xl font-bold leading-snug text-navy transition-colors group-hover:text-royal sm:text-[1.7rem]">
                       {a.title}
                     </h3>
                     <p className="mt-1.5 line-clamp-2 max-w-2xl text-sm leading-relaxed text-ink/60">{a.dek}</p>
@@ -140,7 +140,7 @@ function StoriesCarousel({ stories }) {
                   <div className="absolute inset-0 bg-gradient-to-t from-navy-dark/90 via-navy-dark/20 to-transparent" />
                   <div className="absolute inset-x-0 bottom-0 p-6 sm:p-8">
                     <span className="eyebrow text-flag-red">{s.category}</span>
-                    <h2 className="mt-2 max-w-2xl font-serif text-2xl font-semibold leading-tight text-white text-balance sm:text-4xl">
+                    <h2 className="mt-2 max-w-2xl font-serif text-2xl font-bold leading-tight text-white text-balance sm:text-4xl">
                       {s.title}
                     </h2>
                   </div>

@@ -135,7 +135,7 @@ export default function ArticleDetail() {
         <div className="flex items-center justify-center gap-2 text-xs font-bold uppercase tracking-wider">
           <span className="rounded-full bg-flag-red px-2.5 py-1 text-white">{article.category}</span>
         </div>
-        <h1 className="mt-5 font-serif text-4xl font-semibold leading-[1.08] tracking-tight text-navy text-balance sm:text-5xl">
+        <h1 className="mt-5 font-serif text-4xl font-bold leading-[1.08] tracking-tight text-navy text-balance sm:text-5xl">
           {article.title}
         </h1>
         <p className="mx-auto mt-5 max-w-2xl text-xl leading-relaxed text-ink/70 text-pretty">{article.dek}</p>
@@ -191,7 +191,7 @@ export default function ArticleDetail() {
 
       {/* More */}
       <Container className="pt-20">
-        <h2 className="font-serif text-2xl font-semibold text-navy">Keep reading</h2>
+        <h2 className="font-serif text-2xl font-bold text-navy">Keep reading</h2>
         <div className="mt-8 grid gap-8 sm:grid-cols-3">
           {more.map((a) => (
             <Link key={a.slug} to={`/articles/${a.slug}`} className="group block">
@@ -199,7 +199,7 @@ export default function ArticleDetail() {
                 <img src={a.image} alt="" className="aspect-[16/10] w-full object-cover transition-transform duration-500 group-hover:scale-105" />
               </div>
               <span className="eyebrow mt-3 block text-royal">{a.category}</span>
-              <h3 className="mt-1 font-serif text-lg font-semibold leading-snug text-navy transition-colors group-hover:text-royal">
+              <h3 className="mt-1 font-serif text-lg font-bold leading-snug text-navy transition-colors group-hover:text-royal">
                 {a.title}
               </h3>
             </Link>

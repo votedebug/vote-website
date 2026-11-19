@@ -40,10 +40,10 @@ export default function Home() {
 function Hero({ site }) {
   return (
     <section className="relative overflow-hidden">
-      <Container className="relative grid items-center gap-12 py-16 lg:grid-cols-[1.05fr_0.95fr] lg:py-24">
+      <Container className="relative grid items-center gap-12 pt-10 pb-14 lg:grid-cols-[1.05fr_0.95fr] lg:pt-8 lg:pb-14">
         <div>
           <Eyebrow>{site.tagline}</Eyebrow>
-          <h1 className="mt-5 font-serif text-[2.6rem] font-semibold leading-[1.03] tracking-tight text-navy text-balance sm:text-6xl">
+          <h1 className="mt-5 font-serif text-[2.6rem] font-bold leading-[1.03] tracking-tight text-navy text-balance sm:text-6xl">
             Registering the next
             <span className="relative whitespace-nowrap text-flag-red"> generation </span>
             of American voters.
@@ -85,17 +85,17 @@ function HeroCarousel({ slides }) {
                     src={slide.src}
                     alt={slide.alt}
                     draggable={false}
-                    className="aspect-[4/5] w-full select-none object-cover"
+                    className="aspect-[4/5] lg:aspect-square w-full select-none object-cover"
                   />
                 ) : (
-                  <div className="flex aspect-[4/5] w-full flex-col items-center justify-center gap-2 border-2 border-dashed border-navy/15 bg-secondary text-ink/40">
+                  <div className="flex aspect-[4/5] lg:aspect-square w-full flex-col items-center justify-center gap-2 border-2 border-dashed border-navy/15 bg-secondary text-ink/40">
                     <ImagePlus className="h-8 w-8" strokeWidth={1.5} />
                     <span className="text-xs font-semibold uppercase tracking-wider">Add photo</span>
                   </div>
                 )}
                 {slide.caption && (
                   <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-navy/85 via-navy/35 to-transparent pt-16 pb-6 pl-6 pr-6">
-                    <figcaption className="font-serif text-lg leading-snug text-white text-balance">
+                    <figcaption className="font-serif font-bold text-lg leading-snug text-white text-balance">
                       {slide.caption}
                     </figcaption>
                   </div>
@@ -195,7 +195,7 @@ function StatsBand({ stats }) {
       <Container className="grid grid-cols-2 divide-x divide-white/10 py-2 md:grid-cols-4">
         {stats.map((s, i) => (
           <div key={s.label} className="px-4 py-8 text-center">
-            <div className="font-serif text-4xl font-semibold tabular-nums text-white sm:text-5xl">
+            <div className="font-serif text-4xl font-bold tabular-nums text-white sm:text-5xl">
               <CountUp value={s.value} start={visible} delay={i * 120} />
             </div>
             <div className="eyebrow mt-2 text-white/60">{s.label}</div>
@@ -255,7 +255,7 @@ function FeaturedArticles({ featured, secondary }) {
               </div>
               <div className="mt-5">
                 <span className="eyebrow text-flag-red">{featured.category}</span>
-                <h3 className="mt-2 font-serif text-3xl font-semibold leading-tight text-white transition-colors group-hover:text-royal-light">
+                <h3 className="mt-2 font-serif text-3xl font-bold leading-tight text-white transition-colors group-hover:text-royal-light">
                   {featured.title}
                 </h3>
                 <p className="mt-3 text-[1.02rem] leading-relaxed text-white/70">{featured.dek}</p>
@@ -273,7 +273,7 @@ function FeaturedArticles({ featured, secondary }) {
                   <img src={a.image} alt="" className="h-24 w-24 shrink-0 rounded-xl object-cover" />
                   <div>
                     <span className="eyebrow text-flag-red">{a.category}</span>
-                    <h4 className="mt-1 font-serif text-lg font-semibold leading-snug text-white transition-colors group-hover:text-royal-light">
+                    <h4 className="mt-1 font-serif text-lg font-bold leading-snug text-white transition-colors group-hover:text-royal-light">
                       {a.title}
                     </h4>
                     <p className="mt-1 text-xs font-medium text-white/50">{a.author} · {a.readTime}</p>
@@ -329,7 +329,7 @@ function ClosingCta({ site }) {
     <section className="relative overflow-hidden bg-navy py-20 text-white sm:py-28">
       <Container className="relative">
         <div className="mx-auto max-w-2xl text-center">
-          <h2 className="font-serif text-3xl font-semibold leading-tight text-balance sm:text-[2.75rem]">
+          <h2 className="font-serif text-3xl font-bold leading-tight text-balance sm:text-[2.75rem]">
             Start a chapter, run a drive, and change who shows up on Election Day.
           </h2>
           <p className="mt-4 text-white/70">
@@ -354,7 +354,7 @@ function ChaptersStrip({ chapters }) {
     <section className="py-16 sm:py-20">
       <Container>
         <div className="flex flex-col items-center text-center">
-          <h2 className="max-w-2xl font-serif text-2xl font-semibold text-navy sm:text-3xl text-balance">
+          <h2 className="max-w-2xl font-serif text-2xl font-bold text-navy sm:text-3xl text-balance">
             Representing high schools across New York City.
           </h2>
         </div>
